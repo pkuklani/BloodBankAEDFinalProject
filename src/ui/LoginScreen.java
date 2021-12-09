@@ -6,6 +6,7 @@
 package ui;
 
 import business.Business;
+import business.Customer.Customer;
 import business.DB4OUtil.DB4OUtil;
 import business.Organization.CustOrganization;
 import business.Organization.Organization;
@@ -106,6 +107,8 @@ public class LoginScreen extends javax.swing.JPanel {
         lblUserName1 = new javax.swing.JLabel();
         txtCustName = new javax.swing.JTextField();
         txtCustPassword = new javax.swing.JPasswordField();
+        txtCustLastName = new javax.swing.JTextField();
+        lblUserName2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -169,7 +172,9 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
-        lblUserName1.setText("Name:");
+        lblUserName1.setText("First Name:");
+
+        lblUserName2.setText("Last Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,6 +182,28 @@ public class LoginScreen extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                                            .addComponent(lblPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(5, 5, 5)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtCustUserName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(txtCustName)
+                                                .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtCustLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblUserName1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))))
+                            .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(234, 234, 234)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,27 +223,8 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(327, 327, 327)
-                        .addComponent(btnLogin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUserName1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblUserName)
-                                            .addComponent(lblPassword1))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtCustUserName)
-                                                .addComponent(txtCustName)
-                                                .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(140, Short.MAX_VALUE))
+                        .addComponent(btnLogin)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUser});
@@ -249,6 +257,10 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserName1)
                     .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserName2)
+                    .addComponent(txtCustLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserName)
@@ -259,7 +271,7 @@ public class LoginScreen extends javax.swing.JPanel {
                     .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCreateUser)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -311,10 +323,14 @@ public class LoginScreen extends javax.swing.JPanel {
 
     private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
         String name = txtCustName.getText();
+        String lname = txtCustLastName.getText();
         String staticValidationMessage = "One or more issues found. Please resolve and click Save again.\n\n";
         String validationMessage = "";
         if (name.isEmpty() || name.isBlank()) {
-            validationMessage += "Customer Name is required.";
+            validationMessage += "First Name is required.";
+        }
+        if (lname.isEmpty() || lname.isBlank()) {
+            validationMessage += "Last Name is required.";
         }
         if (txtCustUserName.getText().isEmpty() || txtCustUserName.getText().isBlank()) {
             if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
@@ -342,8 +358,12 @@ public class LoginScreen extends javax.swing.JPanel {
             String userName = txtCustUserName.getText();
             String password = txtCustPassword.getText();
             Role role = new CustRole();
-            var cust = business.getCustomerDirectory().createCustomer(name);
-            var custEmployee = organization.getEmployeeDirectory().createEmployee(name);
+            Customer c = new Customer();
+            c.setName(name + " " + lname);
+            c.setfName(name);
+            c.setlName(lname);
+            var cust = business.getCustomerDirectory().createCustomer(c);
+            var custEmployee = organization.getEmployeeDirectory().createEmployee(name, cust);
             var custUserAccount = organization.getUserAccountDirectory().createUserAccount(userName, password, custEmployee, role);
             System.out.println("calling stored fromuser form ");
             dB4OUtil.storeSystem(business);
@@ -445,7 +465,9 @@ public class LoginScreen extends javax.swing.JPanel {
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblUserName1;
+    private javax.swing.JLabel lblUserName2;
     private javax.swing.JPasswordField pwdField;
+    private javax.swing.JTextField txtCustLastName;
     private javax.swing.JTextField txtCustName;
     private javax.swing.JPasswordField txtCustPassword;
     private javax.swing.JTextField txtCustUserName;

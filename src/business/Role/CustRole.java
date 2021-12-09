@@ -13,6 +13,7 @@ import business.UserAccount.UserAccount;
 import java.io.FileNotFoundException;
 import ui.DeliveryRole.DeliveryWorkAreaJPanel;
 import javax.swing.JPanel;
+import ui.CustRole.CustProfileJPanel;
 import ui.CustRole.CustWorkAreaJPanel;
 import ui.RestRole.RestWorkAreaJPanel;
 
@@ -30,7 +31,8 @@ public class CustRole extends Role {
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, UserAccount account1, Organization organization, Business business) {
         this.type = RoleType.Cust;
         try {
-            return new CustWorkAreaJPanel(userProcessContainer, account, account1, (CustOrganization) organization, business);
+            //return new CustWorkAreaJPanel(userProcessContainer, account, account1, (CustOrganization) organization, business);
+            return new CustProfileJPanel(userProcessContainer, account, (CustOrganization) organization, business);
         } catch (Exception ex) {
             return null;
         }

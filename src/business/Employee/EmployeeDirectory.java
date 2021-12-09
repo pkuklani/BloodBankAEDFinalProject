@@ -4,6 +4,7 @@
  */
 package business.Employee;
 
+import business.Customer.Customer;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,14 @@ public class EmployeeDirectory {
     public Employee createEmployee(String name){
         Employee employee = new Employee();
         employee.setName(name);
+        employeeList.add(employee);
+        return employee;
+    }
+    
+    public Employee createEmployee(String name, Customer cust){
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setCustomer(cust);
         employeeList.add(employee);
         return employee;
     }

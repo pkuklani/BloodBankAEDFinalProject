@@ -21,7 +21,16 @@ public class Customer {
     private String telNo;
     private String city;
     private String state;
-    private int zipCode;
+    private String zipCode;
+    private String bloodGroup;
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
     
     public String getName() {
         return name;
@@ -103,11 +112,11 @@ public class Customer {
         this.state = state;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
    

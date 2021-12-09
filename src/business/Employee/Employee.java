@@ -4,6 +4,8 @@
  */
 package business.Employee;
 
+import business.Customer.Customer;
+
 /**
  * 
  *
@@ -14,6 +16,15 @@ public class Employee {
     private String name;
     private int id;
     private static int count = 1;
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public Employee() {
         id = count;

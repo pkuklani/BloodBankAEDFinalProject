@@ -61,7 +61,7 @@ public class CustProfileJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CustWorkAreaJPanel
      */
-    public CustProfileJPanel(JPanel workArea, UserAccount account, UserAccount account1, CustOrganization organization, Business business) throws IOException {
+    public CustProfileJPanel(JPanel workArea, UserAccount account, CustOrganization organization, Business business) throws IOException {
         try {
             initComponents();
             this.workArea = workArea;
@@ -70,7 +70,7 @@ public class CustProfileJPanel extends javax.swing.JPanel {
             this.userAccount = account;
             this.business = business;
             this.validationMessage = null;
-            setPersonDetails();
+            setPersonDetails(account);
             //populateOrganizationComboBox();
             populateRequestTable();
 
@@ -79,18 +79,18 @@ public class CustProfileJPanel extends javax.swing.JPanel {
         }
     }
 
-    private void setPersonDetails() {
-
-//        jStateComboBox.setSelectedItem(pObj.getState());
-//        txtFName.setText(pObj.getfName());
-//        txtLName.setText(pObj.getlName());
-//        txtDob.setText(dateFormatter.format(pObj.getDob()));
-//        txtMobile.setText(pObj.getTelNo());
-//        txtZip.setText(Integer.toString(pObj.getZipCode()));
-//        txtCity.setText(pObj.getCity());
-//        jGenderComboBox.setSelectedItem(pObj.getGender());
-//        jSaveButton.setText("Update");
-//
+    private void setPersonDetails(UserAccount account) {
+        var employee = account.getEmployee();
+        var pObj = employee.getCustomer();
+        
+        jStateComboBox.setSelectedItem(pObj.getState());
+        txtFName.setText(pObj.getfName());
+        txtLName.setText(pObj.getlName());
+        txtDob.setText(dateFormatter.format(pObj.getDob()));
+        txtMobile.setText(pObj.getTelNo());
+        txtZip.setText(pObj.getZipCode());
+        txtCity.setText(pObj.getCity());
+        jGenderComboBox.setSelectedItem(pObj.getGender());
 //        jStateComboBox.setSelectedIndex(-1);
 //        txtFName.setText("");
 //        txtLName.setText("");
@@ -99,7 +99,6 @@ public class CustProfileJPanel extends javax.swing.JPanel {
 //        txtZip.setText("");
 //        txtCity.setText("");
 //        jGenderComboBox.setSelectedIndex(-1);
-//        jSaveButton.setText("Save");
 
     }
 
