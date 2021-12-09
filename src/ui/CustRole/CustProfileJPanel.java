@@ -34,21 +34,14 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import ui.AdministrativeRole.ManageUserAccountJPanel;
-
-//import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
-//import com.teamdev.jxbrowser.browser.Browser;
-//import com.teamdev.jxbrowser.engine.Engine;
-//import com.teamdev.jxbrowser.engine.EngineOptions;
-//import com.teamdev.jxbrowser.view.swing.BrowserView;
-//import java.awt.BorderLayout;
-//import javax.swing.JFrame;
-//import javax.swing.SwingUtilities;
 
 /**
  *
@@ -89,7 +82,7 @@ public class CustProfileJPanel extends javax.swing.JPanel {
             throw ex;
         }
     }
-    
+
     private Date convertStringToDate(String dateString) {
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         Date startDate = new Date();
@@ -100,7 +93,7 @@ public class CustProfileJPanel extends javax.swing.JPanel {
         }
         return startDate;
     }
-    
+
     private void setFieldState(boolean state) {
         jStateComboBox.setEnabled(state);
         txtFName.setEnabled(state);
@@ -116,7 +109,7 @@ public class CustProfileJPanel extends javax.swing.JPanel {
     private void setPersonDetails(UserAccount account) {
         var employee = account.getEmployee();
         var pObj = employee.getCustomer();
-        
+
         jStateComboBox.setSelectedItem(pObj.getState());
         txtFName.setText(pObj.getfName());
         txtLName.setText(pObj.getlName());
@@ -185,6 +178,98 @@ public class CustProfileJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("Error Occurred" + e);
         }
+    }
+
+    private void appendValidationMessage(String errorMessage) {
+        if (errorMessage != null) {
+            if (this.validationMessage == null) {
+                this.validationMessage = errorMessage;
+            } else {
+                this.validationMessage = this.validationMessage + "\n" + errorMessage;
+            }
+        }
+    }
+
+    private String requiredValidator(String inputVal, String fieldName) {
+        String errorMessage = null;
+        if (inputVal == null || inputVal.trim().isEmpty()) {
+            errorMessage = "The " + fieldName + " is required.";
+        }
+        return errorMessage;
+    }
+
+    private String dateValidator(String inputVal, String fieldName) {
+        String errorMessage = null;
+        if (!(inputVal == null || inputVal.trim().isEmpty())) {
+            DateFormat sdf = new SimpleDateFormat(this.dateFormat);
+            sdf.setLenient(false);
+            try {
+                sdf.parse(inputVal);
+            } catch (ParseException e) {
+                errorMessage = fieldName + " is not a valid date.";
+            }
+        }
+        return errorMessage;
+    }
+
+    private String futureDateValidator(String inputVal, String fieldName) {
+        String errorMessage = null;
+        if (!(inputVal == null || inputVal.trim().isEmpty())) {
+            DateFormat sdf = new SimpleDateFormat(this.dateFormat);
+            sdf.setLenient(false);
+            try {
+                var parsedDate = sdf.parse(inputVal);
+                if (parsedDate.after(new Date())) {
+                    errorMessage = fieldName + " cannot be a future date.";
+                }
+            } catch (ParseException e) {
+
+            }
+        }
+        return errorMessage;
+    }
+
+    private String formatValidator(String inputVal, String fieldName, String regex) {
+        String errorMessage = null;
+        if (!(inputVal == null || inputVal.trim().isEmpty())) {
+            Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(inputVal);
+            if (!m.matches()) {
+                if (fieldName == "First Name" || fieldName == "Last Name") {
+                    errorMessage = "Illegal characters entered in " + fieldName;
+                } else {
+                    errorMessage = fieldName + " entered is invalid";
+                }
+            }
+        }
+        return errorMessage;
+    }
+
+    private void validateFormData() {
+        this.validationMessage = null;
+        //First Name
+        appendValidationMessage(requiredValidator(txtFName.getText(), "First Name"));
+        appendValidationMessage(formatValidator(txtFName.getText(), "First Name", "\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+"));
+        //Last Name
+        appendValidationMessage(requiredValidator(txtLName.getText(), "Last Name"));
+        appendValidationMessage(formatValidator(txtLName.getText(), "Last Name", "\\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+"));
+        //Gender
+        appendValidationMessage(requiredValidator(jGenderComboBox.getSelectedItem() != null ? jGenderComboBox.getSelectedItem().toString() : null, "Gender"));
+        //Date of Birth
+        appendValidationMessage(requiredValidator(txtDob.getText(), "Date of Birth"));
+        appendValidationMessage(dateValidator(txtDob.getText(), "Date of Birth"));
+        appendValidationMessage(futureDateValidator(txtDob.getText(), "Date of Birth"));
+        //Mobile No
+        appendValidationMessage(requiredValidator(txtMobile.getText(), "Mobile No."));
+        appendValidationMessage(formatValidator(txtMobile.getText(), "Mobile No.", "^[0-9]{3}-[0-9]{3}-[0-9]{4}$"));
+        //Zip Code
+        appendValidationMessage(requiredValidator(txtZip.getText(), "Zip Code"));
+        appendValidationMessage(formatValidator(txtZip.getText(), "Mobile No.", "^[0-9]{5}"));
+        //City
+        appendValidationMessage(requiredValidator(txtCity.getText(), "Current City"));
+        //State
+        appendValidationMessage(requiredValidator(jStateComboBox.getSelectedItem() != null ? jStateComboBox.getSelectedItem().toString() : null, "State"));
+
     }
 
     /**
@@ -457,23 +542,28 @@ public class CustProfileJPanel extends javax.swing.JPanel {
 
     private void btnUpdateProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateProfileActionPerformed
         // TODO add your handling code here:
-        
-        var employee = this.userAccount.getEmployee();
-        var pObj = employee.getCustomer();
-        pObj.setState(jStateComboBox.getSelectedItem().toString());
-        pObj.setName(txtFName.getText() + " " + txtLName.getText());
-        pObj.setfName(txtFName.getText());
-        pObj.setlName(txtLName.getText());
-        pObj.setDob(convertStringToDate(txtDob.getText()));
-        pObj.setGender(jGenderComboBox.getSelectedItem().toString());
-        pObj.setBloodGroup(jBloodGroupComboBox.getSelectedItem().toString());
-        pObj.setTelNo(txtMobile.getText());
-        pObj.setCity(txtCity.getText());
-        pObj.setState(jStateComboBox.getSelectedItem().toString());
-        pObj.setZipCode(txtZip.getText());
-        
-        this.userAccount.getEmployee().setCustomer(pObj);
-        setFieldState(false);
+        validateFormData();
+        if (this.validationMessage != null) {
+            String validationMessage = "One or more issues found. Please resolve and click Save again.\n\n";
+            JOptionPane.showMessageDialog(this, validationMessage + this.validationMessage);
+        } else {
+            var employee = this.userAccount.getEmployee();
+            var pObj = employee.getCustomer();
+            pObj.setState(jStateComboBox.getSelectedItem().toString());
+            pObj.setName(txtFName.getText() + " " + txtLName.getText());
+            pObj.setfName(txtFName.getText());
+            pObj.setlName(txtLName.getText());
+            pObj.setDob(convertStringToDate(txtDob.getText()));
+            pObj.setGender(jGenderComboBox.getSelectedItem().toString());
+            pObj.setBloodGroup(jBloodGroupComboBox.getSelectedItem().toString());
+            pObj.setTelNo(txtMobile.getText());
+            pObj.setCity(txtCity.getText());
+            pObj.setState(jStateComboBox.getSelectedItem().toString());
+            pObj.setZipCode(txtZip.getText());
+
+            this.userAccount.getEmployee().setCustomer(pObj);
+            setFieldState(false);
+        }
 //        user fileuser = null;
 //        String foodname = "";//cmbfood.getItemAt(cmbfood.getSelectedIndex());
 //
