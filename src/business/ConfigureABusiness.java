@@ -148,7 +148,7 @@ public class ConfigureABusiness {
         cust.setGender("Male");
         cust.setBloodGroup("O+");
         cust.setTelNo("859-102-9872");
-        cust.setState("MA");
+        cust.setState("Massachusetts");
         cust.setCity("Boston");
         cust.setZipCode("02120");
         employee3.setCustomer(cust);

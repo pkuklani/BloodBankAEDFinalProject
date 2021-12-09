@@ -37,45 +37,49 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblTitle" min="-2" pref="663" max="-2" attributes="0"/>
                   <Component id="jLabel19" min="-2" pref="143" max="-2" attributes="0"/>
-                  <Component id="jLabel18" min="-2" pref="179" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" min="-2" pref="659" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
-                                      <Component id="jCostLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" min="-2" pref="179" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="659" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jCostLabel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel13" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="txtCity" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel16" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                              <Component id="txtZip" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel13" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                              <Component id="txtCity" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel14" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                              <Component id="txtMobile" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                                              <Component id="txtFName" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel12" min="-2" pref="92" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                              <Component id="txtDob" min="-2" pref="140" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="jLabel14" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="txtMobile" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="txtFName" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel12" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                      <Component id="txtDob" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel16" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Component id="txtZip" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="btnEditProfile" alignment="1" min="-2" pref="101" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -98,43 +102,36 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel17" min="-2" pref="80" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                                                  <Component id="jGenderComboBox1" min="-2" pref="140" max="-2" attributes="0"/>
+                                                  <Component id="jBloodGroupComboBox" min="-2" pref="140" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnUpdateProfile" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="lblTitle" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="314" max="-2" attributes="0"/>
                       <Component id="lblimage" min="-2" pref="147" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
-              <Component id="btnorder" min="-2" pref="101" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnfback" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="txtFName" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -153,7 +150,7 @@
                           <Component id="jLabel14" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="txtMobile" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel17" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="jGenderComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBloodGroupComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -167,28 +164,28 @@
                           <Component id="jLabel16" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="txtZip" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnUpdateProfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditProfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="205" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                      <Component id="lblimage" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="116" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jCostLabel" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Component id="jCostLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="116" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnfback" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnorder" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
-              <Component id="lblimage" min="-2" pref="80" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,12 +206,12 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
                 <Column editable="false" title="" type="java.lang.Object"/>
-                <Column editable="false" title="Order ID" type="java.lang.Object"/>
-                <Column editable="false" title="Food Ordered" type="java.lang.String"/>
-                <Column editable="false" title="Restaurant" type="java.lang.String"/>
-                <Column editable="false" title="Status" type="java.lang.String"/>
-                <Column editable="false" title="Request Date" type="java.lang.String"/>
-                <Column editable="false" title="Feedback" type="java.lang.Object"/>
+                <Column editable="false" title="ID" type="java.lang.Object"/>
+                <Column editable="false" title="Center" type="java.lang.String"/>
+                <Column editable="false" title="Blood Group" type="java.lang.String"/>
+                <Column editable="false" title="Donation Date" type="java.lang.String"/>
+                <Column editable="false" title="Quantity" type="java.lang.String"/>
+                <Column editable="false" title="Lab Status" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -224,7 +221,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -272,20 +269,7 @@
         <Property name="text" type="java.lang.String" value="Customer Profile"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnorder">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Reset"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnorderActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblimage">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnfback">
+    <Component class="javax.swing.JButton" name="btnUpdateProfile">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
@@ -293,7 +277,20 @@
         <Property name="text" type="java.lang.String" value="Update Profile"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnfbackActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateProfileActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblimage">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEditProfile">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Edit Profile"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditProfileActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jCostLabel">
@@ -442,13 +439,18 @@
         <Property name="text" type="java.lang.String" value="Blood Group:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jGenderComboBox1">
+    <Component class="javax.swing.JComboBox" name="jBloodGroupComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Male"/>
-            <StringItem index="1" value="Female"/>
-            <StringItem index="2" value="Unknown"/>
+          <StringArray count="8">
+            <StringItem index="0" value="AB-"/>
+            <StringItem index="1" value="B-"/>
+            <StringItem index="2" value="AB+"/>
+            <StringItem index="3" value="A-"/>
+            <StringItem index="4" value="O-"/>
+            <StringItem index="5" value="B+"/>
+            <StringItem index="6" value="A+"/>
+            <StringItem index="7" value="O+"/>
           </StringArray>
         </Property>
         <Property name="selectedIndex" type="int" value="-1"/>
