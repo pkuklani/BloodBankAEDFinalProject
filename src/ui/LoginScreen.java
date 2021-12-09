@@ -11,8 +11,8 @@ import business.Organization.CustOrganization;
 import business.Organization.Organization;
 import business.Role.AdminRole;
 import business.Role.CustRole;
-import business.Role.DeliveryRole;
-import business.Role.RestRole;
+import business.Role.LabTestRole;
+import business.Role.ManagerRole;
 import business.Role.Role;
 import business.UserAccount.UserAccount;
 import business.user;
@@ -187,21 +187,6 @@ public class LoginScreen extends javax.swing.JPanel {
                             .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUserName1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUserName)
-                                    .addComponent(lblPassword1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtCustUserName)
-                                        .addComponent(txtCustName)
-                                        .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -210,12 +195,28 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addGap(158, 158, 158)
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(327, 327, 327)
-                        .addComponent(btnLogin)))
-                .addContainerGap(252, Short.MAX_VALUE))
+                        .addComponent(btnLogin))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUserName1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblUserName)
+                                            .addComponent(lblPassword1))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txtCustUserName)
+                                                .addComponent(txtCustName)
+                                                .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUser});

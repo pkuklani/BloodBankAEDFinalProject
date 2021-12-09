@@ -11,8 +11,8 @@ import business.Organization.Organization;
 import business.Organization.OrganizationDirectory;
 import business.Role.AdminRole;
 import business.Role.CustRole;
-import business.Role.DeliveryRole;
-import business.Role.RestRole;
+import business.Role.LabTestRole;
+import business.Role.ManagerRole;
 import business.Role.Role;
 import business.user;
 import java.awt.CardLayout;
@@ -280,10 +280,10 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
             var organizType = organization.getClass();
             Role role;
             if (organizType.getName().equals("business.Organization.RestOrganization")) {
-                role = new RestRole();
+                role = new ManagerRole();
             }
             else if (organizType.getName().equals("business.Organization.DeliveryOrganization")) {
-                role = new DeliveryRole();
+                role = new LabTestRole();
             }
             else {
                 role = new AdminRole();

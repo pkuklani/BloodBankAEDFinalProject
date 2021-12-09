@@ -9,19 +9,19 @@ import business.Employee.Employee;
 import business.Organization.AdminOrganization;
 import business.Organization.CustOrganization;
 import business.Organization.DeliveryOrganization;
-import business.Organization.RestOrganization;
+import business.Organization.CollectionCenterOrganization;
 import business.Organization.OrganizationDirectory;
 import business.Organization.Organization;
 import business.Role.AdminRole;
-import business.Role.RestRole;
+import business.Role.ManagerRole;
 import business.Role.CustRole;
-import business.Role.DeliveryRole;
+import business.Role.LabTestRole;
 import business.UserAccount.UserAccount;
 import business.Restaurant.Foodmenu;
 import business.Restaurant.FoodmenuDirectory;
 import business.WorkQueue.WorkRequest;
 import business.DeliveryMan.DeliveryManDirectory;
-import business.Restaurant.Restaurant;
+import business.Restaurant.CollectionCenter;
 import business.user;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,20 +54,20 @@ public class ConfigureABusiness {
         Foodmenu foodmenu = new Foodmenu();
         FoodmenuDirectory foodmenudirectory = new FoodmenuDirectory();
         foodmenu.setFoodid(1);
-        foodmenu.setFoodname("Pizza");
-        foodmenudirectory.createFoodmenu(1, "Pizza");
+        foodmenu.setFoodname("B+");
+        foodmenudirectory.createFoodmenu(1, "B+");
         foodmenudirectory.getFoodmenuList().add(foodmenu);
         foodmenu.setFoodid(2);
-        foodmenu.setFoodname("Burger");
-        foodmenudirectory.createFoodmenu(2, "Burger");
+        foodmenu.setFoodname("O+");
+        foodmenudirectory.createFoodmenu(2, "O+");
         foodmenudirectory.getFoodmenuList().add(foodmenu);
         foodmenu.setFoodid(3);
-        foodmenu.setFoodname("Burrito");
-        foodmenudirectory.createFoodmenu(3, "Burrito");
+        foodmenu.setFoodname("AB+");
+        foodmenudirectory.createFoodmenu(3, "AB+");
         foodmenudirectory.getFoodmenuList().add(foodmenu);
         foodmenu.setFoodid(4);
-        foodmenu.setFoodname("Pasta");
-        foodmenudirectory.createFoodmenu(4, "Pasta");
+        foodmenu.setFoodname("AB-");
+        foodmenudirectory.createFoodmenu(4, "AB-");
         foodmenudirectory.getFoodmenuList().add(foodmenu);
         UserAccount account = new UserAccount();
         account.setUsername("admin");
@@ -106,7 +106,7 @@ public class ConfigureABusiness {
         employee2.setName("sam");
         account2.setUsername("sam");
         account2.setPassword("sam");
-        account2.setRole(new DeliveryRole());
+        account2.setRole(new LabTestRole());
         account2.setEmployee(employee2);
         dman.setDmanid(1);
         dman.setDmanname("sam");
@@ -119,14 +119,14 @@ public class ConfigureABusiness {
         // Rest   
         Employee employee1 = new Employee();
         UserAccount account1 = new UserAccount();
-        RestOrganization restOrganization = new RestOrganization();
-        restOrganization.setName("Ray's Steakhouse");
+        CollectionCenterOrganization restOrganization = new CollectionCenterOrganization();
+        restOrganization.setName("Boston Blood Center");
         business.getOrganizationDirectory().getOrganizationList().add(restOrganization);
-        business.getRestaurantDirectory().createRestaurant(0, "Ray's Steakhouse", "Lexington Downtown");
+        business.getRestaurantDirectory().createRestaurant(0, "Boston Blood Center", "Boston Downtown", "09:00", "17:00");
         employee1.setName("Ray");
         account1.setUsername("ray");
         account1.setPassword("ray");
-        account1.setRole(new RestRole());
+        account1.setRole(new ManagerRole());
         account1.setEmployee(employee1);
         restOrganization.getEmployeeDirectory().getEmployeeList().add(employee1);
         restOrganization.getUserAccountDirectory().getUserAccountList().add(account1);
@@ -194,12 +194,12 @@ public class ConfigureABusiness {
                         adminOrganization.getUserAccountDirectory().getUserAccountList().add(account);
                     }
                     if (role == "Restaurant") {
-                        account.setRole(new RestRole());
+                        account.setRole(new ManagerRole());
                         restOrganization.getEmployeeDirectory().getEmployeeList().add(employee);
                         restOrganization.getUserAccountDirectory().getUserAccountList().add(account);
                     }
                     if (role.equalsIgnoreCase("Delivery")) {
-                        account.setRole(new DeliveryRole());
+                        account.setRole(new LabTestRole());
                         System.out.println("inside if delivery :" + account.getUsername());
                         dman.setDmanid(u2.getId());
                         dman.setDmanname(u2.getName());
@@ -222,7 +222,7 @@ public class ConfigureABusiness {
 
                 // Once all connection are closed after the
                 // desired action change the flag state
-            } // Catch block to handle the exception
+            } // Catch block to handle the exception // Catch block to handle the exception // Catch block to handle the exception // Catch block to handle the exception
             catch (Exception e) {
 
                 // Print the exception on the console

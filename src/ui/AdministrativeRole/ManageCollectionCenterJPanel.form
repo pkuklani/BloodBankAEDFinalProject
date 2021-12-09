@@ -25,65 +25,66 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="btnedit" min="-2" pref="87" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btndel" min="-2" pref="87" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="lblOrganizationAdd" min="-2" pref="180" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                              <Component id="btnAdd" min="-2" pref="87" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="btnmod" min="-2" pref="87" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblOrganizationAdd" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="btnAdd" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnmod" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblSelectOrgType" min="-2" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                                      </Group>
+                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="lblSelectOrgType" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblRestID" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="txtname" pref="162" max="32767" attributes="0"/>
-                                                      <Component id="txtaddress" max="32767" attributes="0"/>
-                                                  </Group>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblRestID" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtname" min="-2" pref="162" max="-2" attributes="0"/>
+                                              <Component id="txtaddress" min="-2" pref="162" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="txtFromTime" min="-2" pref="50" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="txtToTime" min="-2" pref="50" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="161" max="32767" attributes="0"/>
-                                      <Component id="jLabel3" min="-2" pref="381" max="-2" attributes="0"/>
+                                      <Component id="lblSelectOrgType1" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lblTitle" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="btnedit" min="-2" pref="87" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btndel" min="-2" pref="87" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="388" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" pref="381" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="651" max="32767" attributes="0"/>
+                          <Component id="lblTitle" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,9 +93,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -106,7 +107,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblOrganizationAdd" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblSelectOrgType" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblRestID" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -117,11 +118,22 @@
                           <Component id="txtname" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtaddress" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtaddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="lblSelectOrgType1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtFromTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="txtToTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnmod" min="-2" max="-2" attributes="0"/>
                           <Component id="btnAdd" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -147,16 +159,28 @@
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="6" rowCount="4">
                 <Column editable="false" title="" type="java.lang.Object"/>
                 <Column editable="false" title="ID" type="java.lang.String"/>
                 <Column editable="false" title="Name" type="java.lang.String"/>
                 <Column editable="false" title="Address" type="java.lang.Object"/>
+                <Column editable="false" title="Open From" type="java.lang.Object"/>
+                <Column editable="false" title="Open To" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
                 <Column maxWidth="0" minWidth="0" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -218,7 +242,7 @@
           <Font name="Tahoma" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Manage Restaurants"/>
+        <Property name="text" type="java.lang.String" value="Manage Blood Collection Centers"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblOrganizationAdd">
@@ -226,7 +250,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Add /Modify Restaurants:"/>
+        <Property name="text" type="java.lang.String" value="Add /Modify Center:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -282,6 +306,28 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="From:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtFromTime">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSelectOrgType1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hours of Operation (24 hour format)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="To:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtToTime">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtToTimeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

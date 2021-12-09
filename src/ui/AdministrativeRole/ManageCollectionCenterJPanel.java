@@ -4,12 +4,12 @@
  */
 package ui.AdministrativeRole;
 
-import business.Restaurant.Restaurant;
-import business.Restaurant.RestaurantDirectory;
+import business.Restaurant.CollectionCenter;
+import business.Restaurant.CollectionCenterDirectory;
 import business.Organization.Organization;
 import business.Organization.Organization.Type;
 import business.Organization.OrganizationDirectory;
-import business.Organization.RestOrganization;
+import business.Organization.CollectionCenterOrganization;
 import java.awt.CardLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,17 +22,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author pkuklani
  */
-public class ManageRestJPanel extends javax.swing.JPanel {
+public class ManageCollectionCenterJPanel extends javax.swing.JPanel {
     // Restaurant restaurant;
 
     OrganizationDirectory directory;
-    RestaurantDirectory restdirectory;
+    CollectionCenterDirectory restdirectory;
     private JPanel userProcessContainer;
 
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageRestJPanel(JPanel userProcessContainer, RestaurantDirectory restdirectory, OrganizationDirectory directory) {
+    public ManageCollectionCenterJPanel(JPanel userProcessContainer, CollectionCenterDirectory restdirectory, OrganizationDirectory directory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.restdirectory = restdirectory;
@@ -47,12 +47,14 @@ public class ManageRestJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         System.out.println("populate");
-        for (Restaurant restaurant : restdirectory.getRestaurantList()) {
-            Object[] row = new Object[4];
+        for (CollectionCenter restaurant : restdirectory.getRestaurantList()) {
+            Object[] row = new Object[6];
             row[0] = restaurant;
             row[1] = restaurant.getRestid();
             row[2] = restaurant.getRestname();
             row[3] = restaurant.getRestadd();
+            row[4] = restaurant.getOpenFrom();
+            row[5] = restaurant.getOpenTo();
             model.addRow(row);
         }
     }
@@ -82,26 +84,31 @@ public class ManageRestJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         lblRestID = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtFromTime = new javax.swing.JTextField();
+        lblSelectOrgType1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtToTime = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         tblOrganizations.setBackground(new java.awt.Color(255, 0, 0));
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "", "ID", "Name", "Address"
+                "", "ID", "Name", "Address", "Open From", "Open To"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -138,10 +145,10 @@ public class ManageRestJPanel extends javax.swing.JPanel {
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Manage Restaurants");
+        lblTitle.setText("Manage Blood Collection Centers");
 
         lblOrganizationAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblOrganizationAdd.setText("Add /Modify Restaurants:");
+        lblOrganizationAdd.setText("Add /Modify Center:");
 
         jLabel1.setText("Name");
 
@@ -173,6 +180,18 @@ public class ManageRestJPanel extends javax.swing.JPanel {
 
         lblRestID.setText("ID");
 
+        jLabel4.setText("From:");
+
+        lblSelectOrgType1.setText("Hours of Operation (24 hour format)");
+
+        jLabel5.setText("To:");
+
+        txtToTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtToTimeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,54 +202,57 @@ public class ManageRestJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(lblOrganizationAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblOrganizationAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(39, 39, 39))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblSelectOrgType)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(jLabel2)
-                                                            .addGap(18, 18, 18))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                            .addComponent(jLabel1)
-                                                            .addGap(33, 33, 33)))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(lblSelectOrgType)
-                                                        .addGap(55, 55, 55)))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblRestID)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                                        .addComponent(txtaddress)))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel1)
+                                                        .addComponent(jLabel2))
+                                                    .addComponent(jLabel4)))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblRestID)
+                                                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(txtFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jLabel5)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(txtToTime, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(lblSelectOrgType1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(btnBack)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                                .addGap(30, 30, 30)
+                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(388, 388, 388)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnBack)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblTitle)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -241,7 +263,7 @@ public class ManageRestJPanel extends javax.swing.JPanel {
                             .addComponent(btndel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblOrganizationAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSelectOrgType)
                             .addComponent(lblRestID))
@@ -250,10 +272,19 @@ public class ManageRestJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSelectOrgType1)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFromTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtToTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnmod)
                             .addComponent(btnAdd))
@@ -266,6 +297,8 @@ public class ManageRestJPanel extends javax.swing.JPanel {
         lblRestID.setText("");
         txtname.setText("");
         txtaddress.setText("");
+        txtFromTime.setText("");
+        txtToTime.setText("");
         btnAdd.setEnabled(true);
         btnAdd.setText("Add");
     }//GEN-LAST:event_btnmodActionPerformed
@@ -279,19 +312,19 @@ public class ManageRestJPanel extends javax.swing.JPanel {
 
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
         // TODO add your handling code here:
-
         int SelectedRowIndex = tblOrganizations.getSelectedRow();
         System.out.println("SelectedRowIndex " + SelectedRowIndex);
         if (SelectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a restaurant record to edit");
+            JOptionPane.showMessageDialog(this, "Please select a Collection Center record to edit");
             return;
         }
         DefaultTableModel model1 = (DefaultTableModel) tblOrganizations.getModel();
-        //System.out.print("model1.getValueAt(SelectedRowIndex, 0) "+model1.getValueAt(SelectedRowIndex, Restaurant));
-        Restaurant selectedvital = (Restaurant) model1.getValueAt(SelectedRowIndex, 0);
+        CollectionCenter selectedvital = (CollectionCenter) model1.getValueAt(SelectedRowIndex, 0);
         lblRestID.setText(String.valueOf(selectedvital.getRestid()));
         txtname.setText(String.valueOf(selectedvital.getRestname()));
         txtaddress.setText(String.valueOf(selectedvital.getRestadd()));
+        txtFromTime.setText(String.valueOf(selectedvital.getOpenFrom()));
+        txtToTime.setText(String.valueOf(selectedvital.getOpenTo()));
         btnAdd.setEnabled(true);
         btnAdd.setText("Update");
     }//GEN-LAST:event_btneditActionPerformed
@@ -300,13 +333,13 @@ public class ManageRestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int SelectedRowIndex = tblOrganizations.getSelectedRow();
         if (SelectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a restaurant record to delete");
+            JOptionPane.showMessageDialog(this, "Please select a Collection Center record to delete");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) tblOrganizations.getModel();
-        Restaurant selectedvital = (Restaurant) model.getValueAt(SelectedRowIndex, 0);
+        CollectionCenter selectedvital = (CollectionCenter) model.getValueAt(SelectedRowIndex, 0);
         restdirectory.deleteRestaurant(selectedvital);
-        JOptionPane.showMessageDialog(this, "Restaurant deleted successfully");
+        JOptionPane.showMessageDialog(this, "Collection Center deleted successfully");
         populateTable();
 
     }//GEN-LAST:event_btndelActionPerformed
@@ -319,41 +352,55 @@ public class ManageRestJPanel extends javax.swing.JPanel {
         }
         String address = txtaddress.getText();
         String pname = txtname.getText();
-
+        String openFrom = txtFromTime.getText();
+        String openTo = txtToTime.getText();
         String validationMessage = "";
         if (txtname.getText().isEmpty() || txtname.getText().isBlank()) {
-            validationMessage += "Restaurant Name is required.";
+            validationMessage += "Collection Center Name is required.";
         }
         if (txtaddress.getText().isEmpty() || txtaddress.getText().isBlank()) {
             if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
                 validationMessage += "\n";
             }
-            validationMessage += "Restaurant Address is required.";
+            validationMessage += "Collection Center Address is required.";
+        }
+        if (openFrom.isEmpty() || openFrom.isBlank()) {
+            if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
+                validationMessage += "\n";
+            }
+            validationMessage += "From Time is required.";
+        }
+        if (openTo.isEmpty() || openTo.isBlank()) {
+            if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
+                validationMessage += "\n";
+            }
+            validationMessage += "To Time is required.";
         }
         String staticValidationMessage = "One or more issues found. Please resolve and click Save again.\n\n";
         if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
             JOptionPane.showMessageDialog(this, staticValidationMessage + validationMessage);
         } else {
             if (restid == 0) {
-                Restaurant md = restdirectory.createRestaurant(restid, pname, address);
+                CollectionCenter md = restdirectory.createRestaurant(restid, pname, address, openFrom, openTo);
                 md.setRestname(pname);
                 md.setRestadd(address);
-                //String t = "Rest";
-                //Type type = Type.valueOf(t);
-                //directory.createOrganization(type);
-                RestOrganization restOrganization = new RestOrganization();
+                md.setOpenFrom(openFrom);
+                md.setOpenTo(openTo);
+                CollectionCenterOrganization restOrganization = new CollectionCenterOrganization();
                 restOrganization.setName(pname);
                 directory.getOrganizationList().add(restOrganization);
-                JOptionPane.showMessageDialog(this, "Restaurant Added");
+                JOptionPane.showMessageDialog(this, "Collection Center Added");
             } else {
-                for (Restaurant vs : restdirectory.getRestaurantList()) {
+                for (CollectionCenter vs : restdirectory.getRestaurantList()) {
                     int idfound = vs.getRestid();
                     if (idfound == restid) {
                         vs.setRestname(pname);
                         vs.setRestadd(address);
+                        vs.setOpenFrom(openFrom);
+                        vs.setOpenTo(openTo);
                     }
                 }
-                JOptionPane.showMessageDialog(this, "Restaurant Data Updated");
+                JOptionPane.showMessageDialog(this, "Collection Center Data Updated");
             }
 
             populateTable();
@@ -362,10 +409,16 @@ public class ManageRestJPanel extends javax.swing.JPanel {
         lblRestID.setText("");
         txtname.setText("");
         txtaddress.setText("");
+        txtFromTime.setText("");
+        txtToTime.setText("");
         btnAdd.setEnabled(true);
         btnAdd.setText("Add");
 
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtToTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtToTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtToTimeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -376,12 +429,17 @@ public class ManageRestJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOrganizationAdd;
     private javax.swing.JLabel lblRestID;
     private javax.swing.JLabel lblSelectOrgType;
+    private javax.swing.JLabel lblSelectOrgType1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblOrganizations;
+    private javax.swing.JTextField txtFromTime;
+    private javax.swing.JTextField txtToTime;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtname;
     // End of variables declaration//GEN-END:variables

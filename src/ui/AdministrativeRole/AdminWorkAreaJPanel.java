@@ -6,9 +6,9 @@ import business.Business;
 import business.DeliveryMan.DeliveryManDirectory;
 import business.Organization.AdminOrganization;
 import business.Organization.Organization;
-import business.Organization.RestOrganization;
-import business.Restaurant.Restaurant;
-import business.Restaurant.RestaurantDirectory;      
+import business.Organization.CollectionCenterOrganization;
+import business.Restaurant.CollectionCenter;
+import business.Restaurant.CollectionCenterDirectory;      
 import business.Restaurant.Foodmenu;
 import business.Restaurant.FoodmenuDirectory;
 import business.UserAccount.UserAccount;
@@ -32,8 +32,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     Business business;
-    private RestaurantDirectory restdirectory;
-    private Restaurant restaurant;
+    private CollectionCenterDirectory restdirectory;
+    private CollectionCenter restaurant;
     private Foodmenu foodmenu;
     private FoodmenuDirectory foodmenudirectory;
     /** Creates new form AdminWorkAreaJPanel */
@@ -121,6 +121,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         manageRestaurantnJButton.setBackground(new java.awt.Color(255, 0, 0));
+        manageRestaurantnJButton.setText("Manage Collection Centers");
         manageRestaurantnJButton.setMaximumSize(new java.awt.Dimension(176, 29));
         manageRestaurantnJButton.setMinimumSize(new java.awt.Dimension(176, 29));
         manageRestaurantnJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +220,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageRestaurantnJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageRestaurantnJButtonActionPerformed
 
-        ManageRestJPanel manageRestJPanel = new ManageRestJPanel(userProcessContainer,business.getRestaurantDirectory(),business.getOrganizationDirectory());
+        ManageCollectionCenterJPanel manageRestJPanel = new ManageCollectionCenterJPanel(userProcessContainer,business.getRestaurantDirectory(),business.getOrganizationDirectory());
         userProcessContainer.add("manageRestaurantJPanel", manageRestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

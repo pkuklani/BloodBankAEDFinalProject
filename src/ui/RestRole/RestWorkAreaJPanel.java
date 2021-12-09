@@ -9,9 +9,9 @@ import business.DeliveryMan.DeliveryMan;
 import business.DeliveryMan.DeliveryManDirectory;
 import business.Employee.Employee;
 import business.Organization.Organization;
-import business.Organization.RestOrganization;
-import business.Restaurant.Restaurant;
-import business.Role.DeliveryRole;
+import business.Organization.CollectionCenterOrganization;
+import business.Restaurant.CollectionCenter;
+import business.Role.LabTestRole;
 import business.UserAccount.UserAccount;
 import business.UserAccount.UserAccountDirectory;
 import business.WorkQueue.WorkRequest;
@@ -35,7 +35,7 @@ import business.order;
 public class RestWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel workArea;
-    private RestOrganization organization;
+    private CollectionCenterOrganization organization;
     private business.DeliveryMan.DeliveryMan dorganization;
     private business.DeliveryMan.DeliveryManDirectory ddirectory;
     private Business business;
@@ -45,7 +45,7 @@ public class RestWorkAreaJPanel extends javax.swing.JPanel {
     private DeliveryManDirectory dmanlist;
     private order fileuser;
 
-    public RestWorkAreaJPanel(JPanel workArea, UserAccount account, UserAccount account1, RestOrganization organization, Business business1) {
+    public RestWorkAreaJPanel(JPanel workArea, UserAccount account, UserAccount account1, CollectionCenterOrganization organization, Business business1) {
         initComponents();
         System.out.println(account);
         this.workArea = workArea;

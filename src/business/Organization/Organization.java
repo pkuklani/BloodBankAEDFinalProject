@@ -30,11 +30,11 @@ public abstract class Organization {
 //                return new AdminOrganization();
 //            }
           
-        }, Rest("Restaurant"){
+        }, Rest("Blood Collection Center"){
 //            public Organization createOrganization() {
 //                return new DoctorOrganization();
 //            }
-        }, Delivery("Delivery Boys"){
+        }, Delivery("Pathology Lab"){
 //            public Organization createOrganization() {
 //                return new LabOrganization();
 //            }

@@ -6,7 +6,7 @@ package ui.DeliveryRole;
 
 import business.Business;
 import business.Organization.DeliveryOrganization;
-import business.Organization.RestOrganization;
+import business.Organization.CollectionCenterOrganization;
 import business.Organization.Organization;
 import business.UserAccount.UserAccount;
 //import business.WorkQueue.LabTestWorkRequest;

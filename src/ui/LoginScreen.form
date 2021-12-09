@@ -36,27 +36,6 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="314" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblUserName1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPassword1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnCreateUser" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtCustUserName" max="32767" attributes="0"/>
-                                      <Component id="txtCustName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtCustPassword" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="548" max="-2" attributes="0"/>
                   </Group>
@@ -67,15 +46,38 @@
                       <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
-                      <Component id="lblTitle1" min="-2" pref="369" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
                       <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblUserName1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblUserName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPassword1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnCreateUser" min="-2" pref="97" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txtCustUserName" max="32767" attributes="0"/>
+                                              <Component id="txtCustName" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txtCustPassword" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Component id="lblTitle1" alignment="0" min="-2" pref="369" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="252" max="32767" attributes="0"/>
+              <EmptySpace pref="140" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

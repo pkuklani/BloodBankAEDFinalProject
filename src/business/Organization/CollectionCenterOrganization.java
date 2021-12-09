@@ -4,7 +4,7 @@
  */
 package business.Organization;
 
-import business.Role.RestRole;
+import business.Role.ManagerRole;
 import business.Role.Role;
 import java.util.ArrayList;
 
@@ -12,16 +12,16 @@ import java.util.ArrayList;
  *
  * @author pkuklani
  */
-public class RestOrganization extends Organization{
+public class CollectionCenterOrganization extends Organization{
 
-    public RestOrganization() {
+    public CollectionCenterOrganization() {
         super(Organization.Type.Rest.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList<>();
-        roles.add(new RestRole());
+        roles.add(new ManagerRole());
         return roles;
     }
      

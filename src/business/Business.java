@@ -6,7 +6,7 @@ package business;
 
 //import business.
 import business.Customer.CustomerDirectory;
-import business.Restaurant.RestaurantDirectory;
+import business.Restaurant.CollectionCenterDirectory;
 import business.Organization.OrganizationDirectory;
 import business.Restaurant.FoodmenuDirectory;
 import business.DeliveryMan.DeliveryManDirectory;
@@ -21,7 +21,7 @@ public class Business {
 
     private static Business business;
     private OrganizationDirectory organizationDirectory;
-     private RestaurantDirectory restaurantDirectory;
+     private CollectionCenterDirectory restaurantDirectory;
       private CustomerDirectory customerDirectory;
      private FoodmenuDirectory foodmenuDirectory;
      private DeliveryManDirectory deliveryDirectory;
@@ -52,7 +52,7 @@ public class Business {
 
     public Business() {
         organizationDirectory = new OrganizationDirectory();
-        restaurantDirectory= new RestaurantDirectory();
+        restaurantDirectory= new CollectionCenterDirectory();
          customerDirectory= new CustomerDirectory();
         foodmenuDirectory=new FoodmenuDirectory();
         deliveryDirectory=new DeliveryManDirectory();
@@ -70,7 +70,7 @@ public class Business {
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
-     public RestaurantDirectory getRestaurantDirectory() {
+     public CollectionCenterDirectory getRestaurantDirectory() {
         return restaurantDirectory;
     }
       public CustomerDirectory getCustomerDirectory() {

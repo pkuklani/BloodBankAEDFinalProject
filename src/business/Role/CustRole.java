@@ -8,7 +8,7 @@ import business.Business;
 import business.Organization.CustOrganization;
 import business.Organization.DeliveryOrganization;
 import business.Organization.Organization;
-import business.Organization.RestOrganization;
+import business.Organization.CollectionCenterOrganization;
 import business.UserAccount.UserAccount;
 import java.io.FileNotFoundException;
 import ui.DeliveryRole.DeliveryWorkAreaJPanel;

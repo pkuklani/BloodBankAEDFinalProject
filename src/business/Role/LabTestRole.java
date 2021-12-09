@@ -16,9 +16,9 @@ import ui.DeliveryRole.DeliveryWorkAreaJPanel;
  *
  * @author pkuklani
  */
-public class DeliveryRole extends Role {
+public class LabTestRole extends Role {
 
-    public DeliveryRole() {
+    public LabTestRole() {
         this.type = RoleType.Delivery;
     }
 

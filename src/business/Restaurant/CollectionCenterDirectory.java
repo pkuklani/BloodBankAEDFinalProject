@@ -12,27 +12,29 @@ import java.util.ArrayList;
  *
  * @author pkuklani
  */
-public class RestaurantDirectory {
-    private ArrayList<Restaurant> restaurantList;
+public class CollectionCenterDirectory {
+    private ArrayList<CollectionCenter> restaurantList;
     private int maxID = 0;
-    public RestaurantDirectory() {
-        restaurantList = new ArrayList<Restaurant>();
+    public CollectionCenterDirectory() {
+        restaurantList = new ArrayList<CollectionCenter>();
     }
 
-    public ArrayList<Restaurant> getRestaurantList() {
+    public ArrayList<CollectionCenter> getRestaurantList() {
         return restaurantList;
     }
     
-    public Restaurant createRestaurant(int id,String name, String restadd){
-        Restaurant restaurant = new Restaurant();
+    public CollectionCenter createRestaurant(int id,String name, String restadd, String openFrom, String openTo){
+        CollectionCenter restaurant = new CollectionCenter();
         maxID++;
         restaurant.setRestid(maxID);
         restaurant.setRestname(name);
         restaurant.setRestadd(restadd);
+        restaurant.setOpenFrom(openFrom);
+        restaurant.setOpenTo(openTo);
         restaurantList.add(restaurant);
         return restaurant;
     }
-    public void deleteRestaurant(Restaurant vs)
+    public void deleteRestaurant(CollectionCenter vs)
     {
         restaurantList.remove(vs);
     }

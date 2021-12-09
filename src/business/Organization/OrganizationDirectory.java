@@ -30,7 +30,7 @@ public class OrganizationDirectory {
            organizationList.add(organization);
         }
        else if (type.getValue().equals(Type.Rest.getValue())){
-           organization = new RestOrganization();
+           organization = new CollectionCenterOrganization();
            organizationList.add(organization);
        }
         return organization;
