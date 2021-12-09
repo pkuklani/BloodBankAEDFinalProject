@@ -55,28 +55,19 @@ public class NewCollectionJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.business = business1;
         this.userAccount = account;
-        //this.userAccount1 = account1;
         this.ddirectory = business1.getDeliveryDirectory();
-        //var dmanListed = ddirectory.getDeliverymanList();
-        /*for (DeliveryMan dman : ddirectory.getDeliverymanList()) {
-            System.out.println("dman= " + dman.getDmanname());
-            cmbdelivery.addItem(dman.getDmanname().toString());
-        }*/
 
-        for (Organization org : business.getOrganizationDirectory().getOrganizationList()) {
-            var organizType = org.getClass();
-            if (organizType.getName().equals("business.Organization.DeliveryOrganization")) {
-                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                    //cmbdelivery.addItem(ua.getEmployee().getName().toString());
-                }
-            }
-        }
-
-        populateRequestTable();
-        
+        populateSearchResults();
         this.validationMessage = null;
 
-//        DefaultTableModel model = (DefaultTableModel) jPersonSummary.getModel();
+
+    }
+
+    public void populateSearchResults() {
+        
+        
+        
+        //        DefaultTableModel model = (DefaultTableModel) jPersonSummary.getModel();
 //        Object rowData[] = new Object[9];
 //        var personList = healthRepository.getPersonRepository();
 //        Format f = new SimpleDateFormat("MM/dd/yy");
@@ -92,9 +83,6 @@ public class NewCollectionJPanel extends javax.swing.JPanel {
 //            rowData[7] = Integer.toString(obj.getZipCode());
 //            model.addRow(rowData);
 //        }
-    }
-
-    public void populateRequestTable() {
 //        DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
 //
 //        model.setRowCount(0);
@@ -207,7 +195,7 @@ public class NewCollectionJPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(797, 350));
 
         btnassignboy.setBackground(new java.awt.Color(255, 0, 0));
-        btnassignboy.setText("Assign delivery Boy");
+        btnassignboy.setText("Initiate Collection");
         btnassignboy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnassignboyActionPerformed(evt);
