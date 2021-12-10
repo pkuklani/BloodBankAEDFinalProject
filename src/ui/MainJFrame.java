@@ -6,20 +6,16 @@ package ui;
 
 
 //import business.DB4OUtil.DB4OUtil;
-import business.Business;
-import business.ConfigureABusiness;
-import business.DB4OUtil.DB4OUtil;
+import bbank.Bbank;
+import bbank.ConfigureABusiness;
+//import business.DB4OUtil.DB4OUtil;
 
-//import Business.DB4OUtil.DB4OUtil;
-
-
+//import Bbank.DB4OUtil.DB4OUtil;
 
 
-import com.db4o.Db4oEmbedded;
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.config.EmbeddedConfiguration;
-import com.db4o.ta.TransparentPersistenceSupport;
+
+
+
 import java.awt.CardLayout;
 import java.nio.file.Paths;
 import javax.swing.JOptionPane;
@@ -27,28 +23,28 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author pkuklani
+ * @author Administrator
  */
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainJFrame
      */
-    private Business system;
-     private Business systemnew;
-    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private Bbank system;
+     private Bbank systemnew;
+   
 
     public MainJFrame() {
         initComponents();
-          // system = ConfigureABusiness.configure();
-           
+          system = ConfigureABusiness.configure();
+           systemnew = ConfigureABusiness.configure(); 
                    System.out.println("system="+system);
                //   System.out.println("systemdata =" +system.getDeliveryDirectory().getDeliveryMan());
-         systemnew = dB4OUtil.retrieveSystem();
-         System.out.println("systemdb="+systemnew);
-            System.out.println("systemdbdata =" +systemnew.getDeliveryDirectory().getDeliveryMan());
+        // systemnew = dB4OUtil.retrieveSystem(Bbank.class);
+         System.out.println("system mainframe db="+system);
+            System.out.println("system new in mainframe  =" +systemnew);
          this.setSize(1680, 1050);
-    
+   // this.setSize(680, 650);
                 initLoginScreen();
     }
 
@@ -117,7 +113,9 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.next(mainWorkArea);
          System.out.println("calling stored from mainframe");
-        dB4OUtil.storeSystem(system);
+          System.out.println("system in login="+system);
+            System.out.println("system new in login =" +systemnew);
+       // dB4OUtil.storeSystem(system);
 
     }
 }

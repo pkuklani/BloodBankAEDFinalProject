@@ -1,96 +1,57 @@
-
+/*
+ * AdminWorkAreaJPanel.java
+ *
+ * Created on October 10, 2008, 8:50 AM
+ */
 
 package ui.AdministrativeRole;
 
-import business.Business;
-import business.DeliveryMan.DeliveryManDirectory;
-import business.Organization.AdminOrganization;
-import business.Organization.Organization;
-import business.Organization.CollectionCenterOrganization;
-import business.Restaurant.CollectionCenter;
-import business.Restaurant.CollectionCenterDirectory;      
-import business.Restaurant.Foodmenu;
-import business.Restaurant.FoodmenuDirectory;
-import business.UserAccount.UserAccount;
-import business.UserAccount.UserAccountDirectory;
+import bbank.Bbank;
+import bbank.Donor.DeliveryManDirectory;
+
+
+import bbank.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Paths;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
- * @author  pkuklani
+ * @author  akhil
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
-    Business business;
-    private CollectionCenterDirectory restdirectory;
-    private CollectionCenter restaurant;
-    private Foodmenu foodmenu;
-    private FoodmenuDirectory foodmenudirectory;
+    Bbank business;
+    
     /** Creates new form AdminWorkAreaJPanel */
      private JPanel workArea;
-     private Organization organization;
-    private business.DeliveryMan.DeliveryMan dorganization;
-    private business.DeliveryMan.DeliveryManDirectory ddirectory;
+    
+    private bbank.Donor.DeliveryMan dorganization;
+    private bbank.Donor.DeliveryManDirectory ddirectory;
        private UserAccount userAccount;
     private UserAccount userAccount1;
     private UserAccountDirectory Daccount;
     private DeliveryManDirectory dmanlist;
-    private JPanel mainWorkArea;
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,UserAccount account1 ,Organization organization, Business business) {
+    String user,roletype;
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user,String roletype) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
           this.workArea = workArea;
-        this.organization = organization;
+      
         this.business = business;
         this.userAccount = account;
-         this.userAccount1 = account1;
+        this.user=user;
+        this.roletype=roletype;
+        System.out.println("user  "+user+ " roletype  "+roletype);
+       //  this.userAccount1 = account1;
          // String foodname="/food1.jpg";
         // ImageIcon icon=createImageIcon(foodname,"x"); 
                                //   icon.getImage().flush();
                                 //  icon = createImageIcon(foodname, "a");
        // userProcessContainer.imageUpdate(foodname, SOMEBITS, WIDTH, WIDTH, WIDTH, WIDTH);
-    }
-    
-        public AdminWorkAreaJPanel(JPanel mainWorkArea, Business business) {
-        initComponents();
-
-        this.mainWorkArea = mainWorkArea;
-        this.business = business;
-        this.jPhotoPanel.removeAll();
-        this.jPhotoPanel.revalidate();
-        this.jPhotoPanel.repaint();
-        try {
-            BufferedImage myPicture = ImageIO.read(new File(Paths.get("admin.png").toAbsolutePath().toString()));
-            ImageIcon ii = new ImageIcon(scaleImage(400, 400, myPicture));
-            jPhotoLabel.setIcon(ii);
-            this.jPhotoLabel.setVisible(true);
-            this.jPhotoPanel.add(new JLabel(ii));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    public static BufferedImage scaleImage(int w, int h, BufferedImage img) throws Exception {
-        BufferedImage bi;
-        bi = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
-        Graphics2D g2d = (Graphics2D) bi.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-        g2d.drawImage(img, 0, 0, w, h, null);
-        g2d.dispose();
-        return bi;
     }
     
     /** This method is called from within the constructor to
@@ -102,156 +63,169 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         userJButton = new javax.swing.JButton();
-        manageRestaurantnJButton = new javax.swing.JButton();
+        btnissue = new javax.swing.JButton();
+        btnbbank = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        managerestmanager = new javax.swing.JButton();
-        btnoverview1 = new javax.swing.JButton();
-        jPhotoPanel = new javax.swing.JPanel();
-        jPhotoLabel = new javax.swing.JLabel();
+        btnreceive = new javax.swing.JButton();
+        btnstock = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnhos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(424, 344));
 
-        userJButton.setBackground(new java.awt.Color(255, 0, 0));
-        userJButton.setText("All Users");
+        userJButton.setBackground(new java.awt.Color(102, 153, 255));
+        userJButton.setText("Manage Users");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
             }
         });
 
-        manageRestaurantnJButton.setBackground(new java.awt.Color(255, 0, 0));
-        manageRestaurantnJButton.setText("Manage Collection Centers");
-        manageRestaurantnJButton.setMaximumSize(new java.awt.Dimension(176, 29));
-        manageRestaurantnJButton.setMinimumSize(new java.awt.Dimension(176, 29));
-        manageRestaurantnJButton.addActionListener(new java.awt.event.ActionListener() {
+        btnissue.setBackground(new java.awt.Color(102, 153, 255));
+        btnissue.setText("Issue Blood");
+        btnissue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageRestaurantnJButtonActionPerformed(evt);
+                btnissueActionPerformed(evt);
+            }
+        });
+
+        btnbbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbbank.setText("Manage Blood Banks");
+        btnbbank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbbankActionPerformed(evt);
             }
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Admin Functions");
+        lblTitle.setText("Administrative Work Area");
 
-        managerestmanager.setBackground(new java.awt.Color(255, 0, 0));
-        managerestmanager.setText("Manage Staff");
-        managerestmanager.addActionListener(new java.awt.event.ActionListener() {
+        btnreceive.setBackground(new java.awt.Color(102, 153, 255));
+        btnreceive.setText("Manage Employees");
+        btnreceive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                managerestmanagerActionPerformed(evt);
+                btnreceiveActionPerformed(evt);
             }
         });
 
-        btnoverview1.setBackground(new java.awt.Color(255, 0, 0));
-        btnoverview1.setText("Analyse Orders");
-        btnoverview1.addActionListener(new java.awt.event.ActionListener() {
+        btnstock.setBackground(new java.awt.Color(102, 153, 255));
+        btnstock.setText("Analyse Stock");
+        btnstock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnoverview1ActionPerformed(evt);
+                btnstockActionPerformed(evt);
             }
         });
 
-        jPhotoLabel.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood Bankm.jpg")); // NOI18N
 
-        javax.swing.GroupLayout jPhotoPanelLayout = new javax.swing.GroupLayout(jPhotoPanel);
-        jPhotoPanel.setLayout(jPhotoPanelLayout);
-        jPhotoPanelLayout.setHorizontalGroup(
-            jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPhotoPanelLayout.createSequentialGroup()
-                .addContainerGap(307, Short.MAX_VALUE)
-                .addComponent(jPhotoLabel)
-                .addGap(299, 299, 299))
-        );
-        jPhotoPanelLayout.setVerticalGroup(
-            jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPhotoPanelLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jPhotoLabel)
-                .addGap(36, 36, 36))
-        );
+        btnhos.setBackground(new java.awt.Color(102, 153, 255));
+        btnhos.setText("Manage Hospitals");
+        btnhos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(manageRestaurantnJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(managerestmanager, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnoverview1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPhotoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnstock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnreceive, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(lblTitle)
+                    .addComponent(btnissue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnhos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(lblTitle)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(manageRestaurantnJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(managerestmanager, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnoverview1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPhotoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnbbank)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnhos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnreceive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnissue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnstock))
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, business);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer,roletype);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButtonActionPerformed
 
-    private void manageRestaurantnJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageRestaurantnJButtonActionPerformed
+    private void btnissueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnissueActionPerformed
 
-        ManageCollectionCenterJPanel manageRestJPanel = new ManageCollectionCenterJPanel(userProcessContainer,business.getRestaurantDirectory(),business.getOrganizationDirectory());
-        userProcessContainer.add("manageRestaurantJPanel", manageRestJPanel);
+       
+        
+    }//GEN-LAST:event_btnissueActionPerformed
+
+    private void btnbbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbbankActionPerformed
+
+        ManageBloodJPanel manageBloodJPanel = new ManageBloodJPanel(userProcessContainer);
+        userProcessContainer.add("manageBloodJPanel", manageBloodJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_manageRestaurantnJButtonActionPerformed
+    }//GEN-LAST:event_btnbbankActionPerformed
 
-    private void managerestmanagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerestmanagerActionPerformed
+    private void btnreceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreceiveActionPerformed
         // TODO add your handling code here:
-          ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer, business.getOrganizationDirectory(), business);
+          ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer,user,roletype);
         userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         
-    }//GEN-LAST:event_managerestmanagerActionPerformed
+    }//GEN-LAST:event_btnreceiveActionPerformed
 
-    private void btnoverview1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnoverview1ActionPerformed
+    private void btnstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstockActionPerformed
         // TODO add your handling code here:
-    overviewWorkAreaJPanel overviewJPanel = new overviewWorkAreaJPanel( userProcessContainer, userAccount, userAccount1 ,organization,business);    
+    overviewWorkAreaJPanel overviewJPanel = new overviewWorkAreaJPanel( userProcessContainer, userAccount);    
     userProcessContainer.add("overviewJPanel", overviewJPanel);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnoverview1ActionPerformed
+    }//GEN-LAST:event_btnstockActionPerformed
+
+    private void btnhosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhosActionPerformed
+        // TODO add your handling code here:
+         ManagehospitalJPanel  managehospital = new  ManagehospitalJPanel( userProcessContainer);    
+    userProcessContainer.add(" Managehospital",  managehospital);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnhosActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnoverview1;
-    private javax.swing.JLabel jPhotoLabel;
-    private javax.swing.JPanel jPhotoPanel;
+    private javax.swing.JButton btnbbank;
+    private javax.swing.JButton btnhos;
+    private javax.swing.JButton btnissue;
+    private javax.swing.JButton btnreceive;
+    private javax.swing.JButton btnstock;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JButton manageRestaurantnJButton;
-    private javax.swing.JButton managerestmanager;
     private javax.swing.JButton userJButton;
     // End of variables declaration//GEN-END:variables
   
@@ -266,22 +240,4 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         return null;
     }
 }
-
-    private class jPhotoPanel {
-
-        private static void removeAll() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        private static void revalidate() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        private static void repaint() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        public jPhotoPanel() {
-        }
-    }
 }

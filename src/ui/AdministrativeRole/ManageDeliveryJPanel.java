@@ -4,9 +4,8 @@
  */
 package ui.AdministrativeRole;
 
-import business.Employee.Employee;
-import business.Organization.Organization;
-import business.Organization.OrganizationDirectory;
+import bbank.Employee.Employee;
+
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,34 +13,37 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author pkuklani
+ * @author raunak
  */
 public class ManageDeliveryJPanel extends javax.swing.JPanel {
-Organization organization;
-     OrganizationDirectory organizationDir;
     private JPanel userProcessContainer;
     
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageDeliveryJPanel(JPanel userProcessContainer,OrganizationDirectory organizationDir) {
+    public ManageDeliveryJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.organizationDir = organizationDir;
+        
         
         populateOrganizationComboBox();
     }
+
+    
     
     @SuppressWarnings("unchecked")
     public void populateOrganizationComboBox(){
-        cmbOrganizationList.removeAllItems();
+       // cmbOrganizationList.removeAllItems();
         String s="Delivery";
-       Organization.Type type  = Organization.Type.valueOf(s);
-     
- organizationDir.createOrganization(type);
+      
        // Organization organization;
-       for (Organization organization : organizationDir.getOrganizationList()){
-           cmbOrganizationList.addItem(organization);
+      // for (Organization organization : organizationDir.getOrganizationList())
+      {
+         //  if(organization.getName().equals("Customer"))
+           {
+         //  System.out.println("combo"+organization.getName());
+          // cmbOrganizationList.addItem(organization);
+           }
         }
        //String s="Delivery";
       // Organization.Type type  = Organization.Type.valueOf(s);
@@ -51,15 +53,16 @@ Organization organization;
        // directory.createOrganization(type);
     }
     
-      private void populateTable(Organization organization){
+      private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
         
         model.setRowCount(0);
         
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
+        //for (Employee employee : organization.getEmployeeDirectory().getEmployeeList())
+        {
             Object[] row = new Object[2];
-            row[0] = employee.getId();
-            row[1] = employee.getName();
+           // row[0] = employee.getId();
+          //  row[1] = employee.getName();
             model.addRow(row);
         }
     }
@@ -78,19 +81,19 @@ Organization organization;
         cmbOrganizationList = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployees = new javax.swing.JTable();
+        lblEmployeeList = new javax.swing.JLabel();
         lblOrganizationList1 = new javax.swing.JLabel();
         lblEmployeeName = new javax.swing.JLabel();
         txtEmployeeName = new javax.swing.JTextField();
         btnCreateEmployee = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblTitle.setBackground(new java.awt.Color(252, 128, 25));
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Manage Delivery Boys");
+        lblTitle.setText("Manage Customers");
 
-        btnBack.setBackground(new java.awt.Color(255, 0, 0));
+        btnBack.setBackground(new java.awt.Color(102, 153, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,10 +101,8 @@ Organization organization;
             }
         });
 
-        lblOrganizationPicker.setBackground(new java.awt.Color(252, 128, 25));
         lblOrganizationPicker.setText("Select Organization:");
 
-        cmbOrganizationList.setBackground(new java.awt.Color(255, 0, 0));
         cmbOrganizationList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Delivery Boys", " " }));
         cmbOrganizationList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +110,7 @@ Organization organization;
             }
         });
 
-        tblEmployees.setBackground(new java.awt.Color(255, 0, 0));
+        tblEmployees.setBackground(new java.awt.Color(204, 255, 204));
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -143,13 +144,15 @@ Organization organization;
             tblEmployees.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        lblOrganizationList1.setBackground(new java.awt.Color(252, 128, 25));
-        lblOrganizationList1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblOrganizationList1.setText("Add New Delivery Boy");
+        lblEmployeeList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmployeeList.setText("Employee List:");
+
+        lblOrganizationList1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblOrganizationList1.setText("New Delivery Boy");
 
         lblEmployeeName.setText("Name:");
 
-        btnCreateEmployee.setBackground(new java.awt.Color(255, 0, 0));
+        btnCreateEmployee.setBackground(new java.awt.Color(102, 153, 255));
         btnCreateEmployee.setText("Create Employee");
         btnCreateEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,64 +160,72 @@ Organization organization;
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\order-food\\employee.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnBack))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(90, 90, 90)
-                            .addComponent(btnCreateEmployee)
-                            .addGap(95, 95, 95))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblOrganizationPicker, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cmbOrganizationList, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lblOrganizationList1)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(451, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmployeeList)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblOrganizationPicker)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbOrganizationList, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblOrganizationList1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblEmployeeName)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCreateEmployee)
+                                    .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(42, 42, 42)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTitle)))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOrganizationPicker, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbOrganizationList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblOrganizationList1)
+                    .addComponent(btnBack)
+                    .addComponent(lblTitle))
+                .addGap(26, 26, 26)
+                .addComponent(lblEmployeeList)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbOrganizationList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOrganizationPicker))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblOrganizationList1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lblEmployeeName))
+                .addGap(18, 18, 18)
                 .addComponent(btnCreateEmployee)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEmployeeActionPerformed
         
-        Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
+      //  Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
         String name = txtEmployeeName.getText();
         
         if (name.isEmpty()) {
@@ -222,9 +233,9 @@ Organization organization;
             return;
         }
         
-        organization.getEmployeeDirectory().createEmployee(name);
+       // organization.getEmployeeDirectory().createEmployee(name);
         txtEmployeeName.setText("");
-        populateTable(organization);
+       // populateTable(organization);
         
     }//GEN-LAST:event_btnCreateEmployeeActionPerformed
 
@@ -236,9 +247,10 @@ Organization organization;
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cmbOrganizationListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationListActionPerformed
-        Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
-        if (organization != null){
-            populateTable(organization);
+      //  Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
+       // if (organization != null)
+        {
+          //  populateTable(organization);
         }
     }//GEN-LAST:event_cmbOrganizationListActionPerformed
 
@@ -246,7 +258,9 @@ Organization organization;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreateEmployee;
     private javax.swing.JComboBox cmbOrganizationList;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEmployeeList;
     private javax.swing.JLabel lblEmployeeName;
     private javax.swing.JLabel lblOrganizationList1;
     private javax.swing.JLabel lblOrganizationPicker;

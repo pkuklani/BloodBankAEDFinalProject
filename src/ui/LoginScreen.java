@@ -5,80 +5,59 @@
  */
 package ui;
 
-import business.Business;
-import business.Customer.Customer;
-import business.DB4OUtil.DB4OUtil;
-import business.Organization.CustOrganization;
-import business.Organization.Organization;
-import business.Role.AdminRole;
-import business.Role.CustRole;
-import business.Role.LabTestRole;
-import business.Role.ManagerRole;
-import business.Role.Role;
-import business.UserAccount.UserAccount;
-import business.user;
+//import bbank.Role.AdminRole;
+import java.util.regex.*;
+import bbank.Role.Role;
+import bbank.DB.DButil;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import bbank.Bbank;
+import bbank.Role.DonarRole;
+import bbank.Role.AdminRole;
+import bbank.Role.BbankRole;
+import bbank.Organization.Organization;
+import bbank.UserAccount.UserAccount;
+import java.awt.BorderLayout;
+//import com.sun.jdi.connect.spi.Connection;
 import java.awt.CardLayout;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.nio.file.Paths;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.Dimension;
+import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import ui.AdministrativeRole.ManageEmployeeJPanel;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
- * @author pkuklani
+ * @author archil
  */
 public class LoginScreen extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
-    Business business1;
-    Business business;
-    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-
+    Bbank business1;
+      Bbank business;
+    //  DButil dbconn;
+     Connection conn=null;
+     DonarRole urole =new DonarRole();
+     AdminRole arole=new AdminRole();
+     BbankRole brole=new BbankRole();
+     String userrole;
+      int rt=0;
     /**
      * Creates new form LoginScreen
      */
-    public LoginScreen(JPanel mainWorkArea, Business business) {
+    public LoginScreen(JPanel mainWorkArea, Bbank business) {
         initComponents();
-
+        
         this.mainWorkArea = mainWorkArea;
         this.business = business;
-        this.jPhotoPanel.removeAll();
-        this.jPhotoPanel.revalidate();
-        this.jPhotoPanel.repaint();
-        try {
-            BufferedImage myPicture = ImageIO.read(new File(Paths.get("sLogo.png").toAbsolutePath().toString()));
-            ImageIcon ii = new ImageIcon(scaleImage(900, 180, myPicture));
-            jPhotoLabel.setIcon(ii);
-            this.jPhotoLabel.setVisible(true);
-            this.jPhotoPanel.add(new JLabel(ii));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    public static BufferedImage scaleImage(int w, int h, BufferedImage img) throws Exception {
-        BufferedImage bi;
-        bi = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
-        Graphics2D g2d = (Graphics2D) bi.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-        g2d.drawImage(img, 0, 0, w, h, null);
-        g2d.dispose();
-        return bi;
+      
+        
     }
 
     /**
@@ -97,22 +76,17 @@ public class LoginScreen extends javax.swing.JPanel {
         pwdField = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPhotoPanel = new javax.swing.JPanel();
-        jPhotoLabel = new javax.swing.JLabel();
-        lblTitle1 = new javax.swing.JLabel();
-        lblUserName = new javax.swing.JLabel();
-        txtCustUserName = new javax.swing.JTextField();
-        lblPassword1 = new javax.swing.JLabel();
-        btnCreateUser = new javax.swing.JButton();
-        lblUserName1 = new javax.swing.JLabel();
-        txtCustName = new javax.swing.JTextField();
-        txtCustPassword = new javax.swing.JPasswordField();
-        txtCustLastName = new javax.swing.JTextField();
-        lblUserName2 = new javax.swing.JLabel();
+        btndonar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        btnstatus = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnngo = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(204, 255, 204));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTitle.setText("Blood Bank Management System");
 
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUser.setText("Username:");
@@ -120,7 +94,7 @@ public class LoginScreen extends javax.swing.JPanel {
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password:");
 
-        btnLogin.setBackground(new java.awt.Color(255, 0, 0));
+        btnLogin.setBackground(new java.awt.Color(0, 204, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,102 +102,89 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/blood-bank.jpg")); // NOI18N
+        jLabel1.setText("jLabel1");
         jLabel1.setMaximumSize(new java.awt.Dimension(356, 159));
 
-        jPhotoPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPhotoLabel.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPhotoPanelLayout = new javax.swing.GroupLayout(jPhotoPanel);
-        jPhotoPanel.setLayout(jPhotoPanelLayout);
-        jPhotoPanelLayout.setHorizontalGroup(
-            jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPhotoPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPhotoLabel)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPhotoPanelLayout.setVerticalGroup(
-            jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPhotoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPhotoPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPhotoLabel)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        lblTitle1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        lblTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle1.setText("Not a DONOR yet? Register Now! ");
-
-        lblUserName.setText("Username:");
-
-        lblPassword1.setText("Password:");
-
-        btnCreateUser.setBackground(new java.awt.Color(255, 0, 0));
-        btnCreateUser.setText("Save a Life!");
-        btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
+        btndonar.setBackground(new java.awt.Color(0, 204, 255));
+        btndonar.setText("Donar Registration");
+        btndonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateUserActionPerformed(evt);
+                btndonarActionPerformed(evt);
             }
         });
 
-        lblUserName1.setText("First Name:");
+        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood-compatibility.jpg")); // NOI18N
 
-        lblUserName2.setText("Last Name:");
+        jButton1.setBackground(new java.awt.Color(0, 204, 255));
+        jButton1.setText("analyse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnstatus.setBackground(new java.awt.Color(0, 204, 255));
+        btnstatus.setText("availability Status");
+        btnstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnstatusActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 204, 255));
+        jButton2.setText("Request  For Blood");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnngo.setBackground(new java.awt.Color(0, 204, 255));
+        btnngo.setText("NGO Registration");
+        btnngo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnngoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(286, 286, 286)
+                        .addComponent(lblTitle))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(btndonar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnngo)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnstatus)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                                            .addComponent(lblPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(5, 5, 5)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtCustUserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(txtCustName)
-                                                .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtCustLastName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblUserName2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblUserName1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))))
-                            .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
+                        .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUser)
                             .addComponent(lblPassword))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogin)
                             .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jPhotoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(158, 158, 158)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(btnLogin)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -235,243 +196,257 @@ public class LoginScreen extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
+                .addComponent(lblTitle)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btndonar)
+                            .addComponent(jButton2)
+                            .addComponent(btnstatus)
+                            .addComponent(jButton1)
+                            .addComponent(btnngo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPhotoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addGap(18, 18, 18)
-                .addComponent(btnLogin)
-                .addGap(33, 33, 33)
-                .addComponent(lblTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserName1)
-                    .addComponent(txtCustName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserName2)
-                    .addComponent(txtCustLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUserName)
-                    .addComponent(txtCustUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword1)
-                    .addComponent(txtCustPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCreateUser)
-                .addGap(35, 35, 35))
+                        .addGap(106, 106, 106)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUser))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPassword))
+                        .addGap(27, 27, 27)
+                        .addComponent(btnLogin)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // Get user name
+        ResultSet resultSet = null;
         String userName = txtUserName.getText();
         // Get Password
         char[] passwordCharArray = pwdField.getPassword();
         String password = String.valueOf(passwordCharArray);
-        boolean flag = false;
-
+        
+        boolean flag= false;
+       //= isValidPassword(password);
+       //if(!c) 
+txtUserName.setText(null);
+pwdField.setText(null);
         UserAccount userAccount = null;
-        UserAccount userAccount1 = null;
+        UserAccount userAccount1=null;
         //userAccount1 = organization.
-        for (Organization organization : business.getOrganizationDirectory().getOrganizationList()) {
+        
+        //db connection
+    //  String dburl= "jdbc:sqlserver://localhost:1433;databaseName=bank";
+    //  String user = "bbank";
+//String pass = "bbank";
+//String  role="admin";
 
-            userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
-            // userAccount1 = organization.getUserAccountDirectory().authenticateUser("tom", "tom");
-            // userAccount1.setUsername("tom");
-            // userAccount1.setPassword("tom");
-            //  userAccount1.setRole((Type)"Cust");
-
-            if (userAccount != null) {
-                // validation
-                for (Organization organization1 : business.getOrganizationDirectory().getOrganizationList()) {
-                    userAccount1 = organization1.getUserAccountDirectory().authenticateUser("tom", "tom");
-                    if (userAccount1 != null) {
-                        break;
-                    }
-                }
-                //
-
-                JPanel mainScreen = new MainScreen(mainWorkArea, userAccount, userAccount1, organization, business);
-                mainWorkArea.add("MainScreen", mainScreen);
-                CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-                layout.next(mainWorkArea);
-
-                flag = true;
-                break;
+    DButil dbconn= new DButil();
+       conn= dbconn.getConnection();
+           // Connection conn = DriverManager.getConnection(dburl, user, pass);
+ System.out.println("Connected to database !");
+  String selectSql = "SELECT * from users";
+      Statement stmt;
+        try {
+            stmt = conn.createStatement();
+       
+            resultSet = stmt.executeQuery(selectSql);
+            // conn.close();
+             while (resultSet.next()) {
+                System.out.println(resultSet.getString(2) + " " + resultSet.getString(3));
+           // JPanel mainScreen = new MainScreen(mainWorkArea, userAccount,userAccount1, organization, business);
+                
+          //      mainWorkArea.add("MainScreen", mainScreen);
+          if((resultSet.getString(1).equals(userName))&&(resultSet.getString(2).equals(password)))
+            
+          { System.out.println("resultSet.getString(1)"+resultSet.getString(1)+" text box "+userName);
+              //CardLayout layout = (CardLayout) mainWorkArea.getLayout();ABORT
+              //  layout.next(mainWorkArea)
+             
+               rt=resultSet.getInt(4);
+               flag = true;
+               break;
             }
+             }
+            System.out.println("xxx"+flag);
+          if (flag == false) {
+              System.out.println("false");
+          JOptionPane.showMessageDialog(null, "Invalid User Name/ Password.");
+           return;
         }
-
-        if (flag == false) {
-            JOptionPane.showMessageDialog(null, "Invalid User Name/ Password.");
-            return;
+        
+          else
+          { System.out.println("true");
+       
+        System.out.print("login "+urole);
+       // account.setRole(new AdminRole());
+               JOptionPane.showMessageDialog(null, "found");
+            //find role
+            String selectSql2="select role from roles where role_id=?";
+            PreparedStatement stmt2;
+            try {
+             // stmt = conn.createStatement();
+            stmt2=conn.prepareStatement(selectSql2);
+             stmt2.setInt(1, rt);
+             resultSet = stmt2.executeQuery();
+              while (resultSet.next()) {
+              userrole=resultSet.getString(1).trim();
+              }
+                conn.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+            //find role
+              // if(rt==1) userrole="Admin";
+              // if(rt==2) userrole="Bbank";
+              // if(rt==3) userrole="DonorregJPanel";
+               System.out.println("rt="+rt+" userrole = "+userrole);
+               
+                JPanel mainScreen = new MainScreen(mainWorkArea,userAccount, userName,userrole);
+                
+              mainWorkArea.add("MainScreen", mainScreen);
+               CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+                layout.next(mainWorkArea);
+               
+              conn.close();
+           return;
+          }
+           } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+         
+             
+ 
 
+     
+//        btnLogin.setEnabled(false);
+//        logoutJButton.setEnabled(true);
+//        userNameJTextField.setEnabled(false);
+//        passwordField.setEnabled(false);
+    
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
-        String name = txtCustName.getText();
-        String lname = txtCustLastName.getText();
-        String staticValidationMessage = "One or more issues found. Please resolve and click Save again.\n\n";
-        String validationMessage = "";
-        if (name.isEmpty() || name.isBlank()) {
-            validationMessage += "First Name is required.";
+    private void btndonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndonarActionPerformed
+        // TODO add your handling code here:
+        String user="Donor";
+       JFrame donorScreen = new DonorregJPanel();
+      // donorScreen.setPreferredSize(new Dimension(400, 300));
+     // mainWorkArea.setPreferredSize(new Dimension(60, 300));
+ //mainWorkArea.setLayout(new BorderLayout());
+  // donorScreen.setVisible(true);
+    //   donorScreen.setSize(600, 600);
+      //... mainWorkArea.add("DonorregJPanel-registration", donorScreen);
+       //... CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       // layout.preferredLayoutSize(donorScreen);
+       // layout.setSize(400, 400);
+       //.... layout.next(mainWorkArea);
+      //donorScreen.setVisible(true);
+       donorScreen.setVisible(true);
+        donorScreen.setSize(500, 500);
+        donorScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        donorScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btndonarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         bloodchart chart = new bloodchart("Blood Group Statistics", 
+         "Blood Group Statistics");
+      chart.pack( );        
+      RefineryUtilities.centerFrameOnScreen( chart );        
+      chart.setVisible( true ); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          String user="Patient ";
+       JPanel donorScreen = new RequestregJPanel(mainWorkArea,user);
+        mainWorkArea.add("Patient-registration", donorScreen);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatusActionPerformed
+        // TODO add your handling code here:
+         String user="Patient ";
+       JPanel patientScreen = new BloodstatusJPanel(mainWorkArea);
+        mainWorkArea.add("Patient-registration", patientScreen);
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.next(mainWorkArea);
+    }//GEN-LAST:event_btnstatusActionPerformed
+
+    private void btnngoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnngoActionPerformed
+        // TODO add your handling code here:
+          String user="NGO";
+       JFrame ngoScreen = new NgoregJPanel();
+     //  JPanel ngoScreen = new NgoregJPanel1(mainWorkArea);
+      //  mainWorkArea.add("NGO-registration", ngoScreen);
+       // CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+      // layout.next(mainWorkArea);
+        ngoScreen.setVisible(true);
+        ngoScreen.setSize(600, 500);
+        ngoScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        ngoScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      
+    }//GEN-LAST:event_btnngoActionPerformed
+//check password
+    
+    public static boolean
+    isValidPassword(String password)
+    {
+  
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+  
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+  
+        // If the password is empty
+        // return false
+        if (password == null) {
+            return false;
         }
-        if (lname.isEmpty() || lname.isBlank()) {
-            validationMessage += "Last Name is required.";
-        }
-        if (txtCustUserName.getText().isEmpty() || txtCustUserName.getText().isBlank()) {
-            if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
-                validationMessage += "\n";
-            }
-            validationMessage += "User Name is required.";
-        }
-        if (txtCustPassword.getText().isEmpty()) {
-            if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
-                validationMessage += "\n";
-            }
-            validationMessage += "Password is required.";
-        }
-        if (!validationMessage.isBlank() && !validationMessage.isEmpty()) {
-            JOptionPane.showMessageDialog(this, staticValidationMessage + validationMessage);
-        } else {
-            Organization organization = new CustOrganization();
-            for (Organization org : business.getOrganizationDirectory().getOrganizationList()) {
-                var organizType = org.getClass();
-                if (organizType.getName().equals("business.Organization.CustOrganization")) {
-                    organization = org;
-                }
-            }
-            user fileuser = null;
-            String userName = txtCustUserName.getText();
-            String password = txtCustPassword.getText();
-            Role role = new CustRole();
-            Customer c = new Customer();
-            c.setName(name + " " + lname);
-            c.setfName(name);
-            c.setlName(lname);
-            var cust = business.getCustomerDirectory().createCustomer(c);
-            var custEmployee = organization.getEmployeeDirectory().createEmployee(name, cust);
-            var custUserAccount = organization.getUserAccountDirectory().createUserAccount(userName, password, custEmployee, role);
-            System.out.println("calling stored fromuser form ");
-            dB4OUtil.storeSystem(business);
-            user u1 = new user();
-            u1.setId(custEmployee.getId());
-            u1.setName(name);
-            u1.setUserid(userName);
-            u1.setPassword(password);
-            u1.setRole(role.toString());
-            File yourFile = new File("user.txt");
-            try {
-
-                FileOutputStream fs = null;
-                fs = new FileOutputStream("user.txt", true);
-                if (yourFile.length() == 0) {
-                    ObjectOutputStream os = new ObjectOutputStream(fs);
-                    os.writeObject(u1);
-                    os.close();
-                } else {
-                    MyObjectOutputStream oos = null;
-                    oos = new MyObjectOutputStream(fs);
-                    oos.writeObject(u1);
-                    oos.close();
-                }
-                System.out.print("added to file");
-            } catch (Exception e) {
-                System.out.println("Error Occurred" + e);
-            }
-            try {
-                yourFile.createNewFile();
-            } catch (Exception e) {
-            }
-            if (yourFile.length() != 0) {
-                try {
-                    FileInputStream fis = null;
-
-                    fis = new FileInputStream(
-                            "user.txt");
-                    ObjectInputStream ois
-                            = new ObjectInputStream(fis);
-
-                    user u2 = null;
-
-                    while (fis.available() != 0) {
-                        u2 = (user) ois.readObject();
-                        String uname = u2.getName();
-                        System.out.println("id ==" + u2.getId());
-                        System.out.println("name ==" + uname);
-                        System.out.println("userid ==" + u2.getUserid());
-                        System.out.println("password ==" + u2.getPassword());
-                        System.out.println("role ==" + u2.getRole());
-                    }
-                    ois.close();
-                    fis.close();
-                } catch (Exception e) {
-                    System.out.println("Error Occurred" + e);
-                    e.printStackTrace();
-                }
-            }
-
-            JOptionPane.showMessageDialog(null, "Customer Account created successfully. Please try logging in.");
-            txtCustName.setText("");
-            txtCustUserName.setText("");
-            txtCustPassword.setText("");
-    }//GEN-LAST:event_btnCreateUserActionPerformed
+  
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(password);
+  
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
     }
+    
+    //check password
 
-    class MyObjectOutputStream extends ObjectOutputStream {
-
-        // Constructor of ths class
-        // 1. Default
-        MyObjectOutputStream() throws IOException {
-
-            // Super keyword refers to parent class instance
-            super();
-        }
-
-        // Constructor of ths class
-        // 1. Parameterized constructor
-        MyObjectOutputStream(OutputStream o) throws IOException {
-            super(o);
-        }
-
-        // Method of this class
-        public void writeStreamHeader() throws IOException {
-            return;
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreateUser;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btndonar;
+    private javax.swing.JButton btnngo;
+    private javax.swing.JButton btnstatus;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jPhotoLabel;
-    private javax.swing.JPanel jPhotoPanel;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblPassword1;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JLabel lblTitle1;
     private javax.swing.JLabel lblUser;
-    private javax.swing.JLabel lblUserName;
-    private javax.swing.JLabel lblUserName1;
-    private javax.swing.JLabel lblUserName2;
     private javax.swing.JPasswordField pwdField;
-    private javax.swing.JTextField txtCustLastName;
-    private javax.swing.JTextField txtCustName;
-    private javax.swing.JPasswordField txtCustPassword;
-    private javax.swing.JTextField txtCustUserName;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 
+    
 }
