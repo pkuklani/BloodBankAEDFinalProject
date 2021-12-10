@@ -140,7 +140,7 @@ public class overviewWorkAreaJPanel extends javax.swing.JPanel {
         }
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Overview of Orders");
+        lblTitle.setText("Overview of Stocks");
 
         cmbfood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Pizza", "Burger", "French Fries" }));
 

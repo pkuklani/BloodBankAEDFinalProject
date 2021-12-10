@@ -39,7 +39,7 @@ import ui.LoginScreen;
  *
  * @author akhil
  */
-public class ViewallreceiptJPanel extends javax.swing.JPanel {
+public class ViewresearchJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Bbank business;
@@ -56,7 +56,7 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
     /**
      * Creates new form 
      */
-    public ViewallreceiptJPanel(JPanel userProcessContainer) {
+    public ViewresearchJPanel(JPanel userProcessContainer) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
@@ -65,33 +65,7 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         this.business = business;
         this.role=role;
         this.user=user;
-        //this.deliveryOrganization = (DeliveryOrganization) organization;
-//getting Bbank id of user
- ResultSet resultSet = null;
-           DButil dbconn= new DButil();
-          Connection conn = dbconn.getConnection();
-           String selectSql = "SELECT Bbank_id from users where user_id=?;";
-            System.out.print("state "+selectSql);
-           PreparedStatement stmt;
-           try {
-           stmt=conn.prepareStatement(selectSql);
-            
-       stmt.setString(1,user);
-            resultSet = stmt.executeQuery();
-            // conn.close();
-             while (resultSet.next()) {
-                  Bbankid=resultSet.getInt(1);
-             }//while
-             did++;
-             System.out.print("bank id "+Bbankid);
-             conn.close();
-            // txtid.setText(Integer.toString(did));
-       }//try
-       catch (SQLException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-//getting Bbank id of user
+       
         populateTable();
     }
 
@@ -101,7 +75,7 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         System.out.println("populate");
         //
-         String selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id";
+           String selectSql = "SELECT a.Bbank_id,b.bbank_name,a.bgroup_name,a.infection_status,a.status_date from research_result a,blood_bank b where a.bbank_id=b.bbank_id;";
       Statement stmt;
        try {
             stmt = conn.createStatement();
@@ -116,7 +90,7 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
             row[2] = resultSet.getString(3);
             row[3] = resultSet.getString(4);
           row[4]=resultSet.getDate(5).toString();
-                  row[5]=resultSet.getInt(6); 
+                 
                                    
                    
             model.addRow(row);
@@ -154,17 +128,17 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         tbldonor.setBackground(new java.awt.Color(204, 255, 204));
         tbldonor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Bank ID", "Bank Name", "Donor Name", "Blood Group", "Date Received", "Donated Count"
+                "Bank ID", "Bank Name", "Blood Group", "Infection Status", "Date "
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -176,14 +150,11 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
             tbldonor.getColumnModel().getColumn(0).setResizable(false);
             tbldonor.getColumnModel().getColumn(1).setResizable(false);
             tbldonor.getColumnModel().getColumn(2).setResizable(false);
-            tbldonor.getColumnModel().getColumn(2).setPreferredWidth(0);
-            tbldonor.getColumnModel().getColumn(3).setResizable(false);
             tbldonor.getColumnModel().getColumn(4).setResizable(false);
-            tbldonor.getColumnModel().getColumn(5).setResizable(false);
         }
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Blood Received Details");
+        lblTitle.setText("Research  Details");
 
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {

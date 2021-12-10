@@ -203,8 +203,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstockActionPerformed
         // TODO add your handling code here:
-    overviewWorkAreaJPanel overviewJPanel = new overviewWorkAreaJPanel( userProcessContainer, userAccount);    
-    userProcessContainer.add("overviewJPanel", overviewJPanel);
+    ViewstockJPanel  viewstock = new  ViewstockJPanel( userProcessContainer, user,roletype);    
+    userProcessContainer.add(" Viewstock",  viewstock);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnstockActionPerformed

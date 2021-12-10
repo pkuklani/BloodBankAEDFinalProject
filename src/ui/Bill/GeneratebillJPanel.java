@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.MhaRole;
+package ui.Bill;
 
 import ui.BbankRole.*;
 import ui.DonorRole.*;
@@ -38,7 +38,7 @@ import ui.LoginScreen;
  *
  * @author akhil
  */
-public class ViewallissueJPanel extends javax.swing.JPanel {
+public class GeneratebillJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private Bbank business;
@@ -52,22 +52,23 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
           Connection conn = dbconn.getConnection();
            int did=0;
            int Bbankid,Did,Pbquant=0,available=0;
-           String user,role,Pname,Pbgroup;
+           String user,role,Pname,Pbgroup,Bbankname;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ViewallissueJPanel(JPanel userProcessContainer) {
+    public GeneratebillJPanel(JPanel userProcessContainer,String user,String role) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
        
         this.business = business;
         this.user=user;
+        this.role=role;
         System.out.println("user "+user+"role "+role);
         ResultSet resultSet = null;
            DButil dbconn= new DButil();
           Connection conn = dbconn.getConnection();
-           String selectSql = "SELECT Bbank_id from users where user_id=?;";
+           String selectSql = "SELECT a.Bbank_id,b.bbank_name from users a, blood_bank b where user_id=? and a.bbank_id=b.bbank_id;";
             System.out.print("state "+selectSql);
            PreparedStatement stmt;
            try {
@@ -78,6 +79,7 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
             // conn.close();
              while (resultSet.next()) {
                   Bbankid=resultSet.getInt(1);
+                   Bbankname=resultSet.getString(2);
              }//while
              did++;
              System.out.print("bank id "+Bbankid);
@@ -99,7 +101,7 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         System.out.println("populate");
         //
-         String selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.patient_name,a.quantity,a.date_issue from bbank_issued a,blood_bank b where a.bbank_id=b.bbank_id";
+         String selectSql = "SELECT * from Blood_demand where status=0 ";
       Statement stmt;
        try {
             stmt = conn.createStatement();
@@ -110,12 +112,12 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
                 
                   Object[] row = new Object[8];
             row[0]=resultSet.getInt(1);
-            row[1] = resultSet.getString(2);
-            row[2] = resultSet.getString(3);
-           row[4]=resultSet.getString(4);
-                  row[5]=resultSet.getInt(5); 
-                  row[6]=resultSet.getDate(6).toString();
-                   
+            row[1] = resultSet.getString(3);
+            row[2] = resultSet.getString(4);
+          //  row[3]=resultSet.getString(4);
+                  row[3]=resultSet.getInt(6); 
+                  row[4]=resultSet.getDate(8).toString();
+                   row[5]=resultSet.getInt(7);
                   
                    
             model.addRow(row);
@@ -146,27 +148,32 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblpatient = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtareabill = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         tblpatient.setBackground(new java.awt.Color(204, 255, 204));
         tblpatient.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Bank  Id", "Bank Name", "Blood Group", "Patient Name", "Quantity", "Issue  Date"
+                " Id", "Blood Group", "Patient Name", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -179,22 +186,39 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblpatient);
         if (tblpatient.getColumnModel().getColumnCount() > 0) {
-            tblpatient.getColumnModel().getColumn(0).setResizable(false);
             tblpatient.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tblpatient.getColumnModel().getColumn(2).setResizable(false);
+            tblpatient.getColumnModel().getColumn(1).setResizable(false);
             tblpatient.getColumnModel().getColumn(3).setResizable(false);
-            tblpatient.getColumnModel().getColumn(4).setResizable(false);
-            tblpatient.getColumnModel().getColumn(4).setPreferredWidth(10);
-            tblpatient.getColumnModel().getColumn(5).setResizable(false);
+            tblpatient.getColumnModel().getColumn(3).setPreferredWidth(10);
         }
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText(" Blood issue details");
+        lblTitle.setText("Bill Desk Work Area");
+
+        jButton2.setText("Generate Bill");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
+            }
+        });
+
+        txtareabill.setColumns(20);
+        txtareabill.setRows(5);
+        jScrollPane2.setViewportView(txtareabill);
+
+        jLabel5.setText("Bill");
+
+        jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -206,27 +230,90 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
-                        .addComponent(lblTitle))
+                        .addComponent(lblTitle)
+                        .addGap(295, 295, 295)
+                        .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnback))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnback)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addComponent(jButton2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(365, 365, 365)
+                        .addComponent(jButton1)))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(10, 10, 10)
-                .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblTitle)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         conn = dbconn.getConnection();
+          int SelectedRowIndex=tblpatient.getSelectedRow();
+       System.out.println("SelectedRowIndex "+SelectedRowIndex);
+                  if(SelectedRowIndex<0)
+        {
+         JOptionPane.showMessageDialog(this, "Please select a Patient to issue Bill");
+            
+        return;
+        }
+        DefaultTableModel model1 =(DefaultTableModel) tblpatient.getModel();
+       int did= (int) model1.getValueAt(SelectedRowIndex, 0);
+         String pname =  (String) model1.getValueAt(SelectedRowIndex, 2);
+         String bgroup=(String) model1.getValueAt(SelectedRowIndex, 1);
+         int pquant=(int)model1.getValueAt(SelectedRowIndex, 3);
+         Pname=pname;
+         Pbgroup=bgroup;
+         Did=did;
+         Pbquant=pquant;
+       System.out.print("idid "+model1.getValueAt(SelectedRowIndex, 0) +" name "+model1.getValueAt(SelectedRowIndex, 1));
+    // txtid.setText(Integer.toString(did));
+                
+       int billamount=10*Pbquant;
+       //add to text area
+       txtareabill.append("\n                       Bill               \n");
+       txtareabill.append(" Bbank id :"+Bbankid+ "                     Bbank Name:"+Bbankname+" \n");
+        txtareabill.append("------------------------------------------------------------------ \n\n");
+       txtareabill.append(" Patient Name :"+Pname+" \n\n");
+       txtareabill.append(" Blood Group :"+Pbgroup+" \n\n");
+       txtareabill.append(" Quantity :"+Pbquant+" \n\n");
+       txtareabill.append(" Unit Price : 10$ \n\n");
+          txtareabill.append("------------------------------------------------------------------ \n\n");
+       txtareabill.append(" Bill Amount :"+billamount+" \n");
+       
+       
+       //add to text area
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
         // TODO add your handling code here:
@@ -234,6 +321,17 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+        txtareabill.print();
+        }catch(Exception e)
+        {e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -264,8 +362,13 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblpatient;
+    private javax.swing.JTextArea txtareabill;
     // End of variables declaration//GEN-END:variables
 }

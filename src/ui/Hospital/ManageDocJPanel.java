@@ -2,12 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.AdministrativeRole;
+package ui.Hospital;
 
+import ui.AdministrativeRole.*;
 import bbank.DB.DButil;
-
-
-
 import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,21 +28,46 @@ import ui.LoginScreen;
  * @author admin
  */
 
-public class ManagehospitalJPanel extends javax.swing.JPanel {
+public class ManageDocJPanel extends javax.swing.JPanel {
    // Restaurant restaurant;
-     
+    
+    
     private JPanel userProcessContainer;
       ResultSet resultSet = null;
            DButil dbconn= new DButil();
-         // Connection conn = dbconn.getConnection();
+          Connection conn = dbconn.getConnection();
            int did=0;
+           String user,roletype;
+           int hospital_id=0;
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManagehospitalJPanel(JPanel userProcessContainer) {
+    public ManageDocJPanel(JPanel userProcessContainer,String user,String roletype) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-       
+       this.user=user;
+       this.roletype=roletype;
+        //finding hospital id
+         ResultSet resultSet2 = null;
+         String selectSql3 = "SELECT hospital_id from employee_list where name=?";
+         PreparedStatement stmt3;
+       int hid=0;
+                try {
+              //get hospital id from employee table
+               stmt3=conn.prepareStatement(selectSql3);
+                stmt3.setString(1, user);
+             resultSet2 = stmt3.executeQuery();
+              while (resultSet2.next()) {
+             // roleid=resultSet.getInt(1);
+             
+               hid=resultSet2.getInt(1);
+              }//while
+               hospital_id=hid;
+                  conn.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        //finding hospital id
          
         populateTable();
        // populateCombo();
@@ -54,16 +77,18 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
 
     private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) tblOrganizations.getModel();
-         Connection conn = dbconn.getConnection();
+         ResultSet resultSet = null;
         model.setRowCount(0);
         System.out.println("populate");
+         Connection conn = dbconn.getConnection();
         //
-         String selectSql = "SELECT id,name,address,mobile,bbank_id from hospitals";
-      Statement stmt;
+         String selectSql = "SELECT doc_id,name,specialization,address,mobile from doctors where hospital_id=?";
+ PreparedStatement stmt;
        try {
-            stmt = conn.createStatement();
-       
-            resultSet = stmt.executeQuery(selectSql);
+         
+         stmt=conn.prepareStatement(selectSql);
+          stmt.setInt(1, hospital_id);
+           resultSet = stmt.executeQuery();
             // conn.close();
              while (resultSet.next()) {
                 
@@ -71,7 +96,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             row[0]=resultSet.getInt(1);
             row[1] = resultSet.getString(2);
             row[2] = resultSet.getString(3);
-            row[3]=resultSet.getInt(4);
+            row[3]=resultSet.getString(4);
                   row[4]=resultSet.getInt(5);  
             model.addRow(row);
              }//while
@@ -99,7 +124,6 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrganizations = new javax.swing.JTable();
-        btnmod = new javax.swing.JButton();
         lblSelectOrgType = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
@@ -110,12 +134,14 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
         txtname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtaddress = new javax.swing.JTextField();
-        btnedit = new javax.swing.JButton();
         btndel = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtmobile = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cmbspecial = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,14 +154,14 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Address", "mobile", "Blood Bank Id"
+                "ID", "Name", "Specialization", "Address", "mobile"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -151,16 +177,8 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             tblOrganizations.getColumnModel().getColumn(0).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(1).setResizable(false);
             tblOrganizations.getColumnModel().getColumn(2).setResizable(false);
-            tblOrganizations.getColumnModel().getColumn(4).setResizable(false);
+            tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
         }
-
-        btnmod.setBackground(new java.awt.Color(102, 153, 255));
-        btnmod.setText("Modify");
-        btnmod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmodActionPerformed(evt);
-            }
-        });
 
         lblSelectOrgType.setText("ID");
 
@@ -173,27 +191,19 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Manage Hospitals ");
+        lblTitle.setText("Manage Doctors");
 
         lblOrganizationList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblOrganizationList.setText("List of Hospitals:");
+        lblOrganizationList.setText("List of Doctors");
 
         lblOrganizationAdd.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblOrganizationAdd.setText("Add /Modify Hospital Details");
+        lblOrganizationAdd.setText("Add /Modify Doctor Details");
 
         txtid.setEditable(false);
 
         jLabel1.setText("Name");
 
         jLabel2.setText("Address");
-
-        btnedit.setBackground(new java.awt.Color(102, 153, 255));
-        btnedit.setText("Edit");
-        btnedit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditActionPerformed(evt);
-            }
-        });
 
         btndel.setBackground(new java.awt.Color(102, 153, 255));
         btndel.setText("Delete");
@@ -211,7 +221,13 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setText("Specialization");
+
         jLabel5.setText("Mobile");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/doctor.png")); // NOI18N
+
+        cmbspecial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Orthopedic", "ENT", "Brain", "Nuro" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -237,26 +253,26 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel2)
                                             .addComponent(lblSelectOrgType)
+                                            .addComponent(jLabel4)
                                             .addComponent(jLabel5))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtaddress, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtid, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtmobile)))))
+                                            .addComponent(txtaddress)
+                                            .addComponent(txtname)
+                                            .addComponent(txtid)
+                                            .addComponent(txtmobile)
+                                            .addComponent(cmbspecial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(164, 164, 164)
                                 .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, 0)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,98 +287,40 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnedit)
-                            .addComponent(btndel))
+                        .addComponent(btndel)
                         .addGap(0, 0, 0)
-                        .addComponent(lblOrganizationAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSelectOrgType)
-                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAdd)
-                            .addComponent(btnmod))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblOrganizationAdd)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblSelectOrgType)
+                                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(cmbspecial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, 0)
+                                .addComponent(btnAdd))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnmodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmodActionPerformed
-
-      Connection conn = dbconn.getConnection();
-             int hid=Integer.parseInt(txtid.getText());
-        String address=txtaddress.getText();
-        String hname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
-       // conn = dbconn.getConnection();
-           //
-    int stop=0;
-     if(txtname.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid name");
-      return;
-     }
-     if(txtaddress.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid address");
-        return;
-     }
-          if(txtmobile.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
-         return; 
-     }
- 
-  {
-      //checking if id is already there
-    //  int found=0;
-     String selectSql = "Update hospitals set name=?,address=?,mobile=? where id=?;";
-     PreparedStatement stmt;
-      try {
-             // stmt = conn.createStatement();
-             stmt=conn.prepareStatement(selectSql);
-              stmt.setString(1, hname);
-              stmt.setString(2, address);
-               stmt.setInt(3, mobile);
-                stmt.setInt(4, hid);                                   
-              stmt.executeUpdate();
-         // conn.close();
-          } catch (SQLException ex) {
-              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
-          }
-       
-       
-JOptionPane.showMessageDialog(this,"Hospital data Updated");
-
-       populateTable(); 
-   
-  }//stop
-  txtid.setText("");
-  txtname.setText("");
-  txtaddress.setText("");
-   txtmobile.setText("");
-  
- 
- btnAdd.setEnabled(true);
- txtid.setEditable(true);
-
-       
-       // populateTable();
-    }//GEN-LAST:event_btnmodActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
 
@@ -371,37 +329,8 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-        // TODO add your handling code here:
-       
-          int SelectedRowIndex=tblOrganizations.getSelectedRow();
-       System.out.println("SelectedRowIndex "+SelectedRowIndex);
-                  if(SelectedRowIndex<0)
-        {
-         JOptionPane.showMessageDialog(this, "Please select a row to edit");
-            
-        return;
-        }
-        DefaultTableModel model1 =(DefaultTableModel) tblOrganizations.getModel();
-       int hid=(int) model1.getValueAt(SelectedRowIndex, 0);
-         String name= (String)model1.getValueAt(SelectedRowIndex, 1); 
-          String address= (String)model1.getValueAt(SelectedRowIndex, 2); 
-            int mobile=(int) model1.getValueAt(SelectedRowIndex, 3);
-              System.out.print("model1.getValueAt(SelectedRowIndex, 0) "+model1.getValueAt(SelectedRowIndex, 0));
-     
-              txtid.setText(Integer.toString(hid));
-            txtname.setText(name);
-             txtaddress.setText(address);
-                  txtmobile.setText(Integer.toString(mobile));
-              
- txtid.setEditable(false);
- btnAdd.setEnabled(false);
-       
-    }//GEN-LAST:event_btneditActionPerformed
-
     private void btndelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelActionPerformed
         // TODO add your handling code here:
-         Connection conn = dbconn.getConnection();
          int SelectedRowIndex=tblOrganizations.getSelectedRow();
         if(SelectedRowIndex<0)
         {
@@ -410,19 +339,26 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
         return;
         }
         DefaultTableModel model =(DefaultTableModel) tblOrganizations.getModel();
-         int hid=(int) model.getValueAt(SelectedRowIndex, 0);
+         int did=(int) model.getValueAt(SelectedRowIndex, 0);
+         String dname=(String) model.getValueAt(SelectedRowIndex, 1);
        
          conn = dbconn.getConnection();
-          String selectSql = "Delete from hospitals where id=?;";
-     PreparedStatement stmt;
+          String selectSql = "Delete from doctors where doc_id=?;";
+           String selectSql1 = "Delete from users where username=?;";
+          
+     PreparedStatement stmt,stmt1;
       try {
              // stmt = conn.createStatement();
              stmt=conn.prepareStatement(selectSql);
+               stmt1=conn.prepareStatement(selectSql1);
              
-                 stmt.setInt(1, hid);
+                 stmt.setInt(1, did);
                                    
               stmt.executeUpdate();
-          conn.close();
+                stmt1.setString(1, dname);
+                                   
+              stmt1.executeUpdate();
+         // conn.close();
           } catch (SQLException ex) {
               Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -435,14 +371,14 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-           Connection conn = dbconn.getConnection();
+         // int bbankid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
-        String name=txtname.getText();
-       int mobile=Integer.parseInt(txtmobile.getText());
-     // int mobile=(int)(txtmobile.getText());
-       // conn = dbconn.getConnection();
+        String dname=txtname.getText();
+        Long mobile=Long.parseLong(txtmobile.getText());
+        String special=cmbspecial.getItemAt(cmbspecial.getSelectedIndex());
+        conn = dbconn.getConnection();
         
-    int stop=0;
+   
      if(txtname.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid name");
@@ -453,37 +389,44 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
          JOptionPane.showMessageDialog(this, "Please enter valid address");
          return;
      }
-    
-      if(txtmobile.getText().isEmpty())
+          if(txtmobile.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
          return;
      }
  
-  {
+  {System.out.println("stop0");
      
-    //  int found=0;
-     String selectSql = "Insert into hospitals (name,address,mobile)values(?,?,?);";
-    
-     PreparedStatement stmt;
+     String selectSql = "Insert into doctors (name,specialization,address,mobile,hospital_id) values(?,?,?,?,?);";
+     String  selectSql1 = "insert into users(user_id,passwd,role_id,hospital_id,username) values(?,?,?,?,?);";
+     PreparedStatement stmt,stmt1;
       try {
              // stmt = conn.createStatement();
              stmt=conn.prepareStatement(selectSql);
+              stmt1=conn.prepareStatement(selectSql1);
              // stmt.setInt(1, bbankid);
-              stmt.setString(1, name);
-              stmt.setString(2, address);
-              stmt.setInt(3, mobile);
+              stmt.setString(1, dname);
+              stmt.setString(2, special);
+               stmt.setString(3, address);
+                stmt.setLong(4, mobile);
+                 stmt.setInt(5, hospital_id);
                 
                                    
               stmt.executeUpdate();
-             
+              
+              stmt1.setString(1, dname);
+               stmt1.setString(2, dname);
+                stmt1.setInt(3, 10);
+                 stmt1.setString(5, dname);
+                 stmt1.setInt(4, hospital_id);
+                  stmt1.executeUpdate();
          // conn.close();
           } catch (SQLException ex) {
-              Logger.getLogger(ManagehospitalJPanel.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(ManageDocJPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
        
        
-JOptionPane.showMessageDialog(this,"New Hospital  Added");
+JOptionPane.showMessageDialog(this,"New Doctor added to the Hospital");
 
        populateTable(); 
    
@@ -491,6 +434,7 @@ JOptionPane.showMessageDialog(this,"New Hospital  Added");
   txtid.setText("");
   txtname.setText("");
   txtaddress.setText("");
+ 
   txtmobile.setText("");
   
      
@@ -500,12 +444,13 @@ JOptionPane.showMessageDialog(this,"New Hospital  Added");
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndel;
-    private javax.swing.JButton btnedit;
-    private javax.swing.JButton btnmod;
+    private javax.swing.JComboBox<String> cmbspecial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOrganizationAdd;
     private javax.swing.JLabel lblOrganizationList;

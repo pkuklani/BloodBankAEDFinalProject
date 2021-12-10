@@ -120,7 +120,7 @@ public class BbankWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\Blood Bankm.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood Bankm.jpg")); // NOI18N
 
         userJButton1.setBackground(new java.awt.Color(102, 153, 255));
         userJButton1.setText("View All Donors");

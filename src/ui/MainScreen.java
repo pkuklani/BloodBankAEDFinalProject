@@ -16,6 +16,9 @@ import bbank.Role.LabRole;
 import bbank.Role.StoresRole;
 import bbank.Role.TechRole;
 import bbank.Role.HospitalRole;
+ import bbank.Role.DoctorRole;
+import bbank.Role.BillRole;
+import bbank.Role.ResearchRole;
 
 import bbank.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -43,6 +46,9 @@ public class MainScreen extends javax.swing.JPanel {
        LabRole lrole=new LabRole();
        TechRole trole=new TechRole();
        HospitalRole hrole=new HospitalRole();
+       DoctorRole drole=new DoctorRole();
+       BillRole billrole=new BillRole();
+       ResearchRole rrrole= new  ResearchRole();
      /* Creates new form MainScreen
      */
     public MainScreen(JPanel mainWorkArea,UserAccount userAccount, String username,String user){
@@ -199,6 +205,13 @@ if (role.equals("Tech"))
 
 if (role.equals("Hospital"))
          workArea.add("workArea", hrole.createWorkArea(workArea, userAccount,user,role));      
+
+
+if (role.equals("Bill-desk"))
+         workArea.add("workArea", billrole.createWorkArea(workArea, userAccount,user,role));      
+
+if (role.equals("Research"))
+         workArea.add("workArea", rrrole.createWorkArea(workArea, userAccount,user,role));      
 
 //  workArea.add("workArea", userid.createWorkArea(workArea, user));
         layout.next(workArea);

@@ -153,39 +153,40 @@ public class LoginScreen extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addComponent(lblTitle))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btndonar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnngo)
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnstatus)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUser)
-                            .addComponent(lblPassword))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogin)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUser)
+                                    .addComponent(lblPassword))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLogin)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(286, 286, 286)
+                                .addComponent(lblTitle))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(btndonar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnngo)
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnstatus)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(0, 0, 0))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUser});
@@ -219,7 +220,7 @@ public class LoginScreen extends javax.swing.JPanel {
                             .addComponent(lblPassword))
                         .addGap(27, 27, 27)
                         .addComponent(btnLogin)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -287,7 +288,7 @@ pwdField.setText(null);
        
         System.out.print("login "+urole);
        // account.setRole(new AdminRole());
-               JOptionPane.showMessageDialog(null, "found");
+               JOptionPane.showMessageDialog(null, "Welcome to Blood Bank Monitoring System");
             //find role
             String selectSql2="select role from roles where role_id=?";
             PreparedStatement stmt2;
@@ -368,19 +369,31 @@ pwdField.setText(null);
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
           String user="Patient ";
-       JPanel donorScreen = new RequestregJPanel(mainWorkArea,user);
-        mainWorkArea.add("Patient-registration", donorScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+       JFrame pScreen = new RequestregJPanel(mainWorkArea,user);
+       // mainWorkArea.add("Patient-registration", Screen);
+       // CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+      //  layout.next(mainWorkArea);
+       pScreen.setVisible(true);
+        pScreen.setSize(500, 500);
+        pScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatusActionPerformed
         // TODO add your handling code here:
          String user="Patient ";
-       JPanel patientScreen = new BloodstatusJPanel(mainWorkArea);
-        mainWorkArea.add("Patient-registration", patientScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+       JFrame pScreen = new BloodstatusJpanel1(mainWorkArea);
+        //mainWorkArea.add("Patient-registration", patientScreen);
+        //CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        //layout.next(mainWorkArea);
+         pScreen.setVisible(true);
+        pScreen.setSize(550, 650);
+        pScreen.setLocation(400, 150);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnstatusActionPerformed
 
     private void btnngoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnngoActionPerformed

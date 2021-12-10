@@ -1,9 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package ui;
-
 import bbank.DB.DButil;
 
 import java.awt.CardLayout;
@@ -20,18 +20,11 @@ import javax.swing.JPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author akhil
- */
-
-public class RequestregJPanel extends JPanel {
-   // Restaurant restaurant;
-         private JPanel userProcessContainer;
+public class RequestregJPanel extends javax.swing.JFrame {
+  private JPanel userProcessContainer;
     int did=0;
-    
     /**
-     * Creates new form ManageOrganizationJPanel
+     * Creates new form Request
      */
     public RequestregJPanel(JPanel userProcessContainer,String user) {
         initComponents();
@@ -61,10 +54,7 @@ public class RequestregJPanel extends JPanel {
                 
        
     }
-    
-    
 
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,8 +64,13 @@ public class RequestregJPanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        cmbgroup = new javax.swing.JComboBox<>();
         lblTitle = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtquantity = new javax.swing.JTextField();
         txtname = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtaddress = new javax.swing.JTextField();
@@ -83,16 +78,17 @@ public class RequestregJPanel extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtmobile = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        cmbgroup = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        txtquantity = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 204, 255));
-        setPreferredSize(new java.awt.Dimension(500, 353));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel6.setText("Blood Group");
+
+        cmbgroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "O+", "O-", "B+", "B-", "AB+", "AB-" }));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Register Blood Request");
+
+        jLabel4.setText("Units");
 
         jLabel1.setText("Patient Name");
 
@@ -110,181 +106,191 @@ public class RequestregJPanel extends JPanel {
 
         jLabel5.setText("Mobile");
 
-        jLabel6.setText("Blood Group");
-
-        cmbgroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "O+", "O-", "B+", "B-", "AB+", "AB-" }));
-
-        jLabel4.setText("Units");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(lblTitle))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(cmbgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnreg))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtaddress)
-                                    .addComponent(txtquantity))))))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(lblTitle)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnreg))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(12, 12, 12))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbgroup, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(lblTitle)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(lblTitle)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(cmbgroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnreg))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
         );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnregActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregActionPerformed
-        // TODO add your 
-       // int donorid=Integer.parseInt(txtid.getText());
+        // TODO add your
+        // int donorid=Integer.parseInt(txtid.getText());
         int donorid=did;
-          ResultSet resultSet = null;
-       String address=txtaddress.getText();
+        ResultSet resultSet = null;
+        String address=txtaddress.getText();
         String donorname=txtname.getText();
-       
+
         String bgroup=cmbgroup.getItemAt(cmbgroup.getSelectedIndex());
         String pass=txtmobile.getText();
         //
-    int stop=0;
-     if(txtname.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid name");
-         stop=1;
-     }
-     if(txtaddress.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid address");
-         stop=1;
-     }
-  
-    
-    
-   
-     
-     
-   //
-  
-         DButil dbconn= new DButil();
-          Connection conn = dbconn.getConnection();
-          
-          //find if userid already there
-            String checkSql = "SELECT * from users";
-      Statement stmtc;
-       try {
+        int stop=0;
+        if(txtname.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Please enter valid name");
+            stop=1;
+        }
+        if(txtaddress.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Please enter valid address");
+            stop=1;
+        }
+
+        //
+
+        DButil dbconn= new DButil();
+        Connection conn = dbconn.getConnection();
+
+        //find if userid already there
+        String checkSql = "SELECT * from users";
+        Statement stmtc;
+        try {
             stmtc = conn.createStatement();
-       
+
             resultSet = stmtc.executeQuery(checkSql);
-              
+
             // conn.close();
-             while (resultSet.next()) {
-                 // did=resultSet.getInt(1);
-              //    System.out.println("1="+resultSet.getString(1)+" userid"+userid+"2="+resultSet.getString(2)+" pass"+pass);
-                 
-                       }//while
-             did++;
-             System.out.print("did "+did);
-           //  conn.close();
-            
-       }//try
-       catch (SQLException ex) {
+            while (resultSet.next()) {
+                // did=resultSet.getInt(1);
+                //    System.out.println("1="+resultSet.getString(1)+" userid"+userid+"2="+resultSet.getString(2)+" pass"+pass);
+
+            }//while
+            did++;
+            System.out.print("did "+did);
+            //  conn.close();
+
+        }//try
+        catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
-       
-          //find if useid already there
-           // Connection conn = DriverManager.getConnection(dburl, user, pass);
- System.out.println("Connected to database !");
- // String selectSql = "insert into Doners values("+did+","+donorname+","+address+","+bgroup+",9999999999,0,0)";
- String selectSql = "insert into blood_demand(Bgroup_name,Patient_name,address,quantity,status)" +" values(?,?,?,?,?);";
- 
- PreparedStatement stmt;
-       
-          try {
-             // stmt = conn.createStatement();
-             stmt=conn.prepareStatement(selectSql);
-             
-               stmt.setString(1,cmbgroup.getItemAt(cmbgroup.getSelectedIndex()));
-             stmt.setString(2, txtname.getText());
-              stmt.setString(3, address);
-               stmt.setInt(4, Integer.parseInt(txtquantity.getText()));
-                 stmt.setInt(5, 0);
-                                   
-               stmt.executeUpdate();
-                  conn.close();
-          } catch (SQLException ex) {
-              Logger.getLogger(RequestregJPanel.class.getName()).log(Level.SEVERE, null, ex);
-          }
-   
-  
-  
-  
-JOptionPane.showMessageDialog(this,"new Blood request added");
 
-     
-  //stop
- 
-  txtname.setText("");
-   txtaddress.setText("");
-    
-       
+        //find if useid already there
+        // Connection conn = DriverManager.getConnection(dburl, user, pass);
+        System.out.println("Connected to database !");
+        // String selectSql = "insert into Doners values("+did+","+donorname+","+address+","+bgroup+",9999999999,0,0)";
+        String selectSql = "insert into blood_demand(Bgroup_name,Patient_name,address,quantity,status)" +" values(?,?,?,?,?);";
+
+        PreparedStatement stmt;
+
+        try {
+            // stmt = conn.createStatement();
+            stmt=conn.prepareStatement(selectSql);
+
+            stmt.setString(1,cmbgroup.getItemAt(cmbgroup.getSelectedIndex()));
+            stmt.setString(2, txtname.getText());
+            stmt.setString(3, address);
+            stmt.setInt(4, Integer.parseInt(txtquantity.getText()));
+            stmt.setInt(5, 0);
+
+            stmt.executeUpdate();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestregoldJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JOptionPane.showMessageDialog(this,"new Blood request added");
+
+        //stop
+
+        txtname.setText("");
+        txtaddress.setText("");
+
     }//GEN-LAST:event_btnregActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnreg;
     private javax.swing.JComboBox<String> cmbgroup;
@@ -294,11 +300,11 @@ JOptionPane.showMessageDialog(this,"new Blood request added");
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtaddress;
     private javax.swing.JTextField txtmobile;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtquantity;
     // End of variables declaration//GEN-END:variables
-
 }

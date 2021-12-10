@@ -126,7 +126,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Annapurna\Documents\NetBeansProjects\blood-bank\Blood Bankm.jpg"/>
+          <Image iconType="2" name="/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood Bankm.jpg"/>
         </Property>
       </Properties>
     </Component>
