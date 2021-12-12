@@ -42,6 +42,7 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
     private Bbank business;
     private UserAccount userAccount;
      private UserAccount userAccount1;
+     
    
  ResultSet resultSet = null;
            DButil dbconn= new DButil();
@@ -65,6 +66,7 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
 
         populateTable();
     }
+    
 
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
