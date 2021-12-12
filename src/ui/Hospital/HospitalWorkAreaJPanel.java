@@ -15,7 +15,9 @@ import ui.Hospital.HospitalWorkAreaJPanel;
 import ui.NgoRole.PatientsJPanel;
 import ui.NgoRole.AvailableJPanel;
 import ui.NgoRole.BloodbanksJPanel;
+
 import ui.NgoRole.ViewdonorsJPanel;
+
 
 import bbank.UserAccount.UserAccount;
 import bbank.UserAccount.UserAccountDirectory;
@@ -59,6 +61,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                                 //  icon = createImageIcon(foodname, "a");
        // userProcessContainer.imageUpdate(foodname, SOMEBITS, WIDTH, WIDTH, WIDTH, WIDTH);
     }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.

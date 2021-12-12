@@ -116,11 +116,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Annapurna\Documents\NetBeansProjects\blood-bank\hospital.png"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
