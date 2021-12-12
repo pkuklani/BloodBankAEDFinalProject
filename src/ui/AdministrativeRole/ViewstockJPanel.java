@@ -303,12 +303,12 @@ public void addcmbtype()
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblstock = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
         btnftype = new javax.swing.JButton();
         cmbbank = new javax.swing.JComboBox<>();
         btnbank = new javax.swing.JButton();
         cmbtype = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -347,9 +347,6 @@ public void addcmbtype()
             tblstock.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Blood Stock Details");
-
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -379,6 +376,8 @@ public void addcmbtype()
             }
         });
 
+        jLabel1.setText("Blood Stock Details");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -395,14 +394,14 @@ public void addcmbtype()
                         .addGap(59, 59, 59)
                         .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnftype)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbbank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnbank))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnftype)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbbank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnbank)))))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -410,9 +409,9 @@ public void addcmbtype()
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(12, 12, 12)
-                .addComponent(jButton1)
-                .addGap(30, 30, 30)
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnftype)
                     .addComponent(cmbbank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -478,7 +477,7 @@ public void addcmbtype()
     private javax.swing.JButton btnftype;
     private javax.swing.JComboBox<String> cmbbank;
     private javax.swing.JComboBox<String> cmbtype;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblstock;
     // End of variables declaration//GEN-END:variables

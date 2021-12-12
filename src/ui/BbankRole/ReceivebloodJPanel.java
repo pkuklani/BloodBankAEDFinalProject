@@ -388,6 +388,7 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
                 stmt2.setString(2, Dbgroup);
                  stmt2.executeUpdate();
          // conn.close();
+         JOptionPane.showMessageDialog(this, "Received");
           } catch (SQLException ex) {
               Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
