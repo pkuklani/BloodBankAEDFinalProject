@@ -78,10 +78,7 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="txtname" min="-2" pref="74" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="txtname" alignment="1" min="-2" pref="74" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtquantity" min="-2" pref="74" max="-2" attributes="0"/>

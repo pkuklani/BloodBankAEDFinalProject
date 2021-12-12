@@ -212,7 +212,7 @@ public class RequestregJPanel extends javax.swing.JFrame {
         String donorname=txtname.getText();
 
         String bgroup=cmbgroup.getItemAt(cmbgroup.getSelectedIndex());
-        String pass=txtmobile.getText();
+        long mobile=Long.parseLong(txtmobile.getText());
         //
         int stop=0;
         if(txtname.getText().isEmpty())
@@ -258,7 +258,7 @@ public class RequestregJPanel extends javax.swing.JFrame {
         // Connection conn = DriverManager.getConnection(dburl, user, pass);
         System.out.println("Connected to database !");
         // String selectSql = "insert into Doners values("+did+","+donorname+","+address+","+bgroup+",9999999999,0,0)";
-        String selectSql = "insert into blood_demand(Bgroup_name,Patient_name,address,quantity,status)" +" values(?,?,?,?,?);";
+        String selectSql = "insert into blood_demand(Bgroup_name,Patient_name,address,quantity,status,mobile)" +" values(?,?,?,?,?,?);";
 
         PreparedStatement stmt;
 
@@ -271,7 +271,7 @@ public class RequestregJPanel extends javax.swing.JFrame {
             stmt.setString(3, address);
             stmt.setInt(4, Integer.parseInt(txtquantity.getText()));
             stmt.setInt(5, 0);
-
+            stmt.setLong(6, mobile);
             stmt.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -284,7 +284,8 @@ public class RequestregJPanel extends javax.swing.JFrame {
 
         txtname.setText("");
         txtaddress.setText("");
-
+        txtmobile.setText("");
+        txtquantity.setText("");
     }//GEN-LAST:event_btnregActionPerformed
 
     /**
