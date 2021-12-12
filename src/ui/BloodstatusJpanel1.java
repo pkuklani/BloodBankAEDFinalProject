@@ -62,7 +62,8 @@ private JPanel userProcessContainer;
              row[3]=resultSet.getInt(4);  
             row[4]=resultSet.getString(5);
             row[5]=resultSet.getString(6);
-                  row[6]=resultSet.getInt(7);  
+                  //row[6]=resultSet.getInt(7);
+                  row[6]=resultSet.getLong(7);
             model.addRow(row);
              }//while
              
@@ -316,7 +317,7 @@ private JPanel userProcessContainer;
         String address=txtaddress.getText();
         String pname=txtnamep.getText();
         String bgroup=txtgroup.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
         int qty=Integer.parseInt(txtquantity.getText());
         conn = dbconn.getConnection();
 
@@ -363,7 +364,8 @@ private JPanel userProcessContainer;
                 stmt.setString(4, address);
                 stmt.setInt(5, qty);
                 stmt.setInt(6, 0);
-                stmt.setInt(7, mobile);
+                //stmt.setInt(7, mobile);
+                stmt.setLong(7, mobile);
                 stmt.executeUpdate();
 
                 conn.close();

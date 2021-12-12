@@ -68,7 +68,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         System.out.println("populate");
         //
-         String selectSql = "SELECT * from Blood_demand where status=0";
+    String selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.patient_name,a.quantity,a.date_demand,a.mobile  from Blood_demand a, blood_bank b  where a.status=0 and a.bbank_id=b.bbank_id";
       Statement stmt;
        try {
             stmt = conn.createStatement();
@@ -77,14 +77,15 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
             // conn.close();
              while (resultSet.next()) {
                 
-                  Object[] row = new Object[8];
+                 Object[] row = new Object[8];
             row[0]=resultSet.getInt(1);
-            row[2] = resultSet.getString(2);
-            row[3] = resultSet.getString(3);
+            row[1] = resultSet.getString(2);
+            row[2] = resultSet.getString(3);
+            row[3] = resultSet.getString(4);
           //  row[3]=resultSet.getString(4);
                   row[4]=resultSet.getInt(5); 
-                   row[6]=resultSet.getInt(6);
-                  row[5]=resultSet.getDate(7).toString();
+                   row[6]=resultSet.getInt(7);
+                  row[5]=(resultSet.getDate(6));
                    
             model.addRow(row);
              }//while
@@ -113,9 +114,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
-        btnAssign = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,19 +159,10 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
             tblWorkRequests.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        btnAssign.setBackground(new java.awt.Color(102, 153, 255));
-        btnAssign.setText("Set Status Delivered");
-        btnAssign.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignActionPerformed(evt);
-            }
-        });
-
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Donor Work Area");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Pending Blood requirements ");
+        jLabel1.setText("Pending Blood requirements ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,59 +171,28 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAssign)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTitle)
-                                .addGap(47, 47, 47)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(lblTitle)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitle)
-                    .addComponent(jButton1))
+                .addGap(19, 19, 19)
+                .addComponent(lblTitle)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnAssign)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
-
-        int selectedRow = tblWorkRequests.getSelectedRow();
-
-        if (selectedRow >= 0) {
-            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
-            if (request.getMessage().equalsIgnoreCase("Completed")) {
-                JOptionPane.showMessageDialog(null, "Request already processed.");
-                return;
-            } else {
-                Date now=new Date();
-                request.setReceiver(userAccount);
-                request.setStatus("Delivered");
-                request.setResolveDate(now);
-                 JOptionPane.showMessageDialog(null, "Order Delivered");
-                populateTable();
-
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Choose a order to deliver");
-            return;
-        }
-
-
-    }//GEN-LAST:event_btnAssignActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -262,8 +222,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssign;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;

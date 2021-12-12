@@ -307,7 +307,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
              int hid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
         String hname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
        // conn = dbconn.getConnection();
            //
     int stop=0;
@@ -337,7 +337,8 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
              stmt=conn.prepareStatement(selectSql);
               stmt.setString(1, hname);
               stmt.setString(2, address);
-               stmt.setInt(3, mobile);
+               //stmt.setInt(3, mobile);
+               stmt.setLong(3, mobile);
                 stmt.setInt(4, hid);                                   
               stmt.executeUpdate();
          // conn.close();
@@ -392,7 +393,7 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
               txtid.setText(Integer.toString(hid));
             txtname.setText(name);
              txtaddress.setText(address);
-                  txtmobile.setText(Integer.toString(mobile));
+                  txtmobile.setText(Long.toString(mobile));
               
  txtid.setEditable(false);
  btnAdd.setEnabled(false);
@@ -438,7 +439,7 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
            Connection conn = dbconn.getConnection();
         String address=txtaddress.getText();
         String name=txtname.getText();
-       int mobile=Integer.parseInt(txtmobile.getText());
+       long mobile=Long.parseLong(txtmobile.getText());
      // int mobile=(int)(txtmobile.getText());
        // conn = dbconn.getConnection();
         
@@ -472,7 +473,7 @@ JOptionPane.showMessageDialog(this,"Hospital data Updated");
              // stmt.setInt(1, bbankid);
               stmt.setString(1, name);
               stmt.setString(2, address);
-              stmt.setInt(3, mobile);
+              stmt.setLong(3, mobile);
                 
                                    
               stmt.executeUpdate();

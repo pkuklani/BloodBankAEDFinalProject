@@ -140,7 +140,62 @@ public void addcmbtype()
         }
        
                 }
-//bank type
+//bank typepopulatebankTable
+       //populate 
+        public void populatebankTable() {
+            DefaultTableModel model = (DefaultTableModel) tblstock.getModel();
+              Connection conn = dbconn.getConnection();
+               ResultSet resultSet = null;
+        String bbank=cmbbank.getItemAt(cmbbank.getSelectedIndex());
+        System.out.println("bgroup==="+bbank);
+        model.setRowCount(0);
+        System.out.println("populate");
+        String selectSql;
+        //
+        if(bbank.equals("All"))
+        { selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.quantity from Bbank_stock a, blood_bank b where a.bbank_id=b.bbank_id  ";
+        }
+        else
+        {
+             selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.quantity from Bbank_stock a, blood_bank b where a.bbank_id=b.bbank_id and b.bbank_name=? ";
+        }
+        
+        // String selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.quantity from Bbank_stock a, blood_bank b where a.bbank_id=b.bbank_id and a.bgroup_name=? ";
+      PreparedStatement stmt;
+       try {
+            stmt = conn.prepareStatement(selectSql);
+              if(!bbank.equals("All"))
+       stmt.setString(1, bbank);
+             resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+            row[0]=resultSet.getString(2);
+            row[1]=resultSet.getString(3);
+                  row[2]=resultSet.getInt(4); 
+                  
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+       
+        //
+      
+    }
+
+       //populatetype
+    
+
+       //populate bank
 
   //populatetype
         public void populatetypeTable() {
@@ -194,9 +249,12 @@ public void addcmbtype()
     }
 
        //populatetype
+
     
 
-    public void populateTable() {
+
+        
+        public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblstock.getModel();
          Connection conn = dbconn.getConnection();
           ResultSet resultSet = null;
@@ -315,6 +373,12 @@ public void addcmbtype()
             }
         });
 
+        cmbtype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbtypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -374,8 +438,12 @@ public void addcmbtype()
 
     private void btnbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbankActionPerformed
         // TODO add your handling code here:
-      //  populatebankTable();
+        populatebankTable();
     }//GEN-LAST:event_btnbankActionPerformed
+
+    private void cmbtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbtypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbtypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {

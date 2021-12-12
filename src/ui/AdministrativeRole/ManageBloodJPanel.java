@@ -216,6 +216,12 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Mobile");
 
+        txtmobile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmobileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,7 +322,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
              int bbankid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
         String bname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
         String hos=txthos.getText();
         conn = dbconn.getConnection();
            //
@@ -331,18 +337,18 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
          JOptionPane.showMessageDialog(this, "Please enter valid address");
         return;
      }
-     if(txthos.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
-         return;
-     }
+     //if(txthos.getText().isEmpty())
+     //{
+         //JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
+        // return;
+     //}
       if(txtmobile.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
          return; 
      }
-  if(stop==0)
-  {System.out.println("stop0");
+ // if(stop==0)
+  {System.out.println("stop0"+mobile);
       //checking if id is already there
     //  int found=0;
      String selectSql = "Update Blood_bank set Bbank_name=?,Hospital_name=?,Address=?,Mobile=? where Bbank_id=?;";
@@ -353,7 +359,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
               stmt.setString(1, bname);
               stmt.setString(3, address);
                stmt.setString(2, hos);
-                stmt.setInt(4, mobile);
+                stmt.setLong(4, mobile);
                  stmt.setInt(5, bbankid);
                                    
               stmt.executeUpdate();
@@ -420,7 +426,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
             txtname.setText(resultSet.getString(2));
              txthos.setText(resultSet.getString(3));
              txtaddress.setText(resultSet.getString(4));
-                  txtmobile.setText(Integer.toString(resultSet.getInt(5)));
+             txtmobile.setText(Long.toString(resultSet.getInt(5)));
             
              }//while
              
@@ -471,10 +477,10 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-           int bbankid=Integer.parseInt(txtid.getText());
+          // int bbankid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
         String bname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
         String hos=txthos.getText();
         conn = dbconn.getConnection();
         
@@ -489,11 +495,11 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
          JOptionPane.showMessageDialog(this, "Please enter valid address");
          return;
      }
-     if(txthos.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
-         return;
-     }
+     //if(txthos.getText().isEmpty())
+    // {
+       //  JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
+         //return;
+     //}
       if(txtmobile.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
@@ -534,7 +540,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
          
     //  int found=0;
      String selectSql = "Insert into Blood_bank (bbank_name,hospital_name,address,mobile,status)values(?,?,?,?,?);";
-     String  selectSql1 = "insert into users(user_id,passwd,role_id,Bbank_id,username" +" values(?,?,?,?,?);";
+     String  selectSql1 = "insert into users(user_id,passwd,role_id,Bbank_id,username)  values(?,?,?,?,?);";
      PreparedStatement stmt,stmt1;
       try {
              // stmt = conn.createStatement();
@@ -544,7 +550,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
               stmt.setString(1, bname);
               stmt.setString(3, address);
                stmt.setString(2, hos);
-                stmt.setInt(4, mobile);
+                stmt.setLong(4, mobile);
                  stmt.setInt(5, 0);
                                    
               stmt.executeUpdate();
@@ -552,7 +558,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
                stmt1.setString(2, bname);
                 stmt1.setInt(3, 2);
                  stmt1.setString(5, bname);
-                 stmt1.setInt(4, bbankid);
+                 stmt1.setInt(4, 0);
                   stmt1.executeUpdate();
          // conn.close();
           } catch (SQLException ex) {
@@ -573,6 +579,10 @@ JOptionPane.showMessageDialog(this,"Blood Bank Added");
   
      
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtmobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmobileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmobileActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

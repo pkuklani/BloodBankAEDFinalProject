@@ -31,7 +31,6 @@
                   <Component id="userJButton" pref="267" max="32767" attributes="0"/>
                   <Component id="btnreceive" pref="267" max="32767" attributes="0"/>
                   <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnissue" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnbbank" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnhos" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -54,8 +53,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnreceive" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnissue" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="userJButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnstock" min="-2" max="-2" attributes="0"/>
@@ -77,17 +74,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userJButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnissue">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Issue Blood"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnissueActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnbbank">

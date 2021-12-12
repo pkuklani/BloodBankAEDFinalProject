@@ -63,7 +63,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         userJButton = new javax.swing.JButton();
-        btnissue = new javax.swing.JButton();
         btnbbank = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         btnreceive = new javax.swing.JButton();
@@ -79,14 +78,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
-            }
-        });
-
-        btnissue.setBackground(new java.awt.Color(102, 153, 255));
-        btnissue.setText("Issue Blood");
-        btnissue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnissueActionPerformed(evt);
             }
         });
 
@@ -138,7 +129,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(userJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                     .addComponent(btnreceive, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                     .addComponent(lblTitle)
-                    .addComponent(btnissue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnhos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,8 +148,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnreceive)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnissue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userJButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnstock))
@@ -176,12 +164,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButtonActionPerformed
-
-    private void btnissueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnissueActionPerformed
-
-       
-        
-    }//GEN-LAST:event_btnissueActionPerformed
 
     private void btnbbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbbankActionPerformed
 
@@ -221,7 +203,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbbank;
     private javax.swing.JButton btnhos;
-    private javax.swing.JButton btnissue;
     private javax.swing.JButton btnreceive;
     private javax.swing.JButton btnstock;
     private javax.swing.JLabel jLabel1;

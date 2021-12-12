@@ -211,7 +211,10 @@ if (role.equals("Bill-desk"))
          workArea.add("workArea", billrole.createWorkArea(workArea, userAccount,user,role));      
 
 if (role.equals("Research"))
-         workArea.add("workArea", rrrole.createWorkArea(workArea, userAccount,user,role));      
+         workArea.add("workArea", rrrole.createWorkArea(workArea, userAccount,user,role)); 
+
+if (role.equals("Doctor"))
+         workArea.add("workArea", drole.createWorkArea(workArea, userAccount,user,role)); 
 
 //  workArea.add("workArea", userid.createWorkArea(workArea, user));
         layout.next(workArea);
