@@ -223,7 +223,9 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
     }
  
     // Constructor of ths class
+    
     // 1. Parameterized constructor
+    
     MyObjectOutputStream(OutputStream o) throws IOException
     {
         super(o);
