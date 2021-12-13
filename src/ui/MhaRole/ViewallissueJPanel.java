@@ -49,20 +49,21 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
  ResultSet resultSet = null;
  ResultSet rSet = null;
            DButil dbconn= new DButil();
-          Connection conn = dbconn.getConnection();
+        //  Connection conn = dbconn.getConnection();
            int did=0;
            int Bbankid,Did,Pbquant=0,available=0;
-           String user,role,Pname,Pbgroup;
+           String user,role,Pname,Pbgroup,roletype;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public ViewallissueJPanel(JPanel userProcessContainer) {
+    public ViewallissueJPanel(JPanel userProcessContainer,String user,String roletype) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
        
         this.business = business;
         this.user=user;
+        this.roletype=roletype;
         System.out.println("user "+user+"role "+role);
         ResultSet resultSet = null;
            DButil dbconn= new DButil();
@@ -89,13 +90,108 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         }
          
 //getting Bbank id of user
-
+addcmbtype();
         populateTable();
     }
+    //start add cmbtype
+    public void addcmbtype()
+        {
+             cmbtype.removeAll();
+                    // cmbbank.removeAll();
+          cmbtype.addItem("All");
+          //  cmbOrganizationList.addItem(organization);
+           Connection conn = dbconn.getConnection();
+            ResultSet resultSet = null;
+         String selectSql = "SELECT bgroup_name from bgroup";
+       PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            
+      // stmt.setString(1,roletype);
+            resultSet = stmt.executeQuery();
+       
+           
+            // conn.close();
+             while (resultSet.next()) {
+                 String cmbvalue=resultSet.getString(1);
+                  // System.out.println("cmbvalue hos "+cmbvalue);
+                  cmbtype.addItem(cmbvalue);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        }
+        
+//blood type
+ 
+    //end add cmbtype
+//start  populatetypeTable
+      public void populatetypeTable() {
+            DefaultTableModel model = (DefaultTableModel) tblpatient.getModel();
+        Connection conn = dbconn.getConnection();
+         ResultSet resultSet = null;
+          String bgroup=cmbtype.getItemAt(cmbtype.getSelectedIndex());
+        model.setRowCount(0);
+        System.out.println("populate");
+        //
+        String selectSql=null;
+         if(bgroup.equals("All"))
+         {
+          selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.patient_name,a.quantity,a.date_issue from bbank_issued a,blood_bank b where a.bbank_id=b.bbank_id";
+         }
+         else
+         {
+               selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.patient_name,a.quantity,a.date_issue from bbank_issued a,blood_bank b where a.bbank_id=b.bbank_id and a.bgroup_name=? ";
+         }
+          PreparedStatement stmt;
+       try {
+            stmt = conn.prepareStatement(selectSql);
+        if(!bgroup.equals("All"))
+        {
+             stmt.setString(1, bgroup);
+        }
+           
+        resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+            row[0]=resultSet.getInt(1);
+            row[1] = resultSet.getString(2);
+            row[2] = resultSet.getString(3);
+           row[3]=resultSet.getString(4);
+                  row[4]=resultSet.getInt(5); 
+                  row[5]=resultSet.getDate(6).toString();
+                   
+                  
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+       
+        //
+      
+    }
 
+    //end  populatetypeTable
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblpatient.getModel();
-       
+        Connection conn = dbconn.getConnection();
         model.setRowCount(0);
         System.out.println("populate");
         //
@@ -112,9 +208,9 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
             row[0]=resultSet.getInt(1);
             row[1] = resultSet.getString(2);
             row[2] = resultSet.getString(3);
-           row[4]=resultSet.getString(4);
-                  row[5]=resultSet.getInt(5); 
-                  row[6]=resultSet.getDate(6).toString();
+           row[3]=resultSet.getString(4);
+                  row[4]=resultSet.getInt(5); 
+                  row[5]=resultSet.getDate(6).toString();
                    
                   
                    
@@ -147,6 +243,8 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         tblpatient = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
         btnback = new javax.swing.JButton();
+        cmbtype = new javax.swing.JComboBox<>();
+        btntype = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -198,6 +296,13 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
             }
         });
 
+        btntype.setText("Search By Type");
+        btntype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -212,7 +317,12 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(btnback)))
+                        .addComponent(btnback))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btntype)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,10 +331,15 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(btnback)
                 .addGap(10, 10, 10)
-                .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btntype))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,6 +349,12 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btntypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntypeActionPerformed
+        // TODO add your handling code here:
+        populatetypeTable();
+        
+    }//GEN-LAST:event_btntypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -264,6 +385,8 @@ public class ViewallissueJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
+    private javax.swing.JButton btntype;
+    private javax.swing.JComboBox<String> cmbtype;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblpatient;

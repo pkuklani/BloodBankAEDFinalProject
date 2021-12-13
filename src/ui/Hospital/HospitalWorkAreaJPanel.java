@@ -15,9 +15,7 @@ import ui.Hospital.HospitalWorkAreaJPanel;
 import ui.NgoRole.PatientsJPanel;
 import ui.NgoRole.AvailableJPanel;
 import ui.NgoRole.BloodbanksJPanel;
-
 import ui.NgoRole.ViewdonorsJPanel;
-
 
 import bbank.UserAccount.UserAccount;
 import bbank.UserAccount.UserAccountDirectory;
@@ -62,7 +60,6 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
        // userProcessContainer.imageUpdate(foodname, SOMEBITS, WIDTH, WIDTH, WIDTH, WIDTH);
     }
     
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -77,6 +74,8 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         btndonor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnadddoc = new javax.swing.JButton();
+        btnaddbank = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(424, 344));
@@ -116,7 +115,23 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\hospital.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/hospital.png")); // NOI18N
+
+        btnadddoc.setBackground(new java.awt.Color(102, 153, 255));
+        btnadddoc.setText("Add Doctors");
+        btnadddoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnadddocActionPerformed(evt);
+            }
+        });
+
+        btnaddbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnaddbank.setText("Attach Blood Bank");
+        btnaddbank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddbankActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,9 +144,11 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btndonor, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                     .addComponent(lblTitle)
                     .addComponent(btnpatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnavailable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnavailable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnadddoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnaddbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -148,9 +165,13 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnpatient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnbank))
+                        .addComponent(btnbank)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnadddoc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnaddbank))
                     .addComponent(jLabel1))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,9 +210,29 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnbankActionPerformed
+
+    private void btnadddocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnadddocActionPerformed
+        // TODO add your handling code here:
+         ManageDocJPanel manageDoc = new ManageDocJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("ManageDoc", manageDoc);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnadddocActionPerformed
+
+    private void btnaddbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddbankActionPerformed
+        // TODO add your handling code here:
+         AddBloodbanksJPanel addBloodbanks = new AddBloodbanksJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("AddBloodbanks", addBloodbanks);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnaddbankActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnaddbank;
+    private javax.swing.JButton btnadddoc;
     private javax.swing.JButton btnavailable;
     private javax.swing.JButton btnbank;
     private javax.swing.JButton btndonor;

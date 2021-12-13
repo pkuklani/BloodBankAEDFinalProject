@@ -18,6 +18,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -60,13 +61,106 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
         this.role=role;
         this.user=user;
         //this.deliveryOrganization = (DeliveryOrganization) organization;
-
+addcmbtype();
         populateTable();
     }
+//add cbtype starts
+    public void addcmbtype()
+        {
+             cmbtype.removeAll();
+                    // cmbbank.removeAll();
+          cmbtype.addItem("All");
+          //  cmbOrganizationList.addItem(organization);
+           Connection conn = dbconn.getConnection();
+            ResultSet resultSet = null;
+         String selectSql = "SELECT bgroup_name from bgroup";
+       PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            
+      // stmt.setString(1,roletype);
+            resultSet = stmt.executeQuery();
+       
+           
+            // conn.close();
+             while (resultSet.next()) {
+                 String cmbvalue=resultSet.getString(1);
+                  // System.out.println("cmbvalue hos "+cmbvalue);
+                  cmbtype.addItem(cmbvalue);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        }
+        
+//blood type
+    //addcmbtype ends
+    // populate type starts
+     public void populatetypeTable() {
+            DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+        Connection conn = dbconn.getConnection();
+        ResultSet resultSet = null;
+        model.setRowCount(0);
+          String bgroup=cmbtype.getItemAt(cmbtype.getSelectedIndex());
+        System.out.println("populate");
+        //
+         String selectSql=null;
+         if(bgroup.equals("All"))
+         {
+         selectSql = "SELECT * from Doners";
+         }
+         else
+            {
+         selectSql = "SELECT * from Doners where bgroup_name=?";
+         }  
+       PreparedStatement stmt;
+       try {
+            stmt = conn.prepareStatement(selectSql);
+        if(!bgroup.equals("All"))
+        {
+             stmt.setString(1, bgroup);
+        }
+            resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+            row[0]=resultSet.getString(2);
+            row[1] = resultSet.getString(4);
+            row[2] = resultSet.getString(3);
+          //  row[3]=resultSet.getString(4);
+                  row[3]=resultSet.getInt(5); 
+                   row[4]=resultSet.getInt(7);
+                 
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+       
+        //
+      
+    }
 
+    //populate type ends
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
-       
+        Connection conn = dbconn.getConnection();
+        ResultSet resultSet = null;
         model.setRowCount(0);
         System.out.println("populate");
         //
@@ -116,8 +210,10 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        cmbtype = new javax.swing.JComboBox<>();
+        btntype = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -159,15 +255,21 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Blood bank Work Area");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Donors list");
-
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
             }
         });
+
+        btntype.setText("Search By Type");
+        btntype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntypeActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Donors list");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -179,13 +281,18 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
                         .addGap(59, 59, 59)
                         .addComponent(lblTitle)
                         .addGap(47, 47, 47)
-                        .addComponent(jButton1))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(btnback)))
+                        .addComponent(btnback))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btntype)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,13 +300,17 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(8, 8, 8)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btntype))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,6 +320,11 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btntypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntypeActionPerformed
+        // TODO add your handling code here:
+        populatetypeTable();
+    }//GEN-LAST:event_btntypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -223,15 +339,12 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
     }
  
     // Constructor of ths class
-    
     // 1. Parameterized constructor
-    
     MyObjectOutputStream(OutputStream o) throws IOException
     {
         super(o);
     }
  
-    
     // Method of this class
     public void writeStreamHeader() throws IOException
     {
@@ -242,7 +355,9 @@ public class ViewalldonorsJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btntype;
+    private javax.swing.JComboBox<String> cmbtype;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;

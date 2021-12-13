@@ -147,7 +147,6 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbldonor = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btndonor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -159,6 +158,7 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtbgroup = new javax.swing.JTextField();
         btnback = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -200,9 +200,6 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Blood bank Work Area");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Donors list-Receive Blood");
-
         btndonor.setText("Select Donor");
         btndonor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +235,8 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("Donors list-Receive Blood");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,8 +246,8 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(lblTitle)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1))
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -288,10 +287,10 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(8, 8, 8)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -389,6 +388,7 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
                 stmt2.setString(2, Dbgroup);
                  stmt2.executeUpdate();
          // conn.close();
+         JOptionPane.showMessageDialog(this, "Received");
           } catch (SQLException ex) {
               Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -433,11 +433,11 @@ public class ReceivebloodJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnback;
     private javax.swing.JButton btndonor;
     private javax.swing.JButton btnreceive;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tbldonor;

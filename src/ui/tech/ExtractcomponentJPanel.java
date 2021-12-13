@@ -30,6 +30,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 import ui.DonorregJPanel;
 import ui.LoginScreen;
@@ -153,6 +154,7 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
         btnsave = new javax.swing.JButton();
         cmbcomp = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -215,7 +217,12 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
 
         cmbcomp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Red Cells", "Platelets", "Plasma", "White cells" }));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\technician.jpg")); // NOI18N
+        jButton1.setText("View Components");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -237,15 +244,17 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(92, 92, 92)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnsave)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel3))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtunits, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                            .addComponent(cmbcomp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtunits)
+                                    .addComponent(cmbcomp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnsave)))
                         .addGap(35, 35, 35)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(164, Short.MAX_VALUE))
@@ -270,7 +279,9 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(txtunits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(btnsave))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnsave)
+                            .addComponent(jButton1)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -352,6 +363,17 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
                  txtunits.setText("");
     }//GEN-LAST:event_btnsaveActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+           String user="Tech";
+           String roletype="Tech";
+       JFrame techScreen = new BloodcomponentsJFrame(userProcessContainer,user,roletype);
+         techScreen.setVisible(true);
+        techScreen.setSize(500, 500);
+        techScreen.setLocation(400, 200);
+        techScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
  
@@ -383,6 +405,7 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnextract;
     private javax.swing.JButton btnsave;
     private javax.swing.JComboBox<String> cmbcomp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

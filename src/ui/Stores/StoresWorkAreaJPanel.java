@@ -20,9 +20,11 @@ import ui.BbankRole.IssuebloodJPanel;
 import ui.BbankRole.ViewmypendingJPanel;
 import ui.BbankRole.ViewalldonorsJPanel;
 import ui.BbankRole.ViewmystockJPanel;
-
+import ui.MhaRole.ViewallreceiptJPanel;
+import ui.MhaRole.ViewallissueJPanel;
 /**
  *
+ * 
  * @author  akhil
  */
 public class StoresWorkAreaJPanel extends javax.swing.JPanel {
@@ -80,6 +82,8 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
         btnstock = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         userJButton1 = new javax.swing.JButton();
+        btnviewr = new javax.swing.JButton();
+        btnviewi = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(424, 344));
@@ -119,13 +123,29 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\stores.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/stores.jpg")); // NOI18N
 
         userJButton1.setBackground(new java.awt.Color(102, 153, 255));
         userJButton1.setText("View All Donors");
         userJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButton1ActionPerformed(evt);
+            }
+        });
+
+        btnviewr.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewr.setText("View All Receipts");
+        btnviewr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnviewrActionPerformed(evt);
+            }
+        });
+
+        btnviewi.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewi.setText("View All Issues");
+        btnviewi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnviewiActionPerformed(evt);
             }
         });
 
@@ -141,7 +161,9 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(lblTitle)
                     .addComponent(btnissue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                    .addComponent(userJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnviewr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnviewi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -151,19 +173,23 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(lblTitle)
                 .addGap(31, 31, 31)
+                .addComponent(btnbbank)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnbbank)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnreceive)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnissue)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userJButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnstock))
+                        .addComponent(btnstock)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnviewr)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnviewi))
                     .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,6 +233,22 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButton1ActionPerformed
+
+    private void btnviewrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewrActionPerformed
+        // TODO add your handling code here:
+           ViewallreceiptJPanel viewallreceipt = new ViewallreceiptJPanel(userProcessContainer,user,role);
+        userProcessContainer.add("manageBloodJPanel", viewallreceipt);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnviewrActionPerformed
+
+    private void btnviewiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewiActionPerformed
+        // TODO add your handling code here:
+         ViewallissueJPanel viewallissue = new ViewallissueJPanel(userProcessContainer,user,role);
+        userProcessContainer.add("manageBloodJPanel", viewallissue);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnviewiActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,6 +256,8 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnissue;
     private javax.swing.JButton btnreceive;
     private javax.swing.JButton btnstock;
+    private javax.swing.JButton btnviewi;
+    private javax.swing.JButton btnviewr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JButton userJButton1;

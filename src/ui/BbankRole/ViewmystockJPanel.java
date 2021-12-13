@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,39 +46,159 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
  
  ResultSet resultSet = null;
            DButil dbconn= new DButil();
-          Connection conn = dbconn.getConnection();
+        //  Connection conn = dbconn.getConnection();
            int did=0;
            String user;
            String role;
            int ubbankid;
+           int Bbankid;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
     public ViewmystockJPanel(JPanel userProcessContainer,String user,String role) {
         initComponents();
-
+ResultSet resultSet = null;
+          // DButil dbconn= new DButil();
+          Connection conn = dbconn.getConnection();
         this.userProcessContainer = userProcessContainer;
        
         this.business = business;
         this.user=user;
         System.out.println("user "+user+"role "+role);
         //this.deliveryOrganization = (DeliveryOrganization) organization;
-
+         String selectSql = "SELECT Bbank_id from users where user_id=?;";
+            System.out.print("state "+selectSql);
+           PreparedStatement stmt;
+           try {
+           stmt=conn.prepareStatement(selectSql);
+            
+       stmt.setString(1,user);
+            resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                  Bbankid=resultSet.getInt(1);
+             }//while
+             did++;
+             System.out.print("bank id "+Bbankid);
+             conn.close();
+            // txtid.setText(Integer.toString(did));
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+addcmbtype();
         populateTable();
     }
-
-    public void populateTable() {
-            DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+//blood type
+public void addcmbtype()
+        {
+             cmbtype.removeAll();
+                    // cmbbank.removeAll();
+          cmbtype.addItem("All");
+          //  cmbOrganizationList.addItem(organization);
+           Connection conn = dbconn.getConnection();
+            ResultSet resultSet = null;
+         String selectSql = "SELECT bgroup_name from bgroup ";
+       PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            
+      // stmt.setString(1,roletype);
+            resultSet = stmt.executeQuery();
        
+           
+            // conn.close();
+             while (resultSet.next()) {
+                 String cmbvalue=resultSet.getString(1);
+                  // System.out.println("cmbvalue hos "+cmbvalue);
+                  cmbtype.addItem(cmbvalue);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        }
+        
+//blood type
+//populate type starts
+public void populatetypeTable() {
+            DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+        Connection conn = dbconn.getConnection();
+               ResultSet resultSet = null;
         model.setRowCount(0);
         System.out.println("populate");
         //
-         String selectSql = "SELECT * from Bbank_stock ";
-      Statement stmt;
+         String bgroup=cmbtype.getItemAt(cmbtype.getSelectedIndex());
+          String selectSql;
+        //
+        if(bgroup.equals("All"))
+        {
+          selectSql = "SELECT * from Bbank_stock where bbank_id=? ";
+        }
+        else
+              {
+          selectSql = "SELECT * from Bbank_stock where bbank_id=? and bgroup_name=?";
+        }
+       PreparedStatement stmt;
        try {
-            stmt = conn.createStatement();
+            stmt = conn.prepareStatement(selectSql);
+              if(bgroup.equals("All"))
+              {
+       stmt.setInt(1, Bbankid);
+              }
+              else
+              {
+                   stmt.setInt(1, Bbankid);
+                  stmt.setString(2, bgroup); 
+              }
+             resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+            row[0]=resultSet.getString(2);
+           
+                  row[1]=resultSet.getInt(3); 
+                  
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
        
-            resultSet = stmt.executeQuery(selectSql);
+        //
+      
+    }
+
+//populate type ends
+    public void populateTable() {
+            DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+        Connection conn = dbconn.getConnection();
+               ResultSet resultSet = null;
+        model.setRowCount(0);
+        System.out.println("populate");
+        //
+         String selectSql = "SELECT * from Bbank_stock where bbank_id=? ";
+       PreparedStatement stmt;
+       try {
+             stmt = conn.prepareStatement(selectSql);
+             stmt.setInt(1, Bbankid);
+       
+            resultSet = stmt.executeQuery();
             // conn.close();
              while (resultSet.next()) {
                 
@@ -115,8 +236,10 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbtype = new javax.swing.JComboBox<>();
+        btntype = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,13 +280,19 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Blood Bank Work Area");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Blood Stock Details");
-
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Blood Stock Details");
+
+        btntype.setText("Search By type");
+        btntype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntypeActionPerformed(evt);
             }
         });
 
@@ -174,16 +303,21 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(lblTitle)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(btnback)))
+                        .addComponent(btnback))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(lblTitle)
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btntype)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,13 +325,17 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblTitle)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btntype))
+                .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,6 +345,11 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btntypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntypeActionPerformed
+        // TODO add your handling code here:
+        populatetypeTable();
+    }//GEN-LAST:event_btntypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -237,7 +380,9 @@ public class ViewmystockJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btntype;
+    private javax.swing.JComboBox<String> cmbtype;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;

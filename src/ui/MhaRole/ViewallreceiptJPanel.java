@@ -49,14 +49,14 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
 
  ResultSet resultSet = null;
            DButil dbconn= new DButil();
-          Connection conn = dbconn.getConnection();
+       //   Connection conn = dbconn.getConnection();
            int did=0;
            int Bbankid,Did=0;
-           String user,role,Dname,Dbgroup;
+           String user,role,Dname,Dbgroup,roletype;
     /**
      * Creates new form 
      */
-    public ViewallreceiptJPanel(JPanel userProcessContainer) {
+    public ViewallreceiptJPanel(JPanel userProcessContainer,String user,String roletype) {
         initComponents();
 
         this.userProcessContainer = userProcessContainer;
@@ -65,10 +65,12 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         this.business = business;
         this.role=role;
         this.user=user;
+        this.roletype=roletype;
         //this.deliveryOrganization = (DeliveryOrganization) organization;
 //getting Bbank id of user
  ResultSet resultSet = null;
            DButil dbconn= new DButil();
+           System.out.print("user "+user);
           Connection conn = dbconn.getConnection();
            String selectSql = "SELECT Bbank_id from users where user_id=?;";
             System.out.print("state "+selectSql);
@@ -92,21 +94,168 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         }
          
 //getting Bbank id of user
+addcmbtype();
         populateTable();
     }
+    //addcmbtype start
+    public void addcmbtype()
+        {
+             cmbtype.removeAll();
+                    // cmbbank.removeAll();
+          cmbtype.addItem("All");
+          //  cmbOrganizationList.addItem(organization);
+           Connection conn = dbconn.getConnection();
+            ResultSet resultSet = null;
+         String selectSql = "SELECT bgroup_name from bgroup";
+       PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            
+      // stmt.setString(1,roletype);
+            resultSet = stmt.executeQuery();
+       
+           
+            // conn.close();
+             while (resultSet.next()) {
+                 String cmbvalue=resultSet.getString(1);
+                  // System.out.println("cmbvalue hos "+cmbvalue);
+                  cmbtype.addItem(cmbvalue);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        }
+        
+//blood type
+    //addcmbtype ends
+    //populate type table start
+     public void populatetypeTable() {
+            DefaultTableModel model = (DefaultTableModel) tbldonor.getModel();
+              Connection conn = dbconn.getConnection();
+        ResultSet resultSet = null;
+        model.setRowCount(0);
+          String bgroup=cmbtype.getItemAt(cmbtype.getSelectedIndex());
+        System.out.println("populate roletype="+ roletype+"blood=="+bgroup);
+        //
+        String selectSql=null,selectSql1=null;
+        if((roletype.equals("Bbank"))||(roletype.equals("Stores")))
+        {System.out.println("inifstores1==");
+         if(bgroup.equals("All"))
+         {
+            selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id and a.bbank_id=?";  
+         }
+         else
+         {System.out.println("not all1 "+bgroup);
+            selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id and a.bbank_id=? and a.bgroup_name=?";
+           // selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id";
+         }
+         }
+        else
+        {System.out.println("inelsestores1==");
+         if(bgroup.equals("All"))
+         {
+            selectSql1 = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id ";
+     
+         }
+         else
+         {
+             selectSql1 = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id and a.bgroup_name=?"; 
+         }
+         }
+        PreparedStatement stmt,stmt1;
+       try {
+           
+            if((roletype.equals("Bbank"))||(roletype.equals("Stores")))  
+            {System.out.println("inifstores2==");
+                 stmt = conn.prepareStatement(selectSql);
+                  stmt.setInt(1, Bbankid);
+                  if(!bgroup.equals("All"))
+                  {System.out.println("not all set "+bgroup);
+                 stmt.setString(2, bgroup);
+                  }
+                  
+                  resultSet = stmt.executeQuery();
+            }
+            else
+            {System.out.println("inelsestores2==");
+                  stmt1= conn.prepareStatement(selectSql1);
+                   if(!bgroup.equals("All"))
+                   {
+                      stmt1.setString(1, bgroup);
+                   }
+                  resultSet = stmt1.executeQuery();
+            }
+      
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+                  row[0]=resultSet.getInt(1);
+            row[1]=resultSet.getString(2);
+            row[2] = resultSet.getString(3);
+            row[3] = resultSet.getString(4);
+          row[4]=resultSet.getDate(5).toString();
+                  row[5]=resultSet.getInt(6); 
+                                   
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+       
+        //
+      
+    }
+
+    //populate type table end
 
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tbldonor.getModel();
-       
+              Connection conn = dbconn.getConnection();
+        ResultSet resultSet = null;
         model.setRowCount(0);
-        System.out.println("populate");
+        System.out.println("populate roletype="+ roletype);
         //
-         String selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id";
-      Statement stmt;
+        String selectSql=null,selectSql1=null;
+        if((roletype.equals("Bbank"))||(roletype.equals("Stores")))
+        {System.out.println("inifstores1=="+Bbankid);
+            selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id and a.bbank_id=?";
+           // selectSql = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id";
+        }
+        else
+        {System.out.println("inelsestores1==");
+            selectSql1 = "SELECT a.bbank_id,b.bbank_name,a.donor_name,a.bgroup_name,a.date_receive,a.quantity from bbank_receive a,blood_bank b where a.bbank_id=b.bbank_id ";
+     
+        }
+        PreparedStatement stmt,stmt1;
        try {
-            stmt = conn.createStatement();
-       
-            resultSet = stmt.executeQuery(selectSql);
+           
+            if((roletype.equals("Bbank"))||(roletype.equals("Stores")))  
+            {System.out.println("inifstores2=="+Bbankid);
+                 stmt = conn.prepareStatement(selectSql);
+                 stmt.setInt(1, Bbankid);
+                  resultSet = stmt.executeQuery();
+            }
+            else
+            {System.out.println("inelsestores2=="+Bbankid);
+                  stmt1= conn.prepareStatement(selectSql1);
+                  resultSet = stmt1.executeQuery();
+            }
+      
             // conn.close();
              while (resultSet.next()) {
                 
@@ -148,6 +297,8 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         tbldonor = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
         btnback = new javax.swing.JButton();
+        cmbtype = new javax.swing.JComboBox<>();
+        btntype = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -192,6 +343,13 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
             }
         });
 
+        btntype.setText("Search by Blood Type");
+        btntype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntypeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,11 +361,16 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnback))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnback)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btntype))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,9 +379,13 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
                 .addComponent(btnback)
                 .addGap(10, 10, 10)
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btntype))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(155, 155, 155))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,6 +395,11 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btntypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntypeActionPerformed
+        // TODO add your handling code here:
+          populatetypeTable();
+    }//GEN-LAST:event_btntypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -258,6 +430,8 @@ public class ViewallreceiptJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
+    private javax.swing.JButton btntype;
+    private javax.swing.JComboBox<String> cmbtype;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tbldonor;

@@ -331,7 +331,7 @@ public class BloodstatusJPanel extends javax.swing.JPanel {
         String address=txtaddress.getText();
         String pname=txtnamep.getText();
         String bgroup=txtgroup.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
        int qty=Integer.parseInt(txtquantity.getText());
         conn = dbconn.getConnection();
         
@@ -379,7 +379,8 @@ public class BloodstatusJPanel extends javax.swing.JPanel {
                stmt.setString(4, address);
                 stmt.setInt(5, qty);
                  stmt.setInt(6, 0);
-                    stmt.setInt(7, mobile);                
+                    stmt.setLong(7, mobile);
+                
               stmt.executeUpdate();
              
             
@@ -399,6 +400,9 @@ JOptionPane.showMessageDialog(this,"Blood Request Added");
   txtaddress.setText("");
  
   txtmobile.setText("");
+  txtnamep.setText("");
+  txtgroup.setText("");
+  txtquantity.setText("");
   
      
     }//GEN-LAST:event_btnAddActionPerformed

@@ -126,12 +126,12 @@ popOrganizationComboBox();
        try {
             stmt=conn.prepareStatement(selectSql);
        stmt.setString(1, orgsel);
-            resultSet = stmt.executeQuery();
+            resultSet1 = stmt.executeQuery();
             // conn.close();
             System.out.println("in loop...........");
-             while (resultSet.next()) {
+             while (resultSet1.next()) {
                  
-            cmbEmployee.addItem(resultSet.getString(2));
+            cmbEmployee.addItem(resultSet1.getString(2));
            
              }//while
              
@@ -284,8 +284,7 @@ popOrganizationComboBox();
         lblCreateUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCreateUser.setText("New User:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\order-food\\users.png")); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/users.png")); // NOI18N
 
         txtrole.setEditable(false);
 
@@ -422,6 +421,9 @@ popOrganizationComboBox();
 
     private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
  Connection conn = dbconn.getConnection();
+  ResultSet resultSet = null;
+   ResultSet resultSet1 = null;
+    ResultSet resultSet2 = null;
         //conn = dbconn.getConnection();
         if(txtUserName.getText().isEmpty())
      {
@@ -480,10 +482,22 @@ popOrganizationComboBox();
          // is user already there
          //insert into table
           String selectSql2="select role_id from roles where role=?";
-         String  selectSql1 = "insert into users(user_id,passwd,role_id,username,status)" +" values(?,?,?,?,?);";
- PreparedStatement stmt1,stmt2;
-       
+         String  selectSql1 = "insert into users(user_id,passwd,role_id,username,status,bbank_id,hospital_id)" +" values(?,?,?,?,?,?,?);";
+ String selectSql3 = "SELECT bank_id,hospital_id from employee_list where name=?";
+         PreparedStatement stmt1,stmt2,stmt3;
+       int hid=0;
+       int bid=0;
           try {
+              //get hospital id from employee table
+               stmt3=conn.prepareStatement(selectSql3);
+                stmt3.setString(1, empsel);
+             resultSet2 = stmt3.executeQuery();
+              while (resultSet2.next()) {
+             // roleid=resultSet.getInt(1);
+             bid=resultSet2.getInt(1);
+               hid=resultSet2.getInt(2);
+              }
+               //get hospital id from employee table
              // stmt = conn.createStatement();
             stmt2=conn.prepareStatement(selectSql2);
              stmt2.setString(1, role);
@@ -497,6 +511,8 @@ popOrganizationComboBox();
                 stmt1.setInt(3, roleid);
                  stmt1.setString(4, empsel);
                   stmt1.setInt(5, 1);
+                   stmt1.setInt(6, bid);
+                    stmt1.setInt(7, hid);
                   stmt1.executeUpdate();
                   conn.close();
           } catch (SQLException ex) {
@@ -586,9 +602,11 @@ popOrganizationComboBox();
       txtrole.setText(null);
 //conn = dbconn.getConnection();
           String selectSql = "SELECT role_id,role from roles where role=?";
-      PreparedStatement stmt;
+            //String selectSql1 = "SELECT bank_id,hospital_id from employee_list where user=?";
+      PreparedStatement stmt,stmt1;
        try {
             stmt=conn.prepareStatement(selectSql);
+            // stmt1=conn.prepareStatement(selectSql1);
        stmt.setString(1, orgsel);
        int first=0;
        

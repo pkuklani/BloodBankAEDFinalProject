@@ -27,7 +27,7 @@
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -36,6 +36,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnback" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="cmbtype" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btntype" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="164" max="32767" attributes="0"/>
@@ -47,14 +53,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnback" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="cmbtype" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btntype" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="171" max="-2" attributes="0"/>
-              <EmptySpace pref="250" max="32767" attributes="0"/>
+              <EmptySpace pref="227" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,14 +136,6 @@
         <Property name="text" type="java.lang.String" value="Blood bank Work Area"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Donors list"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnback">
       <Properties>
         <Property name="text" type="java.lang.String" value="Back"/>
@@ -140,6 +143,29 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnbackActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbtype">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btntype">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Search By Type"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntypeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Donors list"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

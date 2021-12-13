@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/BbankRole/IssuebloodJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/LoginScreen.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/Hospital/HospitalWorkAreaJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/AdministrativeRole/overviewWorkAreaJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/MainJFrame.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/MainScreen.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/bbank/DB/DButil.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/AdministrativeRole/ManageEmployeeJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/Lab/LabtestJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/AdministrativeRole/ManageUserAccountJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/AdministrativeRole/ManageDeliveryJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/BbankRole/ViewmypendingJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/AdministrativeRole/AdminWorkAreaJPanel.java</file>
-            <file>file:/Users/priyankakuklani/NetBeansProjects/BloodBank_AEDFinalProject/src/ui/BbankRole/ViewalldonorsJPanel.java</file>
-        </group>
-    </open-files>
 </project-private>

@@ -25,17 +25,17 @@ public class MhaRole extends Role {
    //DonarRole role=new DonarRole();
    String RoleType;
  //@Override    
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String RoleType) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String user,String RoleType) {
         this.RoleType = "MHA";
         System.out.println("in mharole");
-        return new MhaWorkAreaJPanel(userProcessContainer, account,RoleType);
+        return new MhaWorkAreaJPanel(userProcessContainer, account,user,RoleType);
     }
 
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
-       System.out.println("in mharole over");
-        return new MhaWorkAreaJPanel(userProcessContainer, account,RoleType);
-    }
+   // @Override
+   // public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
+    //   System.out.println("in mharole over");
+    //    return new MhaWorkAreaJPanel(userProcessContainer, account,user,RoleType);
+   // }
    
 }
 

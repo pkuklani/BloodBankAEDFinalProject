@@ -117,8 +117,8 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -157,15 +157,14 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
             tblWorkRequests.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Donors list");
-
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Donors list");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -174,14 +173,14 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(btnback)))
+                        .addComponent(btnback))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -189,8 +188,8 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnback)
-                .addGap(8, 8, 8)
-                .addComponent(jButton1)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(250, Short.MAX_VALUE))
@@ -233,7 +232,7 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblWorkRequests;
     // End of variables declaration//GEN-END:variables

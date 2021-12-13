@@ -20,7 +20,11 @@ import bbank.UserAccount.UserAccount;
 import bbank.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import ui.BbankRole.ViewalldonorsJPanel;
+import ui.Lab.LabtestlistJPanel;
+import ui.tech.BloodcomponentsJFrame;
 
 /**
  *
@@ -40,14 +44,16 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount1;
     private UserAccountDirectory Daccount;
     private DeliveryManDirectory dmanlist;
-    public MhaWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user) {
+    String user,roletype;
+    public MhaWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user,String roletype) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
           this.workArea = workArea;
-      
+      this.roletype=roletype;
         this.business = business;
         this.userAccount = account;
+        this.user=user;
         
        //  this.userAccount1 = account1;
          // String foodname="/food1.jpg";
@@ -73,6 +79,9 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnissue = new javax.swing.JButton();
         btnreceive = new javax.swing.JButton();
+        btnresearch = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btncomponent = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(424, 344));
@@ -112,7 +121,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\mha.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/mha.jpg")); // NOI18N
 
         btnissue.setBackground(new java.awt.Color(102, 153, 255));
         btnissue.setText("View All Issues");
@@ -130,6 +139,30 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnresearch.setBackground(new java.awt.Color(102, 153, 255));
+        btnresearch.setText("View Research Activity");
+        btnresearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnresearchActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(102, 153, 255));
+        jButton1.setText("View List of Blood Tests");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btncomponent.setBackground(new java.awt.Color(102, 153, 255));
+        btncomponent.setText("View Blood Component Available");
+        btncomponent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncomponentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,7 +176,10 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnpatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnavailable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnissue, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                    .addComponent(btnreceive, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
+                    .addComponent(btnreceive, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnresearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btncomponent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -166,7 +202,13 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnissue)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnreceive))
+                        .addComponent(btnreceive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnresearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btncomponent))
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -191,9 +233,8 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btndonorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndonorActionPerformed
         // TODO add your handling code here:
-          ViewdonorsJPanel viewdonorsJPanel = new ViewdonorsJPanel(userProcessContainer);
-        userProcessContainer.add("View DonorsJPanel", viewdonorsJPanel);
-
+          ViewalldonorsJPanel viewalldonorsJPanel = new ViewalldonorsJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewalldonorsJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         
@@ -210,7 +251,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnissueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnissueActionPerformed
         // TODO add your handling code here:
-          ViewallissueJPanel viewallissue = new ViewallissueJPanel(userProcessContainer);
+          ViewallissueJPanel viewallissue = new ViewallissueJPanel(userProcessContainer,user,roletype);
         userProcessContainer.add("Viewallissue", viewallissue);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -219,21 +260,52 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnreceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreceiveActionPerformed
         // TODO add your handling code here:
-         ViewallreceiptJPanel viewallreceipt = new ViewallreceiptJPanel(userProcessContainer);
+         ViewallreceiptJPanel viewallreceipt = new ViewallreceiptJPanel(userProcessContainer,user,roletype);
         userProcessContainer.add("Viewallreceipt", viewallreceipt);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnreceiveActionPerformed
+
+    private void btnresearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresearchActionPerformed
+        // TODO add your handling code here:
+          ViewresearchJPanel  viewresearch = new  ViewresearchJPanel(userProcessContainer);
+        userProcessContainer.add(" Viewresearch",  viewresearch);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnresearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String roletype="MHA";
+         LabtestlistJPanel labtestlist = new LabtestlistJPanel(userProcessContainer,roletype);
+        userProcessContainer.add("labtestlist", labtestlist);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btncomponentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncomponentActionPerformed
+        // TODO add your handling code here:
+          
+       JFrame techScreen = new BloodcomponentsJFrame(userProcessContainer,user,roletype);
+         techScreen.setVisible(true);
+        techScreen.setSize(500, 500);
+        techScreen.setLocation(400, 200);
+        techScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btncomponentActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnavailable;
     private javax.swing.JButton btnbank;
+    private javax.swing.JButton btncomponent;
     private javax.swing.JButton btndonor;
     private javax.swing.JButton btnissue;
     private javax.swing.JButton btnpatient;
     private javax.swing.JButton btnreceive;
+    private javax.swing.JButton btnresearch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

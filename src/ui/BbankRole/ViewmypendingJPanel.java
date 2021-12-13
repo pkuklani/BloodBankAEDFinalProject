@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,7 +43,6 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
     private Bbank business;
     private UserAccount userAccount;
      private UserAccount userAccount1;
-     
    
  ResultSet resultSet = null;
            DButil dbconn= new DButil();
@@ -63,11 +63,107 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
         this.user=user;
         System.out.println("user "+user+"role "+role);
         //this.deliveryOrganization = (DeliveryOrganization) organization;
-
+addcmbtype();
         populateTable();
     }
-    
+//add cmbtype starts
+ public void addcmbtype()
+        {
+             cmbtype.removeAll();
+                    // cmbbank.removeAll();
+          cmbtype.addItem("All");
+          //  cmbOrganizationList.addItem(organization);
+           Connection conn = dbconn.getConnection();
+            ResultSet resultSet = null;
+         String selectSql = "SELECT bgroup_name from bgroup";
+       PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            
+      // stmt.setString(1,roletype);
+            resultSet = stmt.executeQuery();
+       
+           
+            // conn.close();
+             while (resultSet.next()) {
+                 String cmbvalue=resultSet.getString(1);
+                  // System.out.println("cmbvalue hos "+cmbvalue);
+                  cmbtype.addItem(cmbvalue);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        }
+        
+//blood type
+    //addcmbtype ends
+//populate type starts
+  public void populatetypeTable() {
+            DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+       
+        model.setRowCount(0);
+        Connection conn = dbconn.getConnection();
+               ResultSet resultSet = null;
+        model.setRowCount(0);
+        System.out.println("populate");
+        //
+         String bgroup=cmbtype.getItemAt(cmbtype.getSelectedIndex());
+          String selectSql;
+        //
+        if(bgroup.equals("All"))
+        {
+          selectSql = "SELECT * from Blood_demand where status=0 ";
+        }
+        else
+        {
+           selectSql = "SELECT * from Blood_demand where status=0 and bgroup_name=?"; 
+        }
+       PreparedStatement stmt;
+       try {
+            stmt = conn.prepareStatement(selectSql);
+              if(!bgroup.equals("All"))
+              {
+       stmt.setString(1, bgroup);
+              }
+       
+           resultSet = stmt.executeQuery();
+            // conn.close();
+             while (resultSet.next()) {
+                
+                  Object[] row = new Object[8];
+            row[0]=resultSet.getInt(1);
+            row[1] = resultSet.getString(3);
+            row[2] = resultSet.getString(4);
+          //  row[3]=resultSet.getString(4);
+                  row[3]=resultSet.getInt(6); 
+                  row[4]=resultSet.getDate(8).toString();
+                   row[5]=resultSet.getInt(7);
+                  
+                   
+            model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+       
+        //
+      
+    }
 
+ //populate type ends
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
        
@@ -121,8 +217,10 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        cmbtype = new javax.swing.JComboBox<>();
+        btntype = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,13 +265,19 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Blood Bank Work Area");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Pending Blood requirements ");
-
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Pending Blood requirements");
+
+        btntype.setText("Search By Type");
+        btntype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntypeActionPerformed(evt);
             }
         });
 
@@ -186,14 +290,19 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(lblTitle)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton1))
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnback)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btntype))
+                            .addComponent(btnback))))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -204,10 +313,14 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTitle)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btntype))
+                .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -217,6 +330,11 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void btntypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntypeActionPerformed
+        // TODO add your handling code here:
+        populatetypeTable();
+    }//GEN-LAST:event_btntypeActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -247,7 +365,9 @@ public class ViewmypendingJPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnback;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btntype;
+    private javax.swing.JComboBox<String> cmbtype;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;

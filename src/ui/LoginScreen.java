@@ -24,6 +24,7 @@ import java.awt.BorderLayout;
 //import com.sun.jdi.connect.spi.Connection;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,9 @@ public class LoginScreen extends javax.swing.JPanel {
         this.mainWorkArea = mainWorkArea;
         this.business = business;
       
+        jLabel1.setIcon(new javax.swing.ImageIcon(Paths.get("blood-bank.jpg").toAbsolutePath().toString())); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setMaximumSize(new java.awt.Dimension(356, 159));
         
     }
 
@@ -83,10 +87,12 @@ public class LoginScreen extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         btnngo = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(204, 255, 204));
+        setBackground(new java.awt.Color(221, 230, 227));
+        setToolTipText("");
 
-        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblTitle.setText("Blood Bank Management System");
+        lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("   Boston Blood Bank");
 
         lblUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUser.setText("Username:");
@@ -94,45 +100,52 @@ public class LoginScreen extends javax.swing.JPanel {
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password:");
 
-        btnLogin.setBackground(new java.awt.Color(0, 204, 255));
-        btnLogin.setText("Login");
+        btnLogin.setBackground(new java.awt.Color(212, 49, 50));
+        btnLogin.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogin.setText("Save a Life!");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/blood-bank.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setMaximumSize(new java.awt.Dimension(356, 159));
 
-        btndonar.setBackground(new java.awt.Color(0, 204, 255));
-        btndonar.setText("Donar Registration");
+        btndonar.setBackground(new java.awt.Color(212, 49, 50));
+        btndonar.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btndonar.setForeground(new java.awt.Color(255, 255, 255));
+        btndonar.setText("Donor Registration");
         btndonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndonarActionPerformed(evt);
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood-compatibility.jpg")); // NOI18N
-
-        jButton1.setBackground(new java.awt.Color(0, 204, 255));
-        jButton1.setText("analyse");
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Analyse");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        btnstatus.setBackground(new java.awt.Color(0, 204, 255));
-        btnstatus.setText("availability Status");
+        btnstatus.setBackground(new java.awt.Color(212, 49, 50));
+        btnstatus.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnstatus.setForeground(new java.awt.Color(255, 255, 255));
+        btnstatus.setText("Availability Status");
         btnstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnstatusActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 204, 255));
+        jButton2.setBackground(new java.awt.Color(212, 49, 50));
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Request  For Blood");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,7 +153,9 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
-        btnngo.setBackground(new java.awt.Color(0, 204, 255));
+        btnngo.setBackground(new java.awt.Color(212, 49, 50));
+        btnngo.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnngo.setForeground(new java.awt.Color(255, 255, 255));
         btnngo.setText("NGO Registration");
         btnngo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,39 +168,37 @@ public class LoginScreen extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addComponent(lblTitle))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(btndonar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnngo)
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnstatus)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUser)
-                            .addComponent(lblPassword))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogin)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUser)
+                                    .addComponent(lblPassword))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLogin)
+                                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btndonar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnngo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton2)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUser});
@@ -194,20 +207,21 @@ public class LoginScreen extends javax.swing.JPanel {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(lblTitle)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btndonar)
-                            .addComponent(jButton2)
-                            .addComponent(btnstatus)
-                            .addComponent(jButton1)
-                            .addComponent(btnngo))
+                            .addComponent(btndonar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnngo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -219,9 +233,9 @@ public class LoginScreen extends javax.swing.JPanel {
                             .addComponent(lblPassword))
                         .addGap(27, 27, 27)
                         .addComponent(btnLogin)
-                        .addGap(31, 31, 31)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 106, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,7 +301,7 @@ pwdField.setText(null);
        
         System.out.print("login "+urole);
        // account.setRole(new AdminRole());
-               JOptionPane.showMessageDialog(null, "found");
+               JOptionPane.showMessageDialog(null, "Welcome to Blood Bank Monitoring System");
             //find role
             String selectSql2="select role from roles where role_id=?";
             PreparedStatement stmt2;
@@ -368,19 +382,31 @@ pwdField.setText(null);
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
           String user="Patient ";
-       JPanel donorScreen = new RequestregJPanel(mainWorkArea,user);
-        mainWorkArea.add("Patient-registration", donorScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+       JFrame pScreen = new RequestregJPanel(mainWorkArea,user);
+       // mainWorkArea.add("Patient-registration", Screen);
+       // CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+      //  layout.next(mainWorkArea);
+       pScreen.setVisible(true);
+        pScreen.setSize(500, 500);
+        pScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatusActionPerformed
         // TODO add your handling code here:
          String user="Patient ";
-       JPanel patientScreen = new BloodstatusJPanel(mainWorkArea);
-        mainWorkArea.add("Patient-registration", patientScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+       JFrame pScreen = new BloodstatusJpanel1(mainWorkArea);
+        //mainWorkArea.add("Patient-registration", patientScreen);
+        //CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        //layout.next(mainWorkArea);
+         pScreen.setVisible(true);
+        pScreen.setSize(550, 650);
+        pScreen.setLocation(400, 150);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnstatusActionPerformed
 
     private void btnngoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnngoActionPerformed
