@@ -99,10 +99,9 @@ public class overviewWorkAreaJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
         setPreferredSize(new java.awt.Dimension(797, 350));
 
-        tblWorkRequests.setBackground(new java.awt.Color(204, 255, 204));
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -172,6 +171,7 @@ public class overviewWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(212, 49, 50));
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

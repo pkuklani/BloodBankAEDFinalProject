@@ -214,7 +214,7 @@ popOrganizationComboBox();
         lblUsersList = new javax.swing.JLabel();
         btndel = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
         tblUsers.setBackground(new java.awt.Color(204, 255, 204));
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
@@ -249,7 +249,7 @@ popOrganizationComboBox();
 
         grpNewUser.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnCreateUser.setBackground(new java.awt.Color(102, 153, 255));
+        btnCreateUser.setBackground(new java.awt.Color(212, 49, 50));
         btnCreateUser.setText("Create");
         btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +264,7 @@ popOrganizationComboBox();
         lblEmployee.setText("Employee:");
 
         cmbEmployee.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbEmployee.setSelectedIndex(-1);
         cmbEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEmployeeActionPerformed(evt);
@@ -273,6 +274,7 @@ popOrganizationComboBox();
         lblOrganization.setText("Organization:");
 
         cmbOrganization.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbOrganization.setSelectedIndex(-1);
         cmbOrganization.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrganizationActionPerformed(evt);
@@ -284,8 +286,6 @@ popOrganizationComboBox();
         lblCreateUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCreateUser.setText("New User:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/users.png")); // NOI18N
-
         txtrole.setEditable(false);
 
         javax.swing.GroupLayout grpNewUserLayout = new javax.swing.GroupLayout(grpNewUser);
@@ -295,21 +295,21 @@ popOrganizationComboBox();
             .addGroup(grpNewUserLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(grpNewUserLayout.createSequentialGroup()
                             .addComponent(lblOrganization)
                             .addGap(18, 18, 18)
                             .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(grpNewUserLayout.createSequentialGroup()
                             .addComponent(lblEmployee)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(grpNewUserLayout.createSequentialGroup()
-                            .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblUserName)
+                            .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblRole)
+                                .addComponent(lblUserName)
                                 .addComponent(lblPassword))
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                                 .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
@@ -319,14 +319,14 @@ popOrganizationComboBox();
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(btnCreateUser)))
-                    .addComponent(lblCreateUser))
+                    .addComponent(lblCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         grpNewUserLayout.setVerticalGroup(
             grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, grpNewUserLayout.createSequentialGroup()
-                .addComponent(lblCreateUser)
-                .addGap(18, 18, 18)
+                .addComponent(lblCreateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOrganization)
                     .addComponent(cmbOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -348,12 +348,14 @@ popOrganizationComboBox();
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCreateUser)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(grpNewUserLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(btnCreateUser)))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
-        btnBack.setBackground(new java.awt.Color(102, 153, 255));
+        btnBack.setBackground(new java.awt.Color(212, 49, 50));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,7 +369,7 @@ popOrganizationComboBox();
         lblUsersList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblUsersList.setText("Users List:");
 
-        btndel.setBackground(new java.awt.Color(102, 153, 255));
+        btndel.setBackground(new java.awt.Color(212, 49, 50));
         btndel.setText("Delete User");
         btndel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,14 +386,14 @@ popOrganizationComboBox();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblUsersList)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btndel)
-                                .addGap(39, 39, 39)))
+                                .addGap(39, 39, 39))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblUsersList, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)))
                         .addComponent(grpNewUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
@@ -409,8 +411,8 @@ popOrganizationComboBox();
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblUsersList)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblUsersList, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btndel))

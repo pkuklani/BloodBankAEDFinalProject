@@ -117,9 +117,8 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtmobile = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblOrganizations.setBackground(new java.awt.Color(204, 255, 204));
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -154,7 +153,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             tblOrganizations.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        btnmod.setBackground(new java.awt.Color(102, 153, 255));
+        btnmod.setBackground(new java.awt.Color(212, 49, 50));
         btnmod.setText("Modify");
         btnmod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +163,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
 
         lblSelectOrgType.setText("ID");
 
-        btnBack.setBackground(new java.awt.Color(102, 153, 255));
+        btnBack.setBackground(new java.awt.Color(212, 49, 50));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +178,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
         lblOrganizationList.setText("List of Hospitals:");
 
         lblOrganizationAdd.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblOrganizationAdd.setText("Add /Modify Hospital Details");
+        lblOrganizationAdd.setText("Add /Modify Hospital Details:");
 
         txtid.setEditable(false);
 
@@ -187,7 +186,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Address");
 
-        btnedit.setBackground(new java.awt.Color(102, 153, 255));
+        btnedit.setBackground(new java.awt.Color(212, 49, 50));
         btnedit.setText("Edit");
         btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +194,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             }
         });
 
-        btndel.setBackground(new java.awt.Color(102, 153, 255));
+        btndel.setBackground(new java.awt.Color(212, 49, 50));
         btndel.setText("Delete");
         btndel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +202,7 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAdd.setBackground(new java.awt.Color(102, 153, 255));
+        btnAdd.setBackground(new java.awt.Color(212, 49, 50));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,34 +228,33 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
+                                .addGap(4, 4, 4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblOrganizationAdd)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel2)
                                             .addComponent(lblSelectOrgType)
+                                            .addComponent(jLabel1)
                                             .addComponent(jLabel5))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtaddress, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtid, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                            .addComponent(txtmobile)))))
+                                            .addComponent(txtaddress)
+                                            .addComponent(txtname)
+                                            .addComponent(txtid)
+                                            .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, 0)
+                                .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,15 +269,16 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnedit)
                             .addComponent(btndel))
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblOrganizationAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSelectOrgType)
-                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSelectOrgType))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)

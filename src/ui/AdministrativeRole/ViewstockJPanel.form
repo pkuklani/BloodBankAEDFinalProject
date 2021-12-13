@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+      <Color blue="e3" green="e6" red="dd" type="rgb"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -36,7 +36,6 @@
                       <Component id="cmbtype" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnftype" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -44,6 +43,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnbank" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel1" min="-2" pref="179" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -57,8 +57,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnback" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnftype" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmbbank" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -82,9 +82,6 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tblstock">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="ff" red="cc" type="rgb"/>
-            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="3" rowCount="4">
                 <Column editable="false" title="Bank name" type="java.lang.Object"/>
@@ -120,6 +117,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnback">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="32" green="31" red="d4" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
@@ -173,6 +173,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Blood Stock Details"/>
       </Properties>
     </Component>

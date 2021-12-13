@@ -118,9 +118,8 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtmobile = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblOrganizations.setBackground(new java.awt.Color(204, 255, 204));
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -155,7 +154,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
             tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        btnmod.setBackground(new java.awt.Color(102, 153, 255));
+        btnmod.setBackground(new java.awt.Color(212, 49, 50));
         btnmod.setText("Modify");
         btnmod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +164,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
 
         lblSelectOrgType.setText("ID");
 
-        btnBack.setBackground(new java.awt.Color(102, 153, 255));
+        btnBack.setBackground(new java.awt.Color(212, 49, 50));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +187,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Address");
 
-        btnedit.setBackground(new java.awt.Color(102, 153, 255));
+        btnedit.setBackground(new java.awt.Color(212, 49, 50));
         btnedit.setText("Edit");
         btnedit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,7 +195,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
             }
         });
 
-        btndel.setBackground(new java.awt.Color(102, 153, 255));
+        btndel.setBackground(new java.awt.Color(212, 49, 50));
         btndel.setText("Delete");
         btndel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,7 +203,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAdd.setBackground(new java.awt.Color(102, 153, 255));
+        btnAdd.setBackground(new java.awt.Color(212, 49, 50));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,36 +237,36 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblOrganizationAdd)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblSelectOrgType)
                                             .addComponent(jLabel1)
                                             .addComponent(jLabel2)
-                                            .addComponent(lblSelectOrgType)
                                             .addComponent(jLabel4)
                                             .addComponent(jLabel5))
-                                        .addGap(18, 18, 18)
+                                        .addGap(33, 33, 33)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtaddress, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                             .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                             .addComponent(txtid, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                             .addComponent(txthos)
-                                            .addComponent(txtmobile)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
+                                            .addComponent(txtmobile)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(11, 11, 11)
+                                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblOrganizationAdd, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(32, 32, 32))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnmod, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, 0)
+                                .addGap(9, 9, 9)))
+                        .addComponent(btndel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,16 +275,16 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(lblTitle))
-                .addGap(32, 32, 32)
+                .addGap(26, 26, 26)
                 .addComponent(lblOrganizationList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnedit)
                             .addComponent(btndel))
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblOrganizationAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -296,15 +295,15 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txthos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtmobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)

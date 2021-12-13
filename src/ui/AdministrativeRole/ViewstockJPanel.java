@@ -310,9 +310,8 @@ public void addcmbtype()
         cmbtype = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblstock.setBackground(new java.awt.Color(204, 255, 204));
         tblstock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -347,6 +346,7 @@ public void addcmbtype()
             tblstock.getColumnModel().getColumn(2).setPreferredWidth(10);
         }
 
+        btnback.setBackground(new java.awt.Color(212, 49, 50));
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,6 +376,7 @@ public void addcmbtype()
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setText("Blood Stock Details");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -395,13 +396,13 @@ public void addcmbtype()
                         .addComponent(cmbtype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnftype)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbbank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnbank)))))
+                                .addComponent(btnbank))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -410,8 +411,8 @@ public void addcmbtype()
                 .addContainerGap()
                 .addComponent(btnback)
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnftype)
                     .addComponent(cmbbank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
