@@ -7,14 +7,12 @@ package ui.AdministrativeRole;
 import bbank.Bbank;
 import bbank.Donor.DeliveryMan;
 import bbank.Donor.DeliveryManDirectory;
-import business.Employee.Employee;
-import business.Organization.Organization;
-import business.Organization.RestOrganization;
-import business.Restaurant.Restaurant;
-import business.UserAccount.UserAccount;
-import business.UserAccount.UserAccountDirectory;
+import bbank.Employee.Employee;
+
+import bbank.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccountDirectory;
 //import business.WorkQueue.LabTestWorkRequest;
-import business.WorkQueue.WorkRequest;
+import bbank.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class overviewWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel workArea;
-    private Organization organization;
+   
     private bbank.Donor.DeliveryMan dorganization;
     private bbank.Donor.DeliveryManDirectory ddirectory;
     private Bbank business;
@@ -39,15 +37,13 @@ public class overviewWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public overviewWorkAreaJPanel(JPanel workArea, UserAccount account,UserAccount account1,Organization organization, Bbank business1) {
+    public overviewWorkAreaJPanel(JPanel workArea, UserAccount account) {
         initComponents();
         System.out.println(account);
         this.workArea = workArea;
-        this.organization = organization;
-        this.business = business1;
+       
         this.userAccount = account;
-         this.userAccount1 = account1;
-         this.ddirectory=business1.getDeliveryDirectory();
+        
         // this.dmanlist=dorganization.getEmployeeDirectory().getEmployeeList().;
           // Daccount ==business1.getDeliveryDirectory().getDeliverymanList().;
         // this.Daccount=dorganization.getUserAccountDirectory().getUserAccountList().get(0);
@@ -144,7 +140,7 @@ public class overviewWorkAreaJPanel extends javax.swing.JPanel {
         }
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Overview of Orders");
+        lblTitle.setText("Overview of Stocks");
 
         cmbfood.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Pizza", "Burger", "French Fries" }));
 

@@ -5,11 +5,6 @@
 package ui.AdministrativeRole;
 
 import bbank.DB.DButil;
-import business.Restaurant.Restaurant;
-import business.Restaurant.RestaurantDirectory;
-import business.Organization.Organization;
-import business.Organization.Organization.Type;
-import business.Organization.OrganizationDirectory;
 import java.awt.CardLayout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,8 +29,8 @@ import ui.LoginScreen;
 
 public class ManageBloodJPanel extends javax.swing.JPanel {
    // Restaurant restaurant;
-      OrganizationDirectory directory;
-     RestaurantDirectory restdirectory;
+    
+    
     private JPanel userProcessContainer;
       ResultSet resultSet = null;
            DButil dbconn= new DButil();
@@ -47,27 +42,9 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
     public ManageBloodJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.restdirectory = restdirectory;
-         this.directory = directory;
-        String selectSql = "SELECT count(*) from Blood_bank";
-      Statement stmt;
-       try {
-            stmt = conn.createStatement();
        
-            resultSet = stmt.executeQuery(selectSql);
-            // conn.close();
-             while (resultSet.next()) {
-                  did=resultSet.getInt(1);
-             }//while
-             did++;
-             System.out.print("did "+did);
-             //conn.close();
-             txtid.setText(Integer.toString(did));
-       }//try
-       catch (SQLException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        txtid.setEditable(false);  
+        
+         
         populateTable();
        // populateCombo();
     }
@@ -200,10 +177,12 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
         lblTitle.setText("Manage Blood Banks");
 
         lblOrganizationList.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblOrganizationList.setText("List of Restaurents:");
+        lblOrganizationList.setText("List of Blood Banks");
 
         lblOrganizationAdd.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblOrganizationAdd.setText("Add /Modify Blood Bank Details");
+
+        txtid.setEditable(false);
 
         jLabel1.setText("Name");
 
@@ -236,6 +215,12 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
         jLabel4.setText("Hospital");
 
         jLabel5.setText("Mobile");
+
+        txtmobile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmobileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -337,7 +322,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
              int bbankid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
         String bname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
         String hos=txthos.getText();
         conn = dbconn.getConnection();
            //
@@ -345,25 +330,25 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
      if(txtname.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid name");
-         stop=1;
+      return;
      }
      if(txtaddress.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid address");
-         stop=1;
+        return;
      }
-     if(txthos.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
-         stop=1;
-     }
+     //if(txthos.getText().isEmpty())
+     //{
+         //JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
+        // return;
+     //}
       if(txtmobile.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
-         stop=1;
+         return; 
      }
-  if(stop==0)
-  {System.out.println("stop0");
+ // if(stop==0)
+  {System.out.println("stop0"+mobile);
       //checking if id is already there
     //  int found=0;
      String selectSql = "Update Blood_bank set Bbank_name=?,Hospital_name=?,Address=?,Mobile=? where Bbank_id=?;";
@@ -374,7 +359,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
               stmt.setString(1, bname);
               stmt.setString(3, address);
                stmt.setString(2, hos);
-                stmt.setInt(4, mobile);
+                stmt.setLong(4, mobile);
                  stmt.setInt(5, bbankid);
                                    
               stmt.executeUpdate();
@@ -384,7 +369,7 @@ public class ManageBloodJPanel extends javax.swing.JPanel {
           }
        
        
-JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
+JOptionPane.showMessageDialog(this,"Blood Bank data Updated");
 
        populateTable(); 
    
@@ -397,7 +382,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
   
  
  btnAdd.setEnabled(true);
- txtid.setEditable(true);
+ //txtid.setEditable(true);
 
        
        // populateTable();
@@ -441,7 +426,7 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
             txtname.setText(resultSet.getString(2));
              txthos.setText(resultSet.getString(3));
              txtaddress.setText(resultSet.getString(4));
-                  txtmobile.setText(Integer.toString(resultSet.getInt(5)));
+             txtmobile.setText(Long.toString(resultSet.getInt(5)));
             
              }//while
              
@@ -492,10 +477,10 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-           int bbankid=Integer.parseInt(txtid.getText());
+          // int bbankid=Integer.parseInt(txtid.getText());
         String address=txtaddress.getText();
         String bname=txtname.getText();
-        int mobile=Integer.parseInt(txtmobile.getText());
+        long mobile=Long.parseLong(txtmobile.getText());
         String hos=txthos.getText();
         conn = dbconn.getConnection();
         
@@ -503,22 +488,22 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
      if(txtname.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid name");
-         stop=1;
+        return;
      }
      if(txtaddress.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid address");
-         stop=1;
+         return;
      }
-     if(txthos.getText().isEmpty())
-     {
-         JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
-         stop=1;
-     }
+     //if(txthos.getText().isEmpty())
+    // {
+       //  JOptionPane.showMessageDialog(this, "Please enter valid Hospital");
+         //return;
+     //}
       if(txtmobile.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid Mobile Number");
-         stop=1;
+         return;
      }
   if(stop==0)
   {System.out.println("stop0");
@@ -542,9 +527,9 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
                    }
                        }//while
              did++;
-             System.out.print("did "+did);
+          //   System.out.print("did "+did);
             // conn.close();
-             txtid.setText(Integer.toString(did));
+            // txtid.setText(Integer.toString(did));
        }//try
        catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -554,28 +539,30 @@ JOptionPane.showMessageDialog(this,"Blood Bank dataUpdated");
           //find if useid already there
          
     //  int found=0;
-     String selectSql = "Insert into Blood_bank values(?,?,?,?,?,?);";
-     String  selectSql1 = "insert into users" +" values(?,?,?);";
+     String selectSql = "Insert into Blood_bank (bbank_name,hospital_name,address,mobile,status)values(?,?,?,?,?);";
+     String  selectSql1 = "insert into users(user_id,passwd,role_id,Bbank_id,username)  values(?,?,?,?,?);";
      PreparedStatement stmt,stmt1;
       try {
              // stmt = conn.createStatement();
              stmt=conn.prepareStatement(selectSql);
               stmt1=conn.prepareStatement(selectSql1);
-              stmt.setInt(1, bbankid);
-              stmt.setString(2, bname);
-              stmt.setString(4, address);
-               stmt.setString(3, hos);
-                stmt.setInt(5, mobile);
-                 stmt.setInt(6, 0);
+             // stmt.setInt(1, bbankid);
+              stmt.setString(1, bname);
+              stmt.setString(3, address);
+               stmt.setString(2, hos);
+                stmt.setLong(4, mobile);
+                 stmt.setInt(5, 0);
                                    
               stmt.executeUpdate();
               stmt1.setString(1, bname);
                stmt1.setString(2, bname);
-                stmt1.setInt(3, 3);
+                stmt1.setInt(3, 2);
+                 stmt1.setString(5, bname);
+                 stmt1.setInt(4, 0);
                   stmt1.executeUpdate();
          // conn.close();
           } catch (SQLException ex) {
-              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(ManageBloodJPanel.class.getName()).log(Level.SEVERE, null, ex);
           }
        
        
@@ -592,6 +579,10 @@ JOptionPane.showMessageDialog(this,"Blood Bank Added");
   
      
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtmobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmobileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmobileActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

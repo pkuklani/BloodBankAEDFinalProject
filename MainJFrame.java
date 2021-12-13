@@ -44,7 +44,7 @@ public class MainJFrame extends javax.swing.JFrame {
          System.out.println("system mainframe db="+system);
             System.out.println("system new in mainframe  =" +systemnew);
          this.setSize(1680, 1050);
-    
+   // this.setSize(680, 650);
                 initLoginScreen();
     }
 

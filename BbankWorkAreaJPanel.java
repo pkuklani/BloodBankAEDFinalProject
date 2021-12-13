@@ -1,431 +1,370 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * AdminWorkAreaJPanel.java
+ *
+ * Created on October 10, 2008, 8:50 AM
  */
-package ui.BbankRole;
+
+package ui.AdministrativeRole;
 
 import bbank.Bbank;
-import bbank.Donor.DeliveryMan;
 import bbank.Donor.DeliveryManDirectory;
-import business.Employee.Employee;
-import business.Organization.Organization;
-import business.Organization.RestOrganization;
-import business.Restaurant.Restaurant;
-import business.UserAccount.UserAccount;
-import business.UserAccount.UserAccountDirectory;
-//import business.WorkQueue.LabTestWorkRequest;
-import business.WorkQueue.WorkRequest;
-import bbank.order;
-import java.awt.CardLayout;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
-import bbank.order;
+import bbank.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccountDirectory;
+import java.awt.CardLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import ui.BbankRole.ReceivebloodJPanel;
+import ui.BbankRole.IssuebloodJPanel;
+import ui.BbankRole.ViewmypendingJPanel;
+import ui.BbankRole.ViewalldonorsJPanel;
+import ui.BbankRole.ViewmystockJPanel;
+import ui.MhaRole.ViewallissueJPanel;
+import ui.MhaRole.ViewallreceiptJPanel;
+import ui.Lab.LabtestlistJPanel;
+import ui.tech.BloodcomponentsJFrame;
 
 /**
  *
- * @author raunak
+ * @author  akhil
  */
 public class BbankWorkAreaJPanel extends javax.swing.JPanel {
-
-    private JPanel workArea;
-    private RestOrganization organization;
+    
+    JPanel userProcessContainer;
+    Bbank business;
+    
+   // private Restaurant restaurant;
+    //private Foodmenu foodmenu;
+   // private FoodmenuDirectory foodmenudirectory;
+    /** Creates new form AdminWorkAreaJPanel */
+     private JPanel workArea;
+   //  private Organization organization;
     private bbank.Donor.DeliveryMan dorganization;
     private bbank.Donor.DeliveryManDirectory ddirectory;
-    private Bbank business;
-    private UserAccount userAccount;
+       private UserAccount userAccount;
     private UserAccount userAccount1;
     private UserAccountDirectory Daccount;
     private DeliveryManDirectory dmanlist;
-     private order fileuser;
-  //  private UserAccountDirectory daccount =dorganization.getUserAccountDirectory().getUserAccountList();
-    /**
-     * Creates new form DoctorWorkAreaJPanel
-     */
-    public BbankWorkAreaJPanel(JPanel workArea, UserAccount account,String user ) {
+    String user;
+    String roletype;
+    public BbankWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user,String roletype) {
         initComponents();
-        System.out.println(account);
-        this.workArea = workArea;
-        this.organization = organization;
-      
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+          this.workArea = workArea;
+       
+        this.business = business;
         this.userAccount = account;
-        // this.userAccount1 = account1;
-        // this.ddirectory=business1.getDeliveryDirectory();
-        // this.dmanlist=dorganization.getEmployeeDirectory().getEmployeeList().;
-          // Daccount ==business1.getDeliveryDirectory().getDeliverymanList().;
-        // this.Daccount=dorganization.getUserAccountDirectory().getUserAccountList().get(0);
-     //  this. userAccount1=account
-   // System.out.println("delivery"+dmanlist.getDeliverymanList().);
-  // for(Organization org:business.getOrganizationDirectory().getOrganizationList())
-  // for(UserAccount org:organization.getUserAccountDirectory().getUserAccountList())
-  // for(DeliveryMan dman:dmanlist.getDeliverymanList() )
-  for(DeliveryMan dman :ddirectory.getDeliverymanList())
-   {   
-       System.out.println("dman= "+dman.getDmanname());
-      cmbdelivery.addItem(dman.getDmanname().toString());
-  // daccount=organization.getUserAccountDirectory().getUserAccountList().
-           }
-        populateRequestTable();
+        this.user=user;
+        this.roletype=roletype;
+       //  this.userAccount1 = account1;
+         // String foodname="/food1.jpg";
+        // ImageIcon icon=createImageIcon(foodname,"x"); 
+                               //   icon.getImage().flush();
+                                //  icon = createImageIcon(foodname, "a");
+       // userProcessContainer.imageUpdate(foodname, SOMEBITS, WIDTH, WIDTH, WIDTH, WIDTH);
     }
     
-    public void populateRequestTable(){
-        DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
-        
-        model.setRowCount(0);
-       // for (WorkRequest request : userAccount1.getWorkQueue().getWorkRequestList())
-        {
-            Object[] row = new Object[6];
-         //   row[0]=request;
-          //  row[1]=request.getId();
-         //   row[2] = request.getMessage();
-           // row[3] = request.getReceiver();
-          //   row[3] = request.getCustname();
-          //  row[4] = request.getStatus();
-           // row[5]=request.getDname();
-          //  String result = ((LabTestWorkRequest) request).getTestResult();
-           // row[3] = result == null ? "Waiting" : result;
-            
-            model.addRow(row);
-        }
-        //add to text file
-          ////writing to file
-        ///write
-       
-        
-      //writing to file
-        File yourFile = new File("order.txt");
-        yourFile.delete();
-         order u1=new order();
-       try
-       {
-           
-//yourFile.createNewFile(); // if file already exists will do nothing 
-FileOutputStream fs =null;
-fs = new FileOutputStream("order.txt", true); 
-ObjectOutputStream os= new ObjectOutputStream(fs);
-MyObjectOutputStream oos=new MyObjectOutputStream (fs);
-         //  FileOutputStream fs =new FileOutputStream("users.dat") ;
-       
-     //  ObjectOutputStream os= new ObjectOutputStream(fs);
-     int i=0;
-      if(yourFile.length()==0)
-        {
-        i=0;
-        } else i=1;
-      // for (WorkRequest request : userAccount1.getWorkQueue().getWorkRequestList())
-      {
-        //for (WorkRequest request :workqueue.getWorkRequestList() ){
-        
-        
-    //    u1.setId(request.getId());
-    //    u1.setCustname(request.getCustname());
-    //    u1.setFood(request.getMessage());
-      //  u1.setRequestDate(request.getRequestDate());
-      //  u1.setStatus(request.getStatus());
-      //  u1.setFeedback(request.getFeedback());
-      //  u1.setDname(request.getDname());
-     //   u1.setResolveDate(request.getResolveDate());
-        System.out.println("dname in loop"+u1.getDname());
-         System.out.println("feedback in loop"+u1.getFeedback());
-        if(i==0)
-        {//ObjectOutputStream oos = null;
-                  //  os = new ObjectOutputStream(fs);
-             oos = null;
-                    oos = new MyObjectOutputStream(fs);
-       oos.writeObject(u1);
-       i++;
-        }
-        else
-        { oos = null;
-                    oos = new MyObjectOutputStream(fs);
-                    oos.writeObject(u1);
-                    i++;
-        }
-      // os.close();
-       }//for
-        oos.close();
-       
-        // System.out.print("added to file");
-       
-      
-    } //try
-      catch (Exception e) {
- 
-                // Print the exception along with the
-                // display message
-                System.out.println("Error Occurred" + e);
-            } 
-       
- 
-        ///write
-        ///writing to file
-          ////writing to file
-        ///write
-       
-        
-      //writing to file
-       
-    }
-
-    
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
+
+   
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblWorkRequests = new javax.swing.JTable();
-        btnassignboy = new javax.swing.JButton();
-        btnRefresh = new javax.swing.JButton();
+        btnissue = new javax.swing.JButton();
+        btnbbank = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
-        cmbdelivery = new javax.swing.JComboBox<>();
+        btnreceive = new javax.swing.JButton();
+        btnstock = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtorder = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        userJButton1 = new javax.swing.JButton();
+        btnemp = new javax.swing.JButton();
+        btnuser = new javax.swing.JButton();
+        btnviewr = new javax.swing.JButton();
+        btnviewi = new javax.swing.JButton();
+        btntests = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        txtid = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(797, 350));
+        setPreferredSize(new java.awt.Dimension(424, 344));
 
-        tblWorkRequests.setBackground(new java.awt.Color(204, 255, 204));
-        tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "", "Order ID", "Food Ordered", "Order By", "Status", "Delivery Boy"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblWorkRequests);
-        if (tblWorkRequests.getColumnModel().getColumnCount() > 0) {
-            tblWorkRequests.getColumnModel().getColumn(0).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tblWorkRequests.getColumnModel().getColumn(1).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(1).setPreferredWidth(1);
-            tblWorkRequests.getColumnModel().getColumn(2).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(3).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(4).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(5).setResizable(false);
-        }
-
-        btnassignboy.setBackground(new java.awt.Color(102, 153, 255));
-        btnassignboy.setText("Assign delivery Boy");
-        btnassignboy.addActionListener(new java.awt.event.ActionListener() {
+        btnissue.setBackground(new java.awt.Color(102, 153, 255));
+        btnissue.setText("Issue Blood");
+        btnissue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnassignboyActionPerformed(evt);
+                btnissueActionPerformed(evt);
             }
         });
 
-        btnRefresh.setText("Refresh");
-        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+        btnbbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbbank.setText("View Pending Requests");
+        btnbbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRefreshActionPerformed(evt);
+                btnbbankActionPerformed(evt);
             }
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Restaurant Work Area");
+        lblTitle.setText("Blood Bank Work Area");
 
-        jLabel1.setText("Order");
+        btnreceive.setBackground(new java.awt.Color(102, 153, 255));
+        btnreceive.setText("Receive Blood");
+        btnreceive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnreceiveActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Delivery Boy");
+        btnstock.setBackground(new java.awt.Color(102, 153, 255));
+        btnstock.setText("Blood Bank Stock");
+        btnstock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnstockActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/Blood Bankm.jpg")); // NOI18N
+
+        userJButton1.setBackground(new java.awt.Color(102, 153, 255));
+        userJButton1.setText("View All Donors");
+        userJButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userJButton1ActionPerformed(evt);
+            }
+        });
+
+        btnemp.setBackground(new java.awt.Color(102, 153, 255));
+        btnemp.setText("Manage Employees");
+        btnemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnempActionPerformed(evt);
+            }
+        });
+
+        btnuser.setBackground(new java.awt.Color(102, 153, 255));
+        btnuser.setText("Manage User Accounts");
+        btnuser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuserActionPerformed(evt);
+            }
+        });
+
+        btnviewr.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewr.setText("View All Receipts");
+        btnviewr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnviewrActionPerformed(evt);
+            }
+        });
+
+        btnviewi.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewi.setText("View All Issues");
+        btnviewi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnviewiActionPerformed(evt);
+            }
+        });
+
+        btntests.setBackground(new java.awt.Color(102, 153, 255));
+        btntests.setText("View List Of Blood Tests");
+        btntests.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntestsActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(102, 153, 255));
-        jButton1.setText("Assign");
+        jButton1.setText("View Blood Components Available");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        txtid.setEditable(false);
-        txtid.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRefresh))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(76, 76, 76))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtorder, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnassignboy)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(35, 35, 35)
-                                .addComponent(cmbdelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
-                .addGap(78, 78, 78))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnviewr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnstock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnreceive, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(lblTitle)
+                    .addComponent(btnissue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userJButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                    .addComponent(btnemp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnuser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnviewi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btntests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTitle)
-                    .addComponent(btnRefresh))
+                .addGap(29, 29, 29)
+                .addComponent(lblTitle)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnassignboy)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbdelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(txtorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnbbank)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnreceive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnissue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(userJButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnstock)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnuser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnemp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnviewr)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnviewi)
+                        .addGap(4, 4, 4)
+                        .addComponent(btntests)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnassignboyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnassignboyActionPerformed
-        
-        CardLayout layout = (CardLayout) workArea.getLayout();
-        //workArea.add("RequestLabTestJPanel", new RequesDeliveryJPanel(workArea, userAccount, business));
-        layout.next(workArea);
-               
-          int SelectedRowIndex=tblWorkRequests.getSelectedRow();
-       System.out.println("SelectedRowIndex "+SelectedRowIndex);
-                  if(SelectedRowIndex<0)
-        {
-         JOptionPane.showMessageDialog(this, "Please select an Order");
-            
-        return;
-        }
-        DefaultTableModel model1 =(DefaultTableModel) tblWorkRequests.getModel();
-        //System.out.print("model1.getValueAt(SelectedRowIndex, 0) "+model1.getValueAt(SelectedRowIndex, Restaurant));
-        WorkRequest selectedvital= (WorkRequest) model1.getValueAt(SelectedRowIndex, 0); 
-    txtorder.setText(String.valueOf(selectedvital.getMessage()));
-    txtid.setText(String.valueOf(selectedvital.getId()));
-    //  txtname.setText(String.valueOf(selectedvital.getRestname()));
-      // txtaddress.setText(String.valueOf(selectedvital.getRestadd()));
-      
-//txtid.setEditable(false);
- //btnAdd.setEnabled(false);
-//tblOrganizations.setEnabled(true);
+    private void btnissueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnissueActionPerformed
 
-        
-    }//GEN-LAST:event_btnassignboyActionPerformed
+        IssuebloodJPanel issuebloodJPanel = new IssuebloodJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("ReceivebloodJPanel", issuebloodJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnissueActionPerformed
 
-    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+    private void btnbbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbbankActionPerformed
 
-        populateRequestTable();
+        ViewmypendingJPanel viewmypendingJPanel = new ViewmypendingJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewmypendingJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnbbankActionPerformed
+
+    private void btnreceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreceiveActionPerformed
+        // TODO add your handling code here:
+        ReceivebloodJPanel receivebloodJPanel = new ReceivebloodJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("ReceivebloodJPanel", receivebloodJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
-    }//GEN-LAST:event_btnRefreshActionPerformed
+    }//GEN-LAST:event_btnreceiveActionPerformed
+
+    private void btnstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstockActionPerformed
+        // TODO add your handling code here:
+    ViewmystockJPanel viewmystockJPanel = new ViewmystockJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewmystockJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnstockActionPerformed
+
+    private void userJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButton1ActionPerformed
+        // TODO add your handling code here:
+         ViewalldonorsJPanel viewalldonorsJPanel = new ViewalldonorsJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewalldonorsJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_userJButton1ActionPerformed
+
+    private void btnempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnempActionPerformed
+        // TODO add your handling code here:
+           ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+       
+    }//GEN-LAST:event_btnempActionPerformed
+
+    private void btnuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuserActionPerformed
+        // TODO add your handling code here:
+         ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer,roletype);
+        userProcessContainer.add("ManageUserAccountJPanel", muajp);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnuserActionPerformed
+
+    private void btnviewrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewrActionPerformed
+        // TODO add your handling code here:
+        ViewallreceiptJPanel viewallreceipt = new ViewallreceiptJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewallreceipt);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnviewrActionPerformed
+
+    private void btnviewiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewiActionPerformed
+        // TODO add your handling code here:
+        ViewallissueJPanel viewallissue = new ViewallissueJPanel(userProcessContainer,user,roletype);
+        userProcessContainer.add("manageBloodJPanel", viewallissue);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnviewiActionPerformed
+
+    private void btntestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntestsActionPerformed
+        // TODO add your handling code here:
+         LabtestlistJPanel labtestlist = new LabtestlistJPanel(userProcessContainer,roletype);
+        userProcessContainer.add("labtestlist", labtestlist);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btntestsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int l=0;
-     //    for( WorkRequest request : userAccount1.getWorkQueue().getWorkRequestList())
-       {
-      //  int idfound=request.getId();
-        int selectid=0;
-        if(!txtid.getText().isEmpty())
-        {System.out.println("inside");
-                selectid=Integer.parseInt(txtid.getText());}
-       // String s=request.
-    //   System.out.println("idfound"+idfound+"selectfedfe"+selectid);
-  // if(idfound==selectid)
-   { //request.setDname(cmbdelivery.getItemAt(cmbdelivery.getSelectedIndex()));
-   //request.setStatus("Pick Up");
-     // request.setReceiver(cmbdelivery.getItemAt(cmbdelivery.getSelectedIndex()));
-     //  vs.setRestname(pname);
-     //  vs.setRestadd(address);
-       
-    //  history.setHistory(vs);
-    // userAccount1.getWorkQueue().getWorkRequestList().set(l, request);
-  // break;
-       }
-        l++;
+       // BloodcomponentsJFrame bloodcomponents = new BloodcomponentsJFrame(userProcessContainer,user,roletype);
+        //String user="Tech";
+         //  String roletype="Tech";
+       JFrame techScreen = new BloodcomponentsJFrame(userProcessContainer,user,roletype);
+         techScreen.setVisible(true);
+        techScreen.setSize(500, 500);
+        techScreen.setLocation(400, 200);
+        techScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
- JOptionPane.showMessageDialog(this," Order assigned for Pickup");
-  populateRequestTable();
-    }
-    //overriding by akhil
-   class MyObjectOutputStream extends ObjectOutputStream {
- 
-    // Constructor of ths class
-    // 1. Default
-    MyObjectOutputStream() throws IOException
-    {
- 
-        // Super keyword refers to parent class instance
-        super();
-    }
- 
-    // Constructor of ths class
-    // 1. Parameterized constructor
-    MyObjectOutputStream(OutputStream o) throws IOException
-    {
-        super(o);
-    }
- 
-    // Method of this class
-    public void writeStreamHeader() throws IOException
-    {
-        return;
-    }
-}
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRefresh;
-    private javax.swing.JButton btnassignboy;
-    private javax.swing.JComboBox<String> cmbdelivery;
+    private javax.swing.JButton btnbbank;
+    private javax.swing.JButton btnemp;
+    private javax.swing.JButton btnissue;
+    private javax.swing.JButton btnreceive;
+    private javax.swing.JButton btnstock;
+    private javax.swing.JButton btntests;
+    private javax.swing.JButton btnuser;
+    private javax.swing.JButton btnviewi;
+    private javax.swing.JButton btnviewr;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTable tblWorkRequests;
-    private javax.swing.JTextField txtid;
-    private javax.swing.JTextField txtorder;
+    private javax.swing.JButton userJButton1;
     // End of variables declaration//GEN-END:variables
+  
+    protected ImageIcon createImageIcon(String path,
+                                           String description) {
+    java.net.URL imgURL = getClass().getResource(path);
+    if (imgURL != null) {
+         System.err.println("found file: " + path+" url "+imgURL);
+        return new ImageIcon(imgURL, description);
+    } else {
+        System.err.println("Couldn't find file: " + path+" url "+imgURL);
+        return null;
+    }
+}
 }

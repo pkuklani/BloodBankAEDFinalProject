@@ -6,6 +6,7 @@
 package ui;
 
 //import bbank.Role.AdminRole;
+import java.util.regex.*;
 import bbank.Role.Role;
 import bbank.DB.DButil;
 import java.sql.Connection;
@@ -17,14 +18,19 @@ import bbank.Bbank;
 import bbank.Role.DonarRole;
 import bbank.Role.AdminRole;
 import bbank.Role.BbankRole;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
+import bbank.Organization.Organization;
+import bbank.UserAccount.UserAccount;
+import java.awt.BorderLayout;
 //import com.sun.jdi.connect.spi.Connection;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.jfree.ui.RefineryUtilities;
 
 /**
  *
@@ -72,6 +78,10 @@ public class LoginScreen extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btndonar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        btnstatus = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        btnngo = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 204));
 
@@ -84,6 +94,7 @@ public class LoginScreen extends javax.swing.JPanel {
         lblPassword.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPassword.setText("Password:");
 
+        btnLogin.setBackground(new java.awt.Color(0, 204, 255));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,10 +102,11 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\blood-bank.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/blood-bank.jpg")); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setMaximumSize(new java.awt.Dimension(356, 159));
 
+        btndonar.setBackground(new java.awt.Color(0, 204, 255));
         btndonar.setText("Donar Registration");
         btndonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +114,39 @@ public class LoginScreen extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\Blood-compatibility.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood-compatibility.jpg")); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(0, 204, 255));
+        jButton1.setText("analyse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnstatus.setBackground(new java.awt.Color(0, 204, 255));
+        btnstatus.setText("availability Status");
+        btnstatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnstatusActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(0, 204, 255));
+        jButton2.setText("Request  For Blood");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnngo.setBackground(new java.awt.Color(0, 204, 255));
+        btnngo.setText("NGO Registration");
+        btnngo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnngoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,9 +154,6 @@ public class LoginScreen extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(286, 286, 286)
-                        .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +168,25 @@ public class LoginScreen extends javax.swing.JPanel {
                                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(pwdField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(btndonar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(286, 286, 286)
+                                .addComponent(lblTitle))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(btndonar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnngo)
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnstatus)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addGap(0, 0, 0))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblPassword, lblUser});
@@ -145,6 +199,16 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(lblTitle)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btndonar)
+                            .addComponent(jButton2)
+                            .addComponent(btnstatus)
+                            .addComponent(jButton1)
+                            .addComponent(btnngo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,13 +221,8 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addGap(27, 27, 27)
                         .addComponent(btnLogin)
                         .addGap(18, 18, 18)
-                        .addComponent(btndonar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,7 +233,10 @@ public class LoginScreen extends javax.swing.JPanel {
         // Get Password
         char[] passwordCharArray = pwdField.getPassword();
         String password = String.valueOf(passwordCharArray);
-        boolean flag = false;
+        
+        boolean flag= false;
+       //= isValidPassword(password);
+       //if(!c) 
 txtUserName.setText(null);
 pwdField.setText(null);
         UserAccount userAccount = null;
@@ -226,14 +288,27 @@ pwdField.setText(null);
        
         System.out.print("login "+urole);
        // account.setRole(new AdminRole());
-               JOptionPane.showMessageDialog(null, "User Found");
-               
-               if(rt==1) userrole="Admin";
-               if(rt==2) userrole="Bbank";
-               if(rt==3) userrole="Donor";
-               
-               System.out.println("rt"+rt);
-               
+               JOptionPane.showMessageDialog(null, "Welcome to Blood Bank Monitoring System");
+            //find role
+            String selectSql2="select role from roles where role_id=?";
+            PreparedStatement stmt2;
+            try {
+             // stmt = conn.createStatement();
+            stmt2=conn.prepareStatement(selectSql2);
+             stmt2.setInt(1, rt);
+             resultSet = stmt2.executeQuery();
+              while (resultSet.next()) {
+              userrole=resultSet.getString(1).trim();
+              }
+                conn.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+            //find role
+              // if(rt==1) userrole="Admin";
+              // if(rt==2) userrole="Bbank";
+              // if(rt==3) userrole="DonorregJPanel";
+               System.out.println("rt="+rt+" userrole = "+userrole);
                
                 JPanel mainScreen = new MainScreen(mainWorkArea,userAccount, userName,userrole);
                 
@@ -262,16 +337,121 @@ pwdField.setText(null);
     private void btndonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndonarActionPerformed
         // TODO add your handling code here:
         String user="Donor";
-       JPanel donorScreen = new DonorregJPanel(mainWorkArea,user);
-        mainWorkArea.add("Donor-registration", donorScreen);
-        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-        layout.next(mainWorkArea);
+       JFrame donorScreen = new DonorregJPanel();
+      // donorScreen.setPreferredSize(new Dimension(400, 300));
+     // mainWorkArea.setPreferredSize(new Dimension(60, 300));
+ //mainWorkArea.setLayout(new BorderLayout());
+  // donorScreen.setVisible(true);
+    //   donorScreen.setSize(600, 600);
+      //... mainWorkArea.add("DonorregJPanel-registration", donorScreen);
+       //... CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+       // layout.preferredLayoutSize(donorScreen);
+       // layout.setSize(400, 400);
+       //.... layout.next(mainWorkArea);
+      //donorScreen.setVisible(true);
+       donorScreen.setVisible(true);
+        donorScreen.setSize(500, 500);
+        donorScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        donorScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btndonarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         bloodchart chart = new bloodchart("Blood Group Statistics", 
+         "Blood Group Statistics");
+      chart.pack( );        
+      RefineryUtilities.centerFrameOnScreen( chart );        
+      chart.setVisible( true ); 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+          String user="Patient ";
+       JFrame pScreen = new RequestregJPanel(mainWorkArea,user);
+       // mainWorkArea.add("Patient-registration", Screen);
+       // CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+      //  layout.next(mainWorkArea);
+       pScreen.setVisible(true);
+        pScreen.setSize(500, 500);
+        pScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnstatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstatusActionPerformed
+        // TODO add your handling code here:
+         String user="Patient ";
+       JFrame pScreen = new BloodstatusJpanel1(mainWorkArea);
+        //mainWorkArea.add("Patient-registration", patientScreen);
+        //CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        //layout.next(mainWorkArea);
+         pScreen.setVisible(true);
+        pScreen.setSize(550, 650);
+        pScreen.setLocation(400, 150);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        pScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnstatusActionPerformed
+
+    private void btnngoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnngoActionPerformed
+        // TODO add your handling code here:
+          String user="NGO";
+       JFrame ngoScreen = new NgoregJPanel();
+     //  JPanel ngoScreen = new NgoregJPanel1(mainWorkArea);
+      //  mainWorkArea.add("NGO-registration", ngoScreen);
+       // CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+      // layout.next(mainWorkArea);
+        ngoScreen.setVisible(true);
+        ngoScreen.setSize(600, 500);
+        ngoScreen.setLocation(400, 200);
+        //change.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // change.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        ngoScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      
+    }//GEN-LAST:event_btnngoActionPerformed
+//check password
+    
+    public static boolean
+    isValidPassword(String password)
+    {
+  
+        // Regex to check valid password.
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+  
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+  
+        // If the password is empty
+        // return false
+        if (password == null) {
+            return false;
+        }
+  
+        // Pattern class contains matcher() method
+        // to find matching between given password
+        // and regular expression.
+        Matcher m = p.matcher(password);
+  
+        // Return if the password
+        // matched the ReGex
+        return m.matches();
+    }
+    
+    //check password
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btndonar;
+    private javax.swing.JButton btnngo;
+    private javax.swing.JButton btnstatus;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblPassword;

@@ -8,15 +8,10 @@ package ui.AdministrativeRole;
 
 import bbank.Bbank;
 import bbank.Donor.DeliveryManDirectory;
-import business.Organization.AdminOrganization;
-import business.Organization.Organization;
-import business.Organization.RestOrganization;
-import business.Restaurant.Restaurant;
-import business.Restaurant.RestaurantDirectory;      
-import business.Restaurant.Foodmenu;
-import business.Restaurant.FoodmenuDirectory;
-import business.UserAccount.UserAccount;
-import business.UserAccount.UserAccountDirectory;
+
+
+import bbank.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -29,28 +24,28 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     Bbank business;
-    private RestaurantDirectory restdirectory;
-    private Restaurant restaurant;
-    private Foodmenu foodmenu;
-    private FoodmenuDirectory foodmenudirectory;
+    
     /** Creates new form AdminWorkAreaJPanel */
      private JPanel workArea;
-     private Organization organization;
+    
     private bbank.Donor.DeliveryMan dorganization;
     private bbank.Donor.DeliveryManDirectory ddirectory;
        private UserAccount userAccount;
     private UserAccount userAccount1;
     private UserAccountDirectory Daccount;
     private DeliveryManDirectory dmanlist;
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user) {
+    String user,roletype;
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,String user,String roletype) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
           this.workArea = workArea;
-        this.organization = organization;
+      
         this.business = business;
         this.userAccount = account;
-        
+        this.user=user;
+        this.roletype=roletype;
+        System.out.println("user  "+user+ " roletype  "+roletype);
        //  this.userAccount1 = account1;
          // String foodname="/food1.jpg";
         // ImageIcon icon=createImageIcon(foodname,"x"); 
@@ -68,12 +63,12 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         userJButton = new javax.swing.JButton();
-        btnissue = new javax.swing.JButton();
         btnbbank = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         btnreceive = new javax.swing.JButton();
         btnstock = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnhos = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(424, 344));
@@ -83,14 +78,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
-            }
-        });
-
-        btnissue.setBackground(new java.awt.Color(102, 153, 255));
-        btnissue.setText("Issue Blood");
-        btnissue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnissueActionPerformed(evt);
             }
         });
 
@@ -106,7 +93,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setText("Administrative Work Area");
 
         btnreceive.setBackground(new java.awt.Color(102, 153, 255));
-        btnreceive.setText("Receive Blood");
+        btnreceive.setText("Manage Employees");
         btnreceive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnreceiveActionPerformed(evt);
@@ -121,7 +108,15 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\Blood Bankm.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/Blood Bankm.jpg")); // NOI18N
+
+        btnhos.setBackground(new java.awt.Color(102, 153, 255));
+        btnhos.setText("Manage Hospitals");
+        btnhos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,8 +129,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(userJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                     .addComponent(btnreceive, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                     .addComponent(lblTitle)
-                    .addComponent(btnissue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnbbank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnhos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -145,40 +140,30 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(lblTitle)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnbbank)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnhos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnreceive)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnissue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(userJButton)
-                        .addGap(0, 0, 0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnstock))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, business,organization);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer,roletype);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButtonActionPerformed
-
-    private void btnissueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnissueActionPerformed
-
-        ManageDeliveryJPanel manageDeliveryJPanel = new ManageDeliveryJPanel(userProcessContainer, business.getOrganizationDirectory());
-        userProcessContainer.add("manageDeliveryJPanel", manageDeliveryJPanel);
-
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-        
-    }//GEN-LAST:event_btnissueActionPerformed
 
     private void btnbbankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbbankActionPerformed
 
@@ -190,7 +175,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnreceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreceiveActionPerformed
         // TODO add your handling code here:
-          ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer, business.getOrganizationDirectory());
+          ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer,user,roletype);
         userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -200,16 +185,24 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstockActionPerformed
         // TODO add your handling code here:
-    overviewWorkAreaJPanel overviewJPanel = new overviewWorkAreaJPanel( userProcessContainer, userAccount, userAccount1 ,organization,business);    
-    userProcessContainer.add("overviewJPanel", overviewJPanel);
+    ViewstockJPanel  viewstock = new  ViewstockJPanel( userProcessContainer, user,roletype);    
+    userProcessContainer.add(" Viewstock",  viewstock);
        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnstockActionPerformed
+
+    private void btnhosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhosActionPerformed
+        // TODO add your handling code here:
+         ManagehospitalJPanel  managehospital = new  ManagehospitalJPanel( userProcessContainer);    
+    userProcessContainer.add(" Managehospital",  managehospital);
+       CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnhosActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbbank;
-    private javax.swing.JButton btnissue;
+    private javax.swing.JButton btnhos;
     private javax.swing.JButton btnreceive;
     private javax.swing.JButton btnstock;
     private javax.swing.JLabel jLabel1;

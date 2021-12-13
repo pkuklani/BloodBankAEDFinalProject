@@ -4,9 +4,8 @@
  */
 package ui.AdministrativeRole;
 
-import business.Employee.Employee;
-import business.Organization.Organization;
-import business.Organization.OrganizationDirectory;
+import bbank.Employee.Employee;
+
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,38 +16,33 @@ import javax.swing.table.DefaultTableModel;
  * @author raunak
  */
 public class ManageDeliveryJPanel extends javax.swing.JPanel {
-Organization organization;
-     OrganizationDirectory organizationDir;
     private JPanel userProcessContainer;
     
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageDeliveryJPanel(JPanel userProcessContainer,OrganizationDirectory organizationDir) {
+    public ManageDeliveryJPanel(JPanel userProcessContainer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.organizationDir = organizationDir;
+        
         
         populateOrganizationComboBox();
     }
 
-    ManageDeliveryJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
     @SuppressWarnings("unchecked")
     public void populateOrganizationComboBox(){
-        cmbOrganizationList.removeAllItems();
+       // cmbOrganizationList.removeAllItems();
         String s="Delivery";
-       Organization.Type type  = Organization.Type.valueOf(s);
-     
- organizationDir.createOrganization(type);
+      
        // Organization organization;
-       for (Organization organization : organizationDir.getOrganizationList()){
-           if(organization.getName().equals("Customer"))
+      // for (Organization organization : organizationDir.getOrganizationList())
+      {
+         //  if(organization.getName().equals("Customer"))
            {
          //  System.out.println("combo"+organization.getName());
-           cmbOrganizationList.addItem(organization);
+          // cmbOrganizationList.addItem(organization);
            }
         }
        //String s="Delivery";
@@ -59,15 +53,16 @@ Organization organization;
        // directory.createOrganization(type);
     }
     
-      private void populateTable(Organization organization){
+      private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) tblEmployees.getModel();
         
         model.setRowCount(0);
         
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
+        //for (Employee employee : organization.getEmployeeDirectory().getEmployeeList())
+        {
             Object[] row = new Object[2];
-            row[0] = employee.getId();
-            row[1] = employee.getName();
+           // row[0] = employee.getId();
+          //  row[1] = employee.getName();
             model.addRow(row);
         }
     }
@@ -230,7 +225,7 @@ Organization organization;
 
     private void btnCreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateEmployeeActionPerformed
         
-        Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
+      //  Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
         String name = txtEmployeeName.getText();
         
         if (name.isEmpty()) {
@@ -238,9 +233,9 @@ Organization organization;
             return;
         }
         
-        organization.getEmployeeDirectory().createEmployee(name);
+       // organization.getEmployeeDirectory().createEmployee(name);
         txtEmployeeName.setText("");
-        populateTable(organization);
+       // populateTable(organization);
         
     }//GEN-LAST:event_btnCreateEmployeeActionPerformed
 
@@ -252,9 +247,10 @@ Organization organization;
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void cmbOrganizationListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationListActionPerformed
-        Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
-        if (organization != null){
-            populateTable(organization);
+      //  Organization organization = (Organization) cmbOrganizationList.getSelectedItem();
+       // if (organization != null)
+        {
+          //  populateTable(organization);
         }
     }//GEN-LAST:event_cmbOrganizationListActionPerformed
 

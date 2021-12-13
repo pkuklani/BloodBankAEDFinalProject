@@ -156,7 +156,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="13" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Overview of Orders"/>
+        <Property name="text" type="java.lang.String" value="Overview of Stocks"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbfood">

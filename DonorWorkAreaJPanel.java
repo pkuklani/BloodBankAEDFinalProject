@@ -5,13 +5,12 @@
 package ui.DonorRole;
 
 import bbank.Bbank;
+import bbank.DB.DButil;
 import bbank.Role.DonarRole;
-import business.Organization.DeliveryOrganization;
-import business.Organization.RestOrganization;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
+
+import bbank.UserAccount.UserAccount;
 //import business.WorkQueue.LabTestWorkRequest;
-import business.WorkQueue.WorkRequest;
+import bbank.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -20,14 +19,21 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import bbank.order;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import ui.BbankRole.BbankWorkAreaJPanel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import ui.LoginScreen;
 
 /**
  *
- * @author raunak
+ * @author akhil
  */
 public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -35,8 +41,12 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private Bbank business;
     private UserAccount userAccount;
      private UserAccount userAccount1;
-    private DeliveryOrganization deliveryOrganization;
- private order fileuser;
+   
+ 
+ ResultSet resultSet = null;
+           DButil dbconn= new DButil();
+          Connection conn = dbconn.getConnection();
+           int did=0;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
@@ -54,104 +64,43 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
     public void populateTable() {
             DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
-        
+       
         model.setRowCount(0);
-      //  for (WorkRequest request : userAccount1.getWorkQueue().getWorkRequestList())
-        {
-            Object[] row = new Object[7];
-            String dname="A";
-           // dname=request.getDname();
-            if(dname==null)dname="A";
-           // String name=request.getReceiver().getUsername();
-            String lname=null;
-            System.out.println("name"+dname+"username"+lname);
-           if(dname.equals(lname))
-           {
-System.out.println("inside dname");
-           //    row[0]=request;
-           // row[1]=request.getId();
-           // row[2] = request.getMessage();
-           // row[3] = request.getReceiver();
-           //  row[3] = request.getCustname();
-           // row[5] = request.getStatus();
-           // row[4]=request.getDname();
-          //  row[6]=request.getResolveDate();
-            
-          //  String result = ((LabTestWorkRequest) request).getTestResult();
-           // row[3] = result == null ? "Waiting" : result;
-            
+        System.out.println("populate");
+        //
+    String selectSql = "SELECT a.bbank_id,b.bbank_name,a.bgroup_name,a.patient_name,a.quantity,a.date_demand,a.mobile  from Blood_demand a, blood_bank b  where a.status=0 and a.bbank_id=b.bbank_id";
+      Statement stmt;
+       try {
+            stmt = conn.createStatement();
+       
+            resultSet = stmt.executeQuery(selectSql);
+            // conn.close();
+             while (resultSet.next()) {
+                
+                 Object[] row = new Object[8];
+            row[0]=resultSet.getInt(1);
+            row[1] = resultSet.getString(2);
+            row[2] = resultSet.getString(3);
+            row[3] = resultSet.getString(4);
+          //  row[3]=resultSet.getString(4);
+                  row[4]=resultSet.getInt(5); 
+                   row[6]=resultSet.getInt(7);
+                  row[5]=(resultSet.getDate(6));
+                   
             model.addRow(row);
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        //write into text file
-         //writing to file
-        File yourFile = new File("order.txt");
-        yourFile.delete();
-         order u1=new order();
-       try
-       {
-           
-//yourFile.createNewFile(); // if file already exists will do nothing 
-FileOutputStream fs =null;
-fs = new FileOutputStream("order.txt", true); 
-ObjectOutputStream os= new ObjectOutputStream(fs);
-MyObjectOutputStream oos=new MyObjectOutputStream (fs);
-         //  FileOutputStream fs =new FileOutputStream("users.dat") ;
+                
        
-     //  ObjectOutputStream os= new ObjectOutputStream(fs);
-     int i=0;
-      if(yourFile.length()==0)
-        {
-        i=0;
-        } else i=1;
-     //  for (WorkRequest request : userAccount1.getWorkQueue().getWorkRequestList())
-       {
-        //for (WorkRequest request :workqueue.getWorkRequestList() ){
-        
-        
-     //   u1.setId(request.getId());
-     //   u1.setCustname(request.getCustname());
-      //  u1.setFood(request.getMessage());
-       // u1.setRequestDate(request.getRequestDate());
-       // u1.setStatus(request.getStatus());
-      //  u1.setFeedback(request.getFeedback());
-      //  u1.setDname(request.getDname());
-      //  u1.setResolveDate(request.getResolveDate());
-        System.out.println("dname in loop"+u1.getDname());
-         System.out.println("feedback in loop"+u1.getFeedback());
-        if(i==0)
-        {//ObjectOutputStream oos = null;
-                  //  os = new ObjectOutputStream(fs);
-             oos = null;
-                    oos =new  MyObjectOutputStream(fs);
-       oos.writeObject(u1);
-       i++;
-        }
-        else
-        { oos = null;
-                    oos = new MyObjectOutputStream(fs);
-                    oos.writeObject(u1);
-                    i++;
-        }
-      // os.close();
-       }//for
-        oos.close();
-       
-        // System.out.print("added to file");
-       
+        //
       
-    } //try
-      catch (Exception e) {
- 
-                // Print the exception along with the
-                // display message
-                System.out.println("Error Occurred" + e);
-            } 
-       
- 
-        ///write
-        //write into text file
-  
     }
 
     /**
@@ -165,8 +114,8 @@ MyObjectOutputStream oos=new MyObjectOutputStream (fs);
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
-        btnAssign = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,14 +128,14 @@ MyObjectOutputStream oos=new MyObjectOutputStream (fs);
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "null", "Message", "Order By", "Delivery Boy", "Status", "Delivery Date"
+                "Blood Bank ID", "Blood Bank Name", "Blood Group", "Patient Name", "Quantity", "Request  Date", "Mobile"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, false, true
+                false, false, false, true, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -206,20 +155,14 @@ MyObjectOutputStream oos=new MyObjectOutputStream (fs);
             tblWorkRequests.getColumnModel().getColumn(2).setResizable(false);
             tblWorkRequests.getColumnModel().getColumn(3).setResizable(false);
             tblWorkRequests.getColumnModel().getColumn(4).setResizable(false);
+            tblWorkRequests.getColumnModel().getColumn(4).setPreferredWidth(10);
             tblWorkRequests.getColumnModel().getColumn(5).setResizable(false);
-            tblWorkRequests.getColumnModel().getColumn(5).setPreferredWidth(10);
         }
 
-        btnAssign.setBackground(new java.awt.Color(102, 153, 255));
-        btnAssign.setText("Set Status Delivered");
-        btnAssign.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignActionPerformed(evt);
-            }
-        });
-
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("Delivery Boy Work Area");
+        lblTitle.setText("Donor Work Area");
+
+        jLabel1.setText("Pending Blood requirements ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -228,54 +171,28 @@ MyObjectOutputStream oos=new MyObjectOutputStream (fs);
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAssign)
-                            .addComponent(lblTitle)))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addComponent(lblTitle)))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(19, 19, 19)
                 .addComponent(lblTitle)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(btnAssign)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
-
-        int selectedRow = tblWorkRequests.getSelectedRow();
-
-        if (selectedRow >= 0) {
-            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
-            if (request.getMessage().equalsIgnoreCase("Completed")) {
-                JOptionPane.showMessageDialog(null, "Request already processed.");
-                return;
-            } else {
-                Date now=new Date();
-                request.setReceiver(userAccount);
-                request.setStatus("Delivered");
-                request.setResolveDate(now);
-                 JOptionPane.showMessageDialog(null, "Order Delivered");
-                populateTable();
-
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Choose a order to deliver");
-            return;
-        }
-
-
-    }//GEN-LAST:event_btnAssignActionPerformed
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {
@@ -305,7 +222,7 @@ MyObjectOutputStream oos=new MyObjectOutputStream (fs);
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssign;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblWorkRequests;

@@ -5,13 +5,13 @@
 package ui.AdministrativeRole;
 
 import bbank.Bbank;
+import bbank.DB.DButil;
+import ui.LoginScreen;
+import bbank.Employee.Employee;
 
-import business.Employee.Employee;
-import business.Organization.Organization;
-import business.Organization.OrganizationDirectory;
 import bbank.Role.Role;
-import business.UserAccount.UserAccount;
-import business.WorkQueue.WorkRequest;
+import bbank.UserAccount.UserAccount;
+import bbank.WorkQueue.WorkRequest;
 
 import java.awt.CardLayout;
 import java.io.FileInputStream;
@@ -27,9 +27,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import bbank.user;
+import java.awt.event.ItemEvent;
 import java.io.EOFException;
 import java.io.File;
 import java.io.OutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import ui.LoginScreen;
+import java.awt.event.ItemListener;
+import ui.DonorregJPanel;
+import static ui.LoginScreen.isValidPassword;
 /**
  *
  * @author Administrator
@@ -44,65 +54,134 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private UserAccount useraccount;
       private UserAccount useraccount1;
       private user fileuser;
-      private Organization organization1;
-      private OrganizationDirectory orgdir;
+     
+        ResultSet resultSet = null;
+           DButil dbconn= new DButil();
+         // Connection conn = dbconn.getConnection();
+          String orgsel,empsel,rolesel;
+          int roleid;
+           String roletype;
+          String selectedorg;
      //private DB4OUtil dB4OUtil;
  
-    public ManageUserAccountJPanel(JPanel container, Bbank business,Organization organization2) {
+    public ManageUserAccountJPanel(JPanel container,String roletype) {
         initComponents();
         this.business = business;
         this.container = container;
 this.useraccount=useraccount;
 this.fileuser=fileuser;
-this.organization1=organization2;
+  this.roletype=roletype;
 popOrganizationComboBox();
         
-        Organization organization = (Organization) cmbOrganization.getSelectedItem();
-        if (organization != null) {
-            populateEmployeeComboBox(organization);
-            populateRoleComboBox(organization);
-        }
+   
 
         popUserAccountsTable();
     }
-
+ @SuppressWarnings("unchecked")
     public void popOrganizationComboBox() {
-        cmbOrganization.removeAllItems();
-
-        for (Organization organization : business.getOrganizationDirectory().getOrganizationList()) {
-           // cmbOrganization.addItem(organization);
+       ResultSet resultSet1 = null;
+         cmbOrganization.removeAllItems();
+         //if(conn)conn.close();
+          Connection conn = dbconn.getConnection();
+        // conn = dbconn.getConnection();
+          //  cmbOrganizationList.addItem(organization);
+         String selectSql = "SELECT * from org where org_access=?";
+       PreparedStatement stmt0;
+       try {
+            stmt0=conn.prepareStatement(selectSql);
+            
+       stmt0.setString(1,roletype);
+            resultSet1 = stmt0.executeQuery();
+       System.out.println("stmt"+ stmt0+"resultset = "+resultSet1);
+            
+             cmbOrganization.addItem("Select");
+             String selval;
+            // conn.close();
+             while (resultSet1.next()) {
+                selval=resultSet1.getString(2);
+                  cmbOrganization.addItem(selval);
+           
+             }//while
+             
+               cmbOrganization.setEditable(true);
+               
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+        MyItemListener actionListener = new MyItemListener();
+    cmbOrganization.addItemListener(actionListener);
+    }
+    
+ @SuppressWarnings("unchecked")
+    public void populateEmployeeComboBox() {
+         cmbEmployee.removeAllItems();
+          Connection conn = dbconn.getConnection();
+           ResultSet resultSet1 = null;
+//conn = dbconn.getConnection();
+          String selectSql = "SELECT * from employee_list where org=?";
+      PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+       stmt.setString(1, orgsel);
+            resultSet1 = stmt.executeQuery();
+            // conn.close();
+            System.out.println("in loop...........");
+             while (resultSet1.next()) {
+                 
+            cmbEmployee.addItem(resultSet1.getString(2));
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+        
     }
 
-    public void populateEmployeeComboBox(Organization organization) {
-        cmbEmployee.removeAllItems();
-
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()) {
-          // cmbEmployee.addItem(employee);
-        }
-    }
-
-    private void populateRoleComboBox(Organization organization) {
-        cmbRoles.removeAllItems();
-        for (Role role : organization.getSupportedRole()) {
-          //  cmbRoles.addItem(role);
-        }
-    }
+   
 
     public void popUserAccountsTable() {
 
         DefaultTableModel model = (DefaultTableModel) tblUsers.getModel();
-
-        model.setRowCount(0);
-
-        for (Organization organization : business.getOrganizationDirectory().getOrganizationList()) {
-            for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
-                Object row[] = new Object[3];
-                row[0] = ua;
-                row[1] = ua.getRole();
-                ((DefaultTableModel) tblUsers.getModel()).addRow(row);
-            }
+ model.setRowCount(0);
+  Connection conn = dbconn.getConnection();
+        // conn = dbconn.getConnection();
+          String selectSql5 = "SELECT a.user_id,a.username,b.role from users a, roles b where a.role_id=b.role_id ";
+      Statement stmt5;
+       try {
+            stmt5 = conn.createStatement();
+       
+            resultSet = stmt5.executeQuery(selectSql5);
+            // conn.close();
+            System.out.println("in loop...........");
+             while (resultSet.next()) {
+                 Object[] row = new Object[3];
+                  System.out.println("in loop"+ resultSet.getString(2));
+            row[0] = resultSet.getString(1);
+            row[1] = resultSet.getString(2);
+              row[2] = resultSet.getString(3);
+            model.addRow(row);
+           
+             }//while
+             
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+      
+       
     }
 
     /**
@@ -127,9 +206,9 @@ popOrganizationComboBox();
         lblOrganization = new javax.swing.JLabel();
         cmbOrganization = new javax.swing.JComboBox();
         lblRole = new javax.swing.JLabel();
-        cmbRoles = new javax.swing.JComboBox();
         lblCreateUser = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtrole = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
         lblUsersList = new javax.swing.JLabel();
@@ -143,14 +222,14 @@ popOrganizationComboBox();
 
             },
             new String [] {
-                "User Name", "Role"
+                "User ID", "User Name", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -165,6 +244,7 @@ popOrganizationComboBox();
         if (tblUsers.getColumnModel().getColumnCount() > 0) {
             tblUsers.getColumnModel().getColumn(0).setResizable(false);
             tblUsers.getColumnModel().getColumn(1).setResizable(false);
+            tblUsers.getColumnModel().getColumn(2).setResizable(false);
         }
 
         grpNewUser.setBackground(new java.awt.Color(255, 255, 255));
@@ -201,18 +281,12 @@ popOrganizationComboBox();
 
         lblRole.setText("Role:");
 
-        cmbRoles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRolesActionPerformed(evt);
-            }
-        });
-
         lblCreateUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCreateUser.setText("New User:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\order-food\\users.png")); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/users.png")); // NOI18N
+
+        txtrole.setEditable(false);
 
         javax.swing.GroupLayout grpNewUserLayout = new javax.swing.GroupLayout(grpNewUser);
         grpNewUser.setLayout(grpNewUserLayout);
@@ -236,10 +310,10 @@ popOrganizationComboBox();
                                 .addComponent(lblRole)
                                 .addComponent(lblPassword))
                             .addGap(18, 18, 18)
-                            .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addComponent(txtrole)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, grpNewUserLayout.createSequentialGroup()
                             .addGap(26, 26, 26)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +337,7 @@ popOrganizationComboBox();
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRole)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtrole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(grpNewUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserName)
@@ -346,7 +420,12 @@ popOrganizationComboBox();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
- if(txtUserName.getText().isEmpty())
+ Connection conn = dbconn.getConnection();
+  ResultSet resultSet = null;
+   ResultSet resultSet1 = null;
+    ResultSet resultSet2 = null;
+        //conn = dbconn.getConnection();
+        if(txtUserName.getText().isEmpty())
      {
          JOptionPane.showMessageDialog(this, "Please enter valid User name");
         return;
@@ -356,151 +435,92 @@ popOrganizationComboBox();
          JOptionPane.showMessageDialog(this, "Please enter valid Password");
         return;
      } 
-       // WorkQueue row= new WorkQueue();
-      // private static File f = new File("user.txt");
-       user fileuser = null;
-       //bject row[] = new Object[4];
-          // String r[]=new String[3];     
-        String userName = txtUserName.getText();
-        String password = txtPassword.getText();
-        Organization organization = (Organization) cmbOrganization.getSelectedItem();
-        Employee employee = (Employee) cmbEmployee.getSelectedItem();
-        Role role = (Role) cmbRoles.getSelectedItem();
-       // useraccount.setPassword(password);
-      //  useraccount.setUsername(userName);
-//row[0] = userName;
-               // row[1] = password;
-                //row[2]=cmbRoles.getSelectedItem().toString();
-                //check if userid password already exist
-                 for (Organization organization1 : business.getOrganizationDirectory().getOrganizationList()){
-                for (UserAccount ua : organization1.getUserAccountDirectory().getUserAccountList()) {
-                    System.out.println("user = "+ua.getUsername()+" password "+ua.getPassword());
-                    if((userName.equals(ua.getUsername()))||(password.equals(ua.getPassword())))
-                    {JOptionPane.showMessageDialog(this, "Username already exist Try again");
-       //System.out.println("founduser");
-                    return;
-                    }
-                    //  System.out.println("not founduser");
-                           }
-                 }
-               //  for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
-                //    if((password.equals(ua.getPassword())))
-                 //   {JOptionPane.showMessageDialog(this, "Password already exist Try again");
-      // System.out.println("foundpass");
-               //     return;
-               //     }
-                //      System.out.println("not foundpass");
-                //           }
-                //check if userid password already exist
-       // organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
-//business.getUseraccountdirectory().createUserAccount(userName, password, employee, role);
-   System.out.println("calling stored fromuser form ");
-       // dB4OUtil.storeSystem(business);
-          user u1=new user();
-        u1.setId(employee.getId());
-        u1.setName(employee.getName());
-        u1.setUserid(txtUserName.getText());
-        u1.setPassword(password);
-       // u1.setRole(cmbRoles.getItemAt(cmbRoles.getSelectedIndex()));
-        u1.setRole(cmbRoles.getSelectedItem().toString());
-        //writing to file
-        File yourFile = new File("user.txt");
-       try
-       {
-           
-//yourFile.createNewFile(); // if file already exists will do nothing 
-FileOutputStream fs =null;
-fs = new FileOutputStream("user.txt", true); 
-         //  FileOutputStream fs =new FileOutputStream("users.dat") ;
-        if(yourFile.length()==0)
-        {
-       ObjectOutputStream os= new ObjectOutputStream(fs);
-       os.writeObject(u1);
-       os.close();
-        }
-        else
-        {
-           MyObjectOutputStream oos = null;
-                    oos = new MyObjectOutputStream(fs);
-                    oos.writeObject(u1);
- 
-                    // Closing the FileOutputStream object
-                    // to release memory resources
-                    oos.close();  
-        }
-         System.out.print("added to file");
-        }
-      
-       
-      catch (Exception e) {
- 
-                // Print the exception along with the
-                // display message
-                System.out.println("Error Occurred" + e);
-            } 
-       
-        // reading back
+ // check password
+ boolean flag=false;
+  boolean flag1=false;
+ String password=txtPassword.getText();
+ String username=txtUserName.getText();
+ String role=txtrole.getText();
+ flag=isValidPassword(password);
+
+  if(!flag)
+     {
+         JOptionPane.showMessageDialog(this, "kindly use a Strong  Password");
+        return;
+     }
+ //check password
+        // is user already there
+        // conn= dbconn.getConnection();
+           // Connection conn = DriverManager.getConnection(dburl, user, pass);
+ System.out.println("Connected to database !");
+  String selectSql = "SELECT * from users";
+      Statement stmt;
         try {
- 
-            // Creating new file using File object above
-            yourFile.createNewFile();
-        }
- 
-        // Catch block to handle the exception
-        catch (Exception e) {
-        }
-        ////////////
-        // If the file is empty
-        if (yourFile.length() != 0) {
- 
-            try {
- 
-                // If file doesn't exists
-                FileInputStream fis = null;
- 
-                fis = new FileInputStream(
-                    "user.txt");
-                ObjectInputStream ois
-                    = new ObjectInputStream(fis);
- 
-                user u2 = null;
- 
-                while (fis.available() != 0) {
-                    u2 = (user)ois.readObject();
-                    String name=u2.getName();
-                   // System.out.println("id =="+u2.getId());
-                     // System.out.println("name =="+name);
-                      //  System.out.println("userid =="+u2.getUserid());
-                        //  System.out.println("password =="+u2.getPassword());
-                         //   System.out.println("role =="+u2.getRole());
-                                    }
- 
-                // Closing the connection to release memory
-                // resources using close() method
-                ois.close();
-                fis.close();
- 
-                // Once all connection are closed after the
-                // desired action change the flag state
-                
+            stmt = conn.createStatement();
+       
+            resultSet = stmt.executeQuery(selectSql);
+            // conn.close();
+             while (resultSet.next()) {
+                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
+                    if((resultSet.getString(1).equals(username))||(resultSet.getString(2).equals(password)))
+            
+          { System.out.println("resultSet.getString(1)"+resultSet.getString(1)+" text box "+username);
+              flag1 = true;
+               break;
             }
+             }//while
+            System.out.println("xxx"+flag1);
+          if (flag1) {
+              System.out.println("false");
+          JOptionPane.showMessageDialog(null, "User Name/ Password. already available Try Again");
+           return;
+        }//if found
+        
+         } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+         // is user already there
+         //insert into table
+          String selectSql2="select role_id from roles where role=?";
+         String  selectSql1 = "insert into users(user_id,passwd,role_id,username,status,bbank_id,hospital_id)" +" values(?,?,?,?,?,?,?);";
+ String selectSql3 = "SELECT bank_id,hospital_id from employee_list where name=?";
+         PreparedStatement stmt1,stmt2,stmt3;
+       int hid=0;
+       int bid=0;
+          try {
+              //get hospital id from employee table
+               stmt3=conn.prepareStatement(selectSql3);
+                stmt3.setString(1, empsel);
+             resultSet2 = stmt3.executeQuery();
+              while (resultSet2.next()) {
+             // roleid=resultSet.getInt(1);
+             bid=resultSet2.getInt(1);
+               hid=resultSet2.getInt(2);
+              }
+               //get hospital id from employee table
+             // stmt = conn.createStatement();
+            stmt2=conn.prepareStatement(selectSql2);
+             stmt2.setString(1, role);
+             resultSet = stmt2.executeQuery();
+              while (resultSet.next()) {
+             // roleid=resultSet.getInt(1);
+              }
+              stmt1=conn.prepareStatement(selectSql1);
+              stmt1.setString(1, username);
+               stmt1.setString(2, password);
+                stmt1.setInt(3, roleid);
+                 stmt1.setString(4, empsel);
+                  stmt1.setInt(5, 1);
+                   stmt1.setInt(6, bid);
+                    stmt1.setInt(7, hid);
+                  stmt1.executeUpdate();
+                  conn.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+   
  
-            // Catch block to handle the exception
-            catch (Exception e) {
- 
-                // Print the exception on the console
-                // along with display message
-                System.out.println("Error Occurred" + e);
- 
-                // Exception encountered line is also
-                // displayed on console using the
-                // printStackTrace() method
-                e.printStackTrace();
-            }
-        }
-        ////////////
-      
-        //
+         //insert into table
         popUserAccountsTable();
 
         JOptionPane.showMessageDialog(null, "User Account added successfully.");
@@ -514,25 +534,108 @@ fs = new FileOutputStream("user.txt", true);
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
     private void cmbOrganizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOrganizationActionPerformed
-        Organization organization = (Organization) cmbOrganization.getSelectedItem();
-        if (organization != null) {
-            populateEmployeeComboBox(organization);
-            populateRoleComboBox(organization);
+      Connection conn = dbconn.getConnection();
+        ResultSet resultSet2 = null;
+        orgsel=(String)cmbOrganization.getSelectedItem();
+        //resultSet = null;
+      if(orgsel=="Select")
+      {
+        System.out.println("if "+orgsel);   
+      }
+      else
+      {System.out.println( "selected cmb = "+cmbOrganization.getSelectedItem());
+            System.out.println("else "+orgsel);   
+        //adding employees 
+        //adding employees
+        cmbEmployee.removeAllItems();
+//conn = dbconn.getConnection();
+
+          String selectSql = "SELECT * from employee_list where org=?";
+      PreparedStatement stmt;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+       stmt.setString(1, orgsel);
+       int first=0;
+       
+            resultSet2 = stmt.executeQuery();
+            // conn.close();
+           
+             while (resultSet2.next()) {
+                 if(first==0)
+                 {
+                 rolesel=resultSet2.getString(3);
+                 }
+                  System.out.println("in loop..........."+resultSet2.getString(2));
+            cmbEmployee.addItem(resultSet2.getString(2));
+           
+             }//while
+             txtrole.setText(rolesel);
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
+ 
+      }
+          // populateEmployeeComboBox();
+            //populateRoleComboBox();
+        
     }//GEN-LAST:event_cmbOrganizationActionPerformed
 
     private void cmbEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEmployeeActionPerformed
         // TODO add your handling code here:
+         Connection conn = dbconn.getConnection();
+          ResultSet resultSet2 = null;
+         empsel=(String)cmbEmployee.getSelectedItem();
+      if(empsel=="Select")
+      {
+        System.out.println("if "+orgsel);   
+      }
+      else
+      {System.out.println( "selected cmb = "+cmbEmployee.getSelectedItem());
+            System.out.println("else "+empsel);   
+        //adding employees 
+        //adding employees
+      txtrole.setText(null);
+//conn = dbconn.getConnection();
+          String selectSql = "SELECT role_id,role from roles where role=?";
+            //String selectSql1 = "SELECT bank_id,hospital_id from employee_list where user=?";
+      PreparedStatement stmt,stmt1;
+       try {
+            stmt=conn.prepareStatement(selectSql);
+            // stmt1=conn.prepareStatement(selectSql1);
+       stmt.setString(1, orgsel);
+       int first=0;
+       
+            resultSet2 = stmt.executeQuery();
+            // conn.close();
+           System.out.println("in loo org"+ orgsel); 
+             while (resultSet2.next()) {
+                 roleid=resultSet2.getInt(1);
+                 rolesel=resultSet2.getString(2);
+                   System.out.println("in loop..........."+roleid+ "org"+ orgsel);          
+             }//while
+             txtrole.setText(rolesel);
+            
+             conn.close();
+             
+       }//try
+       catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+      }
+          // populateEmployeeComboBox();
+            //populateRoleComboBox();
+     
     }//GEN-LAST:event_cmbEmployeeActionPerformed
-
-    private void cmbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbRolesActionPerformed
 
     private void btndelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelActionPerformed
         // TODO add your handling code here:
+         Connection conn = dbconn.getConnection();
           int SelectedRowIndex=tblUsers.getSelectedRow();
         System.out.print("select"+SelectedRowIndex);
         if(SelectedRowIndex<0)
@@ -545,43 +648,48 @@ fs = new FileOutputStream("user.txt", true);
         DefaultTableModel model =(DefaultTableModel) tblUsers.getModel();
       // workqueue.deletevitals(vs);
        // WorkRequest request= (WorkRequest) model.getValueAt(SelectedRowIndex, 0);
-       UserAccount request = (UserAccount)model.getValueAt(SelectedRowIndex, 0);
-        System.out.println("request"+request);
-       // business.getOrganizationDirectory().getOrganizationList().g
-       // useraccount       useraccount.getWorkQueue().deletevitals(request);
-         organization1.getUserAccountDirectory().deluserAccount(request);
+       String deluserid =(String) model.getValueAt(SelectedRowIndex, 0);
+        System.out.println("request"+deluserid);
+        //delete
+      //  conn = dbconn.getConnection();
+          String selectSql = "Delete from users where user_id=?;";
+     PreparedStatement stmt;
+      try {
+             // stmt = conn.createStatement();
+             stmt=conn.prepareStatement(selectSql);
+             
+                 stmt.setString(1, deluserid);
+                                   
+              stmt.executeUpdate();
+          conn.close();
+          } catch (SQLException ex) {
+              Logger.getLogger(DonorregJPanel.class.getName()).log(Level.SEVERE, null, ex);
+          }
+     
+        //delete
         JOptionPane.showMessageDialog(this, "selected data deleted");
        
             popUserAccountsTable();
        
      
     }//GEN-LAST:event_btndelActionPerformed
-//overriding by akhil
-   class MyObjectOutputStream extends ObjectOutputStream {
- 
-    // Constructor of ths class
-    // 1. Default
-    MyObjectOutputStream() throws IOException
-    {
- 
-        // Super keyword refers to parent class instance
-        super();
+  class MyItemListener implements ItemListener {
+  // This method is called only if a new item has been selected.
+       @Override
+  public void itemStateChanged(ItemEvent evt) {
+    //JComboBox cmbOrganization = (JComboBox) evt.getSource();
+
+    Object item = evt.getItem();
+
+    if (evt.getStateChange() == ItemEvent.SELECTED) {
+      // Item was just selected
+    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+      // Item is no longer selected
     }
- 
-    // Constructor of ths class
-    // 1. Parameterized constructor
-    MyObjectOutputStream(OutputStream o) throws IOException
-    {
-        super(o);
+  }
+
+        
     }
- 
-    // Method of this class
-    public void writeStreamHeader() throws IOException
-    {
-        return;
-    }
-}
-  
     //
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -589,7 +697,6 @@ fs = new FileOutputStream("user.txt", true);
     private javax.swing.JButton btndel;
     private javax.swing.JComboBox cmbEmployee;
     private javax.swing.JComboBox cmbOrganization;
-    private javax.swing.JComboBox cmbRoles;
     private javax.swing.JPanel grpNewUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -604,5 +711,6 @@ fs = new FileOutputStream("user.txt", true);
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUserName;
+    private javax.swing.JTextField txtrole;
     // End of variables declaration//GEN-END:variables
 }
