@@ -293,9 +293,8 @@ public class AvailableJPanel extends javax.swing.JPanel {
         cmbbank = new javax.swing.JComboBox<>();
         btnbank = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblblood.setBackground(new java.awt.Color(204, 255, 204));
         tblblood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -334,6 +333,7 @@ public class AvailableJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText(" Blood Availabilty Status");
 
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

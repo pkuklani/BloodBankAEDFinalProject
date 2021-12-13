@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+      <Color blue="e3" green="e6" red="dd" type="rgb"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[424, 344]"/>
@@ -74,7 +74,7 @@
     <Component class="javax.swing.JButton" name="btnissue">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Issue Blood"/>
       </Properties>
@@ -85,7 +85,7 @@
     <Component class="javax.swing.JButton" name="btnbbank">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="View Pending Requests"/>
       </Properties>
@@ -104,7 +104,7 @@
     <Component class="javax.swing.JButton" name="btnreceive">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Receive Blood"/>
       </Properties>
@@ -115,7 +115,7 @@
     <Component class="javax.swing.JButton" name="btnstock">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Blood Bank Stock"/>
       </Properties>
@@ -124,16 +124,11 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/stores.jpg"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="userJButton1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="View All Donors"/>
       </Properties>
@@ -144,7 +139,7 @@
     <Component class="javax.swing.JButton" name="btnviewr">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="View All Receipts"/>
       </Properties>
@@ -155,7 +150,7 @@
     <Component class="javax.swing.JButton" name="btnviewi">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="99" red="66" type="rgb"/>
+          <Color blue="32" green="31" red="d4" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="View All Issues"/>
       </Properties>

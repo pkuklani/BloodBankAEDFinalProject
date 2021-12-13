@@ -77,10 +77,10 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         btnadddoc = new javax.swing.JButton();
         btnaddbank = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
         setPreferredSize(new java.awt.Dimension(424, 344));
 
-        btnbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbank.setBackground(new java.awt.Color(212, 49, 50));
         btnbank.setText("Blood Banks");
         btnbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +88,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnpatient.setBackground(new java.awt.Color(102, 153, 255));
+        btnpatient.setBackground(new java.awt.Color(212, 49, 50));
         btnpatient.setText("Patient Request");
         btnpatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnavailable.setBackground(new java.awt.Color(102, 153, 255));
+        btnavailable.setBackground(new java.awt.Color(212, 49, 50));
         btnavailable.setText("Check Blood Availability");
         btnavailable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Hospital Work Area");
 
-        btndonor.setBackground(new java.awt.Color(102, 153, 255));
+        btndonor.setBackground(new java.awt.Color(212, 49, 50));
         btndonor.setText("Donors List");
         btndonor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,9 +115,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/hospital.png")); // NOI18N
-
-        btnadddoc.setBackground(new java.awt.Color(102, 153, 255));
+        btnadddoc.setBackground(new java.awt.Color(212, 49, 50));
         btnadddoc.setText("Add Doctors");
         btnadddoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +123,7 @@ public class HospitalWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnaddbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnaddbank.setBackground(new java.awt.Color(212, 49, 50));
         btnaddbank.setText("Attach Blood Bank");
         btnaddbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

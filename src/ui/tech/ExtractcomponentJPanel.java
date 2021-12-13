@@ -156,9 +156,8 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblblood.setBackground(new java.awt.Color(204, 255, 204));
         tblblood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -197,6 +196,7 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Extract Blood Components");
 
+        btnextract.setBackground(new java.awt.Color(212, 49, 50));
         btnextract.setText("Extract Blood");
         btnextract.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +208,7 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Units");
 
+        btnsave.setBackground(new java.awt.Color(212, 49, 50));
         btnsave.setText("Save components");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +218,7 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
 
         cmbcomp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Red Cells", "Platelets", "Plasma", "White cells" }));
 
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
         jButton1.setText("View Components");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -132,9 +132,8 @@ public class AddBloodbanksJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblOrganizations.setBackground(new java.awt.Color(204, 255, 204));
         tblOrganizations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -168,7 +167,7 @@ public class AddBloodbanksJPanel extends javax.swing.JPanel {
             tblOrganizations.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        btnBack.setBackground(new java.awt.Color(102, 153, 255));
+        btnBack.setBackground(new java.awt.Color(212, 49, 50));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,8 +176,9 @@ public class AddBloodbanksJPanel extends javax.swing.JPanel {
         });
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        lblTitle.setText("List of Blood Banks");
+        lblTitle.setText("Blood Banks");
 
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
         jButton1.setText("Add Selected Blood Bank to the hospital");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

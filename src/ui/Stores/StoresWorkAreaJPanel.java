@@ -85,10 +85,10 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
         btnviewr = new javax.swing.JButton();
         btnviewi = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
         setPreferredSize(new java.awt.Dimension(424, 344));
 
-        btnissue.setBackground(new java.awt.Color(102, 153, 255));
+        btnissue.setBackground(new java.awt.Color(212, 49, 50));
         btnissue.setText("Issue Blood");
         btnissue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +96,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnbbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbbank.setBackground(new java.awt.Color(212, 49, 50));
         btnbbank.setText("View Pending Requests");
         btnbbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("Blood Bank  Stores Work Area");
 
-        btnreceive.setBackground(new java.awt.Color(102, 153, 255));
+        btnreceive.setBackground(new java.awt.Color(212, 49, 50));
         btnreceive.setText("Receive Blood");
         btnreceive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +115,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnstock.setBackground(new java.awt.Color(102, 153, 255));
+        btnstock.setBackground(new java.awt.Color(212, 49, 50));
         btnstock.setText("Blood Bank Stock");
         btnstock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,9 +123,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/stores.jpg")); // NOI18N
-
-        userJButton1.setBackground(new java.awt.Color(102, 153, 255));
+        userJButton1.setBackground(new java.awt.Color(212, 49, 50));
         userJButton1.setText("View All Donors");
         userJButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,7 +131,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnviewr.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewr.setBackground(new java.awt.Color(212, 49, 50));
         btnviewr.setText("View All Receipts");
         btnviewr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +139,7 @@ public class StoresWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnviewi.setBackground(new java.awt.Color(102, 153, 255));
+        btnviewi.setBackground(new java.awt.Color(212, 49, 50));
         btnviewi.setText("View All Issues");
         btnviewi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -68,10 +68,10 @@ public class NGOWorkAreaJPanel extends javax.swing.JPanel {
         btndonor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
         setPreferredSize(new java.awt.Dimension(424, 344));
 
-        btnbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbank.setBackground(new java.awt.Color(212, 49, 50));
         btnbank.setText("Blood Banks");
         btnbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class NGOWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnpatient.setBackground(new java.awt.Color(102, 153, 255));
+        btnpatient.setBackground(new java.awt.Color(212, 49, 50));
         btnpatient.setText("Patient Request");
         btnpatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,7 @@ public class NGOWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnavailable.setBackground(new java.awt.Color(102, 153, 255));
+        btnavailable.setBackground(new java.awt.Color(212, 49, 50));
         btnavailable.setText("Check Blood Availability");
         btnavailable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,15 +98,13 @@ public class NGOWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("NGO Work Area");
 
-        btndonor.setBackground(new java.awt.Color(102, 153, 255));
+        btndonor.setBackground(new java.awt.Color(212, 49, 50));
         btndonor.setText("Donors List");
         btndonor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndonorActionPerformed(evt);
             }
         });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/ngo.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

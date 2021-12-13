@@ -120,9 +120,8 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
         btnback = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
 
-        tblWorkRequests.setBackground(new java.awt.Color(204, 255, 204));
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -157,6 +156,7 @@ public class ViewdonorsJPanel extends javax.swing.JPanel {
             tblWorkRequests.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        btnback.setBackground(new java.awt.Color(212, 49, 50));
         btnback.setText("Back");
         btnback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

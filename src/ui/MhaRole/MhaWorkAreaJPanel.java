@@ -83,10 +83,10 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         btncomponent = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(221, 230, 227));
         setPreferredSize(new java.awt.Dimension(424, 344));
 
-        btnbank.setBackground(new java.awt.Color(102, 153, 255));
+        btnbank.setBackground(new java.awt.Color(212, 49, 50));
         btnbank.setText("Blood Banks");
         btnbank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnpatient.setBackground(new java.awt.Color(102, 153, 255));
+        btnpatient.setBackground(new java.awt.Color(212, 49, 50));
         btnpatient.setText("Patient Request");
         btnpatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnavailable.setBackground(new java.awt.Color(102, 153, 255));
+        btnavailable.setBackground(new java.awt.Color(212, 49, 50));
         btnavailable.setText("Check Blood Availability");
         btnavailable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +113,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTitle.setText("MHA Work Area");
 
-        btndonor.setBackground(new java.awt.Color(102, 153, 255));
+        btndonor.setBackground(new java.awt.Color(212, 49, 50));
         btndonor.setText("Donors List");
         btndonor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,9 +121,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/AED_final_P/github/BloodBankAEDFinalProject/mha.jpg")); // NOI18N
-
-        btnissue.setBackground(new java.awt.Color(102, 153, 255));
+        btnissue.setBackground(new java.awt.Color(212, 49, 50));
         btnissue.setText("View All Issues");
         btnissue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +129,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnreceive.setBackground(new java.awt.Color(102, 153, 255));
+        btnreceive.setBackground(new java.awt.Color(212, 49, 50));
         btnreceive.setText("View All Receipt");
         btnreceive.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +137,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnresearch.setBackground(new java.awt.Color(102, 153, 255));
+        btnresearch.setBackground(new java.awt.Color(212, 49, 50));
         btnresearch.setText("View Research Activity");
         btnresearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +145,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(102, 153, 255));
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
         jButton1.setText("View List of Blood Tests");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +153,7 @@ public class MhaWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btncomponent.setBackground(new java.awt.Color(102, 153, 255));
+        btncomponent.setBackground(new java.awt.Color(212, 49, 50));
         btncomponent.setText("View Blood Component Available");
         btncomponent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
