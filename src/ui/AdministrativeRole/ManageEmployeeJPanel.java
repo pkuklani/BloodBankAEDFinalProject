@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -269,6 +271,12 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         lblOrganizationList1.setText("New Employee:");
 
         lblEmployeeName.setText("Name:");
+
+        txtEmployeeName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmployeeNameKeyPressed(evt);
+            }
+        });
 
         btnCreateEmployee.setBackground(new java.awt.Color(102, 153, 255));
         btnCreateEmployee.setText("Create Employee");
@@ -561,6 +569,24 @@ JOptionPane.showMessageDialog(this,"New Employee Added");
        
      
     }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void txtEmployeeNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmployeeNameKeyPressed
+        // TODO add your handling code here:
+          String name =txtEmployeeName.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtEmployeeNameKeyPressed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

@@ -208,6 +208,23 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Units");
 
+        txtunits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtunitsActionPerformed(evt);
+            }
+        });
+        txtunits.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtunitsKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtunitsKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtunitsKeyTyped(evt);
+            }
+        });
+
         btnsave.setText("Save components");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -373,6 +390,28 @@ public class ExtractcomponentJPanel extends javax.swing.JPanel {
         techScreen.setLocation(400, 200);
         techScreen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtunitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtunitsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtunitsActionPerformed
+
+    private void txtunitsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtunitsKeyPressed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_txtunitsKeyPressed
+
+    private void txtunitsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtunitsKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtunitsKeyReleased
+
+    private void txtunitsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtunitsKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) )) {
+           getToolkit().beep();
+          evt.consume();
+       }
+    }//GEN-LAST:event_txtunitsKeyTyped
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {

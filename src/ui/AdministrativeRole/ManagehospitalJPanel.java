@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -185,6 +187,12 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Name");
 
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Address");
 
         btnedit.setBackground(new java.awt.Color(102, 153, 255));
@@ -212,6 +220,12 @@ public class ManagehospitalJPanel extends javax.swing.JPanel {
         });
 
         jLabel5.setText("Mobile");
+
+        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobileKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -496,6 +510,41 @@ JOptionPane.showMessageDialog(this,"New Hospital  Added");
   
      
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+                String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
+
+    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+        // TODO add your handling code here:
+           String mobile =txtmobile.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if((mobile.matches("^[0-9]*$")) && (mobile.length()<11) )
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Mobile Number");
+        }
+    }//GEN-LAST:event_txtmobileKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

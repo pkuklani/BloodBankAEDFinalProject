@@ -29,6 +29,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ui.DonorregJPanel;
 import ui.LoginScreen;
@@ -211,12 +213,31 @@ public class IssuebloodJPanel extends javax.swing.JPanel {
         jLabel1.setText("Patient Name :");
 
         txtname.setEditable(false);
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Blood Group");
 
         txtbgroup.setEditable(false);
 
         jLabel3.setText("Units");
+
+        txtunits.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtunitsActionPerformed(evt);
+            }
+        });
+        txtunits.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtunitsKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtunitsKeyTyped(evt);
+            }
+        });
 
         btnissue.setText("Issue");
         btnissue.addActionListener(new java.awt.event.ActionListener() {
@@ -442,6 +463,42 @@ public class IssuebloodJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+           String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
+
+    private void txtunitsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtunitsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtunitsActionPerformed
+
+    private void txtunitsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtunitsKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtunitsKeyPressed
+
+    private void txtunitsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtunitsKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) )) {
+           getToolkit().beep();
+          evt.consume();
+       }
+    }//GEN-LAST:event_txtunitsKeyTyped
 
      //overriding by akhil
    class MyObjectOutputStream extends ObjectOutputStream {

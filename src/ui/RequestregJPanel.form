@@ -186,8 +186,15 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtquantity">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtquantityKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtquantityKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtname">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnameKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -220,6 +227,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtmobile">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtmobileKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtmobileKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

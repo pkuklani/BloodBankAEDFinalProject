@@ -153,6 +153,10 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtmobile">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtmobileKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtmobileKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtaddress">
         </Component>
@@ -226,6 +230,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtname">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnameKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>

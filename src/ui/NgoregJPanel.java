@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static ui.LoginScreen.isValidPassword;
 
 
@@ -72,9 +74,20 @@ private JPanel userProcessContainer;
 
         jLabel1.setText("NGO Name");
 
+        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobileKeyPressed(evt);
+            }
+        });
+
         txtname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnameActionPerformed(evt);
+            }
+        });
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
             }
         });
 
@@ -294,6 +307,41 @@ private JPanel userProcessContainer;
     private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnameActionPerformed
+
+    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+        // TODO add your handling code here:
+            String mobile =txtmobile.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if((mobile.matches("^[0-9]*$")) && (mobile.length()<11) )
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Mobile Number");
+        }
+    }//GEN-LAST:event_txtmobileKeyPressed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+                      String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
 
     /**
      * @param args the command line arguments

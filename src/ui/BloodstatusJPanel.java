@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -173,6 +175,11 @@ public class BloodstatusJPanel extends javax.swing.JPanel {
                 txtnameActionPerformed(evt);
             }
         });
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
 
         btnedit.setBackground(new java.awt.Color(102, 153, 255));
         btnedit.setText("Select Blood Bank");
@@ -195,6 +202,18 @@ public class BloodstatusJPanel extends javax.swing.JPanel {
         jLabel4.setText("Units");
 
         jLabel5.setText("Mobile");
+
+        txtquantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtquantityKeyPressed(evt);
+            }
+        });
+
+        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobileKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Blood Group");
 
@@ -417,6 +436,58 @@ JOptionPane.showMessageDialog(this,"Blood Request Added");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtquantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtquantityKeyPressed
+        // TODO add your handling code here:
+          String unit =txtquantity.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if((unit.matches("^[0-9]*$")) && (unit.length()<11) )
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Units");
+        }
+    }//GEN-LAST:event_txtquantityKeyPressed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+                      String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
+
+    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+        // TODO add your handling code here:
+              String unit =txtmobile.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if((unit.matches("^[0-9]*$")) && (unit.length()<11) )
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Mobile Number");
+        }
+    }//GEN-LAST:event_txtmobileKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

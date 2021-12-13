@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RequestregJPanel extends javax.swing.JFrame {
   private JPanel userProcessContainer;
@@ -92,6 +94,21 @@ public class RequestregJPanel extends javax.swing.JFrame {
 
         jLabel1.setText("Patient Name");
 
+        txtquantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtquantityKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtquantityKeyTyped(evt);
+            }
+        });
+
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Address");
 
         btnreg.setBackground(new java.awt.Color(102, 153, 255));
@@ -105,6 +122,15 @@ public class RequestregJPanel extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon("/Users/akhil_kaundinya/NetBeansProjects/bloodbanksystem/blood-request.jpg")); // NOI18N
 
         jLabel5.setText("Mobile");
+
+        txtmobile.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmobileKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmobileKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,9 +164,7 @@ public class RequestregJPanel extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtquantity, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,6 +311,76 @@ public class RequestregJPanel extends javax.swing.JFrame {
         txtmobile.setText("");
         txtquantity.setText("");
     }//GEN-LAST:event_btnregActionPerformed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+                          String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
+
+    private void txtquantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtquantityKeyPressed
+        // TODO add your handling code here:
+                String unit =txtquantity.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if((unit.matches("^[0-9]*$")) && (unit.length()<11) )
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Units");
+        }
+    }//GEN-LAST:event_txtquantityKeyPressed
+
+    private void txtmobileKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyPressed
+        // TODO add your handling code here:
+             String unit =txtmobile.getText();
+        //if(PhoneNo.matches("^[0-9]*$") && PhoneNo.length()==10)
+        if (unit.length()<11) 
+        {
+            //txtid.setBackground(Color.yellow);
+            //JOptionPane.showMessageDialog(null,"You Have Entered Correct PhoneNO");
+        }
+        else
+       
+        {
+            //txtid.setBackground(Color.blue);
+            JOptionPane.showMessageDialog(null,"Please Enter Correct Mobile Number");
+        }
+    }//GEN-LAST:event_txtmobileKeyPressed
+
+    private void txtmobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmobileKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) )) {
+           getToolkit().beep();
+          evt.consume();
+       }
+    }//GEN-LAST:event_txtmobileKeyTyped
+
+    private void txtquantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtquantityKeyTyped
+        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+       if(!(Character.isDigit(c) )) {
+           getToolkit().beep();
+          evt.consume();
+       }
+    }//GEN-LAST:event_txtquantityKeyTyped
 
     /**
      * @param args the command line arguments

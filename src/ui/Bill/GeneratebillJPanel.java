@@ -149,7 +149,6 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
         tblpatient = new javax.swing.JTable();
         lblTitle = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        btnback = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtareabill = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
@@ -202,13 +201,6 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnback.setText("Back");
-        btnback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackActionPerformed(evt);
-            }
-        });
-
         txtareabill.setColumns(20);
         txtareabill.setRows(5);
         jScrollPane2.setViewportView(txtareabill);
@@ -234,9 +226,6 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
                         .addGap(295, 295, 295)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnback))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(101, 101, 101)
@@ -254,14 +243,12 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnback)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(58, 58, 58)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(45, 45, 45)
                         .addComponent(lblTitle)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,13 +302,6 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
        //add to text area
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        // TODO add your handling code here:
-         userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnbackActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try
@@ -361,7 +341,6 @@ public class GeneratebillJPanel extends javax.swing.JPanel {
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnback;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel5;

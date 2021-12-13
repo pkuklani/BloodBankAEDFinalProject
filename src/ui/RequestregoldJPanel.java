@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -96,6 +98,12 @@ public class RequestregoldJPanel extends JPanel {
 
         jLabel1.setText("Patient Name");
 
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Address");
 
         btnreg.setBackground(new java.awt.Color(102, 153, 255));
@@ -105,8 +113,6 @@ public class RequestregoldJPanel extends JPanel {
                 btnregActionPerformed(evt);
             }
         });
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Annapurna\\Documents\\NetBeansProjects\\blood-bank\\blood-request.jpg")); // NOI18N
 
         jLabel5.setText("Mobile");
 
@@ -284,6 +290,24 @@ JOptionPane.showMessageDialog(this,"new Blood request added");
     
        
     }//GEN-LAST:event_btnregActionPerformed
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        // TODO add your handling code here:
+                        String name =txtname.getText();
+        Pattern pattern = Pattern.compile(new String ("^[a-zA-Z\\s]*$"));
+        Matcher matcher = pattern.matcher(name);
+    if(matcher.matches())
+    {
+         //if pattern matches
+        //txtName.setBackground(Color.yellow);
+    }
+    else
+    {
+         //if pattern does not matches
+        //txtName.setBackground(Color.orange);
+            JOptionPane.showMessageDialog(null,"Please Enter your Correct Name");
+    }
+    }//GEN-LAST:event_txtnameKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnreg;
