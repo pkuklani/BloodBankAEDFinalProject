@@ -5,12 +5,10 @@
 package bbank.Role;
 
 import bbank.Bbank;
-import business.Organization.DeliveryOrganization;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccount;
 //import ui.RestRole.RestWorkAreaJPanel;
 import javax.swing.JPanel;
-import ui.DonorRole.DonorWorkAreaJPanel;
+import ui.AdministrativeRole.BbankWorkAreaJPanel;
 
 /**
  *
@@ -26,14 +24,15 @@ public class BbankRole extends Role {
    //DonarRole role=new DonarRole();
    String RoleType;
  //@Override    
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String RoleType) {
-        this.RoleType = "Donor";
-        return new DonorWorkAreaJPanel(userProcessContainer, account,RoleType);
-    }
+  //  public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String RoleType) {
+   //     this.RoleType = "Bbank";
+   //     return new BbankWorkAreaJPanel(userProcessContainer, account,RoleType);
+   // }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
-        return new DonorWorkAreaJPanel(userProcessContainer, account,RoleType);
+       this.RoleType = "Bbank";
+        return new BbankWorkAreaJPanel(userProcessContainer, account,user,RoleType);
     }
    
 }

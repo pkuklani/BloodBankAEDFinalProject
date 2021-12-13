@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  */
 public class DButil implements DBConnection {
 
-    private String dburl= "jdbc:sqlserver://localhost:1433;databaseName=bloodbank";
-     private  String user = "SA";
-private String pass = "Mypass@word1";
+    private String dburl= "jdbc:sqlserver://localhost:1433;databaseName=bank";
+     private  String user = "bbank";
+private String pass = "bbank";
    public DButil() {
        
     this.dburl=dburl;

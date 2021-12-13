@@ -9,32 +9,32 @@ import bbank.UserAccount.UserAccount;
 //import ui.RestRole.RestWorkAreaJPanel;
 import javax.swing.JPanel;
 import ui.AdministrativeRole.AdminWorkAreaJPanel;
-import ui.DonorRole.DonorWorkAreaJPanel;
+import ui.MhaRole.MhaWorkAreaJPanel;
 
 /**
  *
  * @author akhil
  */
-public class AdminRole extends Role {
+public class MhaRole extends Role {
    
 
-    public AdminRole() {
-        this.RoleType = "Admin";
+    public MhaRole() {
+        this.RoleType = "MHA";
     }
 
    //DonarRole role=new DonarRole();
    String RoleType;
  //@Override    
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String user,String RoleType) {
-        this.RoleType = "Admin";
-        System.out.println("in adminrole....");
-        return new AdminWorkAreaJPanel(userProcessContainer, account,user,RoleType);
+        this.RoleType = "MHA";
+        System.out.println("in mharole");
+        return new MhaWorkAreaJPanel(userProcessContainer, account,user,RoleType);
     }
 
-    //@Override
+   // @Override
    // public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
-   //    System.out.println("in adminrole over");
-   //     return new AdminWorkAreaJPanel(userProcessContainer, account,user,RoleType);
+    //   System.out.println("in mharole over");
+    //    return new MhaWorkAreaJPanel(userProcessContainer, account,user,RoleType);
    // }
    
 }

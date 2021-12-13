@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.UserAccount;
+package bbank.UserAccount;
 
-import business.Employee.Employee;
+import bbank.Employee.Employee;
 import bbank.Role.Role;
-import business.WorkQueue.WorkQueue;
+import bbank.WorkQueue.WorkQueue;
 
 /**
  *

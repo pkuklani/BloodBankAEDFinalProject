@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.Organization;
+package bbank.Organization;
 
-import business.Employee.EmployeeDirectory;
+import bbank.Employee.EmployeeDirectory;
 import bbank.Role.Role;
-import business.UserAccount.UserAccountDirectory;
-import business.WorkQueue.WorkQueue;
+import bbank.UserAccount.UserAccountDirectory;
+import bbank.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
 /**

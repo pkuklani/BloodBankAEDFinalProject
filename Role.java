@@ -5,8 +5,7 @@
 package bbank.Role;
 
 import bbank.Bbank;
-import business.Organization.Organization;
-import business.UserAccount.UserAccount;
+import bbank.UserAccount.UserAccount;
 import java.awt.Component;
 import javax.swing.JPanel;
 

@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.WorkQueue;
+package bbank.WorkQueue;
 
 //import Business.Customer.Customer;
-import business.WorkQueue.WorkRequest;
-import business.WorkQueue.WorkQueue;
+import bbank.WorkQueue.WorkRequest;
+import bbank.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
 /**

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package business.Organization;
+package bbank.Organization;
 
 import bbank.Role.DonarRole;
 import bbank.Role.Role;

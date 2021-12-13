@@ -10,31 +10,32 @@ import bbank.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import ui.AdministrativeRole.AdminWorkAreaJPanel;
 import ui.DonorRole.DonorWorkAreaJPanel;
+import ui.tech.ExtractcomponentJPanel;
 
 /**
  *
  * @author akhil
  */
-public class AdminRole extends Role {
+public class TechRole extends Role {
    
 
-    public AdminRole() {
-        this.RoleType = "Admin";
+    public TechRole() {
+        this.RoleType = "Tech";
     }
 
    //DonarRole role=new DonarRole();
    String RoleType;
  //@Override    
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String user,String RoleType) {
-        this.RoleType = "Admin";
-        System.out.println("in adminrole....");
-        return new AdminWorkAreaJPanel(userProcessContainer, account,user,RoleType);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user,String RoleType) {
+        this.RoleType = "Tech";
+        System.out.println("in techrole");
+        return new ExtractcomponentJPanel(userProcessContainer,user,RoleType);
     }
 
-    //@Override
+   // @Override
    // public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
-   //    System.out.println("in adminrole over");
-   //     return new AdminWorkAreaJPanel(userProcessContainer, account,user,RoleType);
+   //    System.out.println("in techrole over");
+   //     return new ExtractcomponentJPanel(userProcessContainer, user,RoleType);
    // }
    
 }

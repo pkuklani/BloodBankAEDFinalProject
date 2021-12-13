@@ -5,12 +5,9 @@
 package bbank;
 
 //import business.
-import business.Customer.CustomerDirectory;
-import business.Restaurant.RestaurantDirectory;
-import business.Organization.OrganizationDirectory;
-import business.Restaurant.FoodmenuDirectory;
+
 import bbank.Donor.DeliveryManDirectory;
-import business.UserAccount.UserAccountDirectory;
+import bbank.UserAccount.UserAccountDirectory;
 
 
 /**
@@ -20,10 +17,7 @@ import business.UserAccount.UserAccountDirectory;
 public class Bbank {
 
     private static Bbank business;
-    private OrganizationDirectory organizationDirectory;
-     private RestaurantDirectory restaurantDirectory;
-      private CustomerDirectory customerDirectory;
-     private FoodmenuDirectory foodmenuDirectory;
+       
      private DeliveryManDirectory deliveryDirectory;
     // private UserAccountDirectory useraccountdirectory;
 
@@ -51,10 +45,7 @@ public class Bbank {
     }
 
     public Bbank() {
-        organizationDirectory = new OrganizationDirectory();
-        restaurantDirectory= new RestaurantDirectory();
-         customerDirectory= new CustomerDirectory();
-        foodmenuDirectory=new FoodmenuDirectory();
+             
         deliveryDirectory=new DeliveryManDirectory();
        // useraccountdirectory=new UserAccountDirectory();
     }
@@ -67,18 +58,8 @@ public class Bbank {
    //     this.useraccountdirectory = useraccountdirectory;
    // }
 
-    public OrganizationDirectory getOrganizationDirectory() {
-        return organizationDirectory;
-    }
-     public RestaurantDirectory getRestaurantDirectory() {
-        return restaurantDirectory;
-    }
-      public CustomerDirectory getCustomerDirectory() {
-        return customerDirectory;
-    }
-     public FoodmenuDirectory getFoodmenuDirectory(){
-         return foodmenuDirectory;
-     }
+  
+     
 
     public DeliveryManDirectory getDeliveryDirectory() {
         return deliveryDirectory;

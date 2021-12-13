@@ -8,33 +8,34 @@ import bbank.Bbank;
 import bbank.UserAccount.UserAccount;
 //import ui.RestRole.RestWorkAreaJPanel;
 import javax.swing.JPanel;
+import ui.AdministrativeRole.AdminWorkAreaJPanel;
 import ui.DonorRole.DonorWorkAreaJPanel;
+import ui.Stores.StoresWorkAreaJPanel;
 
 /**
  *
  * @author akhil
  */
-public class DonarRole extends Role {
+public class StoresRole extends Role {
    
 
-    public DonarRole() {
-        this.RoleType = "Donor";
+    public StoresRole() {
+        this.RoleType = "Stores";
     }
 
    //DonarRole role=new DonarRole();
    String RoleType;
  //@Override    
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,String RoleType) {
-        this.RoleType = "Donor";
-        System.out.println("in donorrole");
-        return new DonorWorkAreaJPanel(userProcessContainer, account,RoleType);
+    public JPanel createWorkArea(JPanel userProcessContainer,String user,String RoleType) {
+        this.RoleType = "Stores";
+        System.out.println("in storesrole");
+        return new StoresWorkAreaJPanel(userProcessContainer, user,RoleType);
     }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, String user, String RoleType) {
-       this.RoleType = "Donor";
-        System.out.println("in donorrole over");
-        return new DonorWorkAreaJPanel(userProcessContainer, account,RoleType);
+       System.out.println("in storesrole over");
+        return new StoresWorkAreaJPanel(userProcessContainer, user,RoleType);
     }
    
 }
