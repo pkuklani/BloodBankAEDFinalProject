@@ -81,11 +81,12 @@ public class MainScreen extends javax.swing.JPanel {
 
         splitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        menuPanel.setBackground(new java.awt.Color(255, 204, 255));
+        menuPanel.setBackground(new java.awt.Color(221, 230, 227));
 
         lblWelcome.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblWelcome.setText("<WelcomeMsg>");
 
+        btnLogOut.setBackground(new java.awt.Color(212, 49, 50));
         btnLogOut.setText("Log Out");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class MainScreen extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(212, 49, 50));
         jButton1.setText("Change Password");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

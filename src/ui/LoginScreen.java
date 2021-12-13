@@ -301,7 +301,7 @@ pwdField.setText(null);
        
         System.out.print("login "+urole);
        // account.setRole(new AdminRole());
-               JOptionPane.showMessageDialog(null, "Welcome to Blood Bank Monitoring System");
+               JOptionPane.showMessageDialog(null, "Welcome to Boston Blood Bank");
             //find role
             String selectSql2="select role from roles where role_id=?";
             PreparedStatement stmt2;
